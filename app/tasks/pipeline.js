@@ -30,6 +30,7 @@ var jsFilesToInject = [
 
   // !! Dependencies should primarily be handled by Bower
   // !! Angular is preloaded here to avoid modules loading first
+  'js/dependencies/jquery/**/*.js',
   'js/dependencies/angular/**/*.js',
   'js/dependencies/**/*.js',
 
