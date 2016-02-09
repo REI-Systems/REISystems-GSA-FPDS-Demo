@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #echo "Updating Centos ..."
-#yum -y update
+yum -y update
 
 #echo "Install some dependencies..."
-#yum -y install yum-utils bzip2 bzip2-devel wget curl tar gcc gcc-c++ fontconfig make
+#yum -y install yum-utils bzip2 bzip2-devel wget curl tar gcc gcc-c++ fontconfig make http-parser libuv
 
 echo "Enable EPEL Repo ..."
 yum -y install epel-release
@@ -12,6 +12,13 @@ yum -y install epel-release
 #echo "Install Develpment Tools ..."
 #yum -y groupinstall "Development tools"
 
+echo "Install PostgreSQL ..."
+rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+yum -y install postgresql94-server postgresql94-contrib
+
+service postgresql-9.4 initdb
+service postgresql-9.4 start
+chkconfig postgresql-9.4 on
 
 echo "Install latest NodeJS ..."
 curl --silent --location https://rpm.nodesource.com/setup_5.x | bash -
