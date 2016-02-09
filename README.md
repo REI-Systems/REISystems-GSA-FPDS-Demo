@@ -38,6 +38,7 @@ Inside your vagrant VM, run the following command
 
 <pre>
 $ cd /var/www/fpds/app
+$ grunt
 $ sails lift
 </pre>
 
