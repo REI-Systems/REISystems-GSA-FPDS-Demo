@@ -37,6 +37,5 @@
   "author": "REI Systems, Inc.",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "^0.4.5"
   }
 }
