@@ -20,6 +20,10 @@ service postgresql-9.4 initdb
 service postgresql-9.4 start
 chkconfig postgresql-9.4 on
 
+echo "Install Ruby & SASS ..."
+yum -y install rubygems
+gem install sass
+
 echo "Install latest NodeJS ..."
 curl --silent --location https://rpm.nodesource.com/setup_5.x | bash -
 yum -y install nodejs
