@@ -1,5 +1,5 @@
 {
-  "name": "FPDS Demo",
+  "name": "fpds-demo",
   "private": true,
   "version": "0.0.0",
   "description": "FDPS Demo",
@@ -35,5 +35,8 @@
     "url": "https://github.com/REI-Systems/REISystems-GSA-FPDS-Demo.git"
   },
   "author": "REI Systems, Inc.",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
 }
