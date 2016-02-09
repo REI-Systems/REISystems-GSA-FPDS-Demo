@@ -1,2 +1,3 @@
 #Vagrant
 conf/vagrant/.vagrant
+.tmp
