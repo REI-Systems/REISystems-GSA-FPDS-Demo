@@ -28,11 +28,11 @@ config(['$routeProvider', function ($routeProvider) {
         .otherwise({redirectTo: '/'});
 }]);
 
-//assign all defined providers to this module 'provider'
-fpds.provider(providers);
-
 //assign all defined factories to this module 'factory'
 fpds.factory(factories);
+
+//assign all defined providers to this module 'provider'
+fpds.provider(providers);
 
 //assign all defined services to this module 'service'
 fpds.service(services);

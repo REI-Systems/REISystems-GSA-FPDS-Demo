@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-controller="CommonController">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -19,15 +19,19 @@
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <!--user logged ou-->
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> Sign up</a>
+                <li ng-show="!isUserAuth">
+                    <a href="#"><i class="fa fa-user fa-fw"></i> Sign up</a>
                 </li>
-                <li><a href="#"><i class="fa fa-sign-in fa-fw"></i> Sign in</a>
+                <li ng-show="!isUserAuth">
+                    <a href="#"><i class="fa fa-sign-in fa-fw"></i> Sign in</a>
                 </li>
                 <!--Is user logged in -->
-                <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Profile</a>
+                <li ng-show="isUserAuth">
+                    <a href="#"><i class="fa fa-pencil fa-fw"></i> Profile</a>
                 </li>
-                <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li ng-show="isUserAuth" class="divider"></li>
+                <li ng-show="isUserAuth">
+                    <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
