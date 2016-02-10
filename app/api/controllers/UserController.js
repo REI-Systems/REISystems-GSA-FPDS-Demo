@@ -8,7 +8,7 @@
 module.exports = {
 
     login: function (req, res) {
-        var bcrypt = require('bcrypt');
+        var bcrypt = require('bcryptjs');
         var params = req.params.all();
 
         if (req.session.user) {
