@@ -8,7 +8,15 @@
 module.exports = {
 
   attributes: {
-
-  }
+        params : { 
+            type: 'json'
+//            required: true 
+        },
+        url : { 
+            type: 'string'
+//            unique: true,
+//            required: true
+        }
+    }
 };
 
