@@ -1,5 +1,8 @@
 {
   "contract": {
+    "_source": {
+      "enabled": true
+    },
     "properties": {
       "unique_transaction_id": {
         "type": "string",
