@@ -15,24 +15,21 @@ providers.AuthProvider = [function () {
                             if (data.loggedIn) {
                                 $rootScope.authenticated = {
                                     "user": data.user,
-                                    "success": true,
-                                    "role": data.user.role
+                                    "success": true
                                 }
                             }
                             else //session invalid
                             {
                                 $rootScope.authenticated = {
                                     "user": null,
-                                    "success": false,
-                                    "role": null
+                                    "success": false
                                 };
                             }
                         })
                         .error(function () {    //  data, status, headers, config
                             $rootScope.authenticated = {
                                 "user": null,
-                                "success": false,
-                                "role": null
+                                "success": false
                             };
 
                         });
@@ -43,8 +40,7 @@ providers.AuthProvider = [function () {
                             if (data.success) {
                                 $rootScope.authenticated = {
                                     "user": null,
-                                    "success": false,
-                                    "role": null
+                                    "success": false
                                 };
                                 
                                 $location.path('/');
