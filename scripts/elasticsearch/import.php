@@ -36,26 +36,10 @@ try {
 }
 
 // load data into index
-//$importer->push('/Users/cedwards/Downloads/Contracts-2015.csv',array(
-//    'batchSize' => 5,
-//    'rowLimit' => 100
-//));
-
-
-$client = Elasticsearch\ClientBuilder::create()->setHosts([ELASTICSEARCH_HOST])->setLogger(Elasticsearch\ClientBuilder::defaultLogger('./elastic.log'))->build();
-$params = [
-    'index' => CONTRACT_INDEX,
-    'type' => CONTRACT_TYPE,
-    'body' => [
-        'query' => [
-            'match_all' => array()
-        ]
-    ]
-];
-
-$results = $client->search($params);
-
-print_r($results);
+$importer->push('/Users/cedwards/Downloads/Contracts-2015.csv',array(
+    'batchSize' => 1000,
+    'rowLimit' => 100000
+));
 
 
 class ContractImporter {
@@ -178,15 +162,16 @@ class ContractImporter {
 
             $package['body'][] = [
                 'index' => [
-                    '_index' => 'contracts_2015',
-                    '_type' => 'contract'
+                    '_index' => CONTRACT_INDEX,
+                    '_type' => CONTRACT_TYPE
                 ]
             ];
 
-            $package['body'][] = [
-                'my_field' => 'my_value',
-                'second_field' => 'some more values'
-            ];
+            $item = array();
+            foreach ( $data as $key => $value ) {
+                $item[$this->contract_field_map[$key]] = $value;
+            }
+            $package['body'][] = $item;
 
             if ( ($i+1) % $options['batchSize'] === 0 ) {
                 echo "\nBatch sending ".(count($package['body'])/2)." items starting at ".($batch*$options['batchSize'])." ... \n";
