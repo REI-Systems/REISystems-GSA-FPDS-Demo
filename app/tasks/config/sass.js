@@ -16,7 +16,8 @@ module.exports = function(grunt) {
         dev: {
             options: {
                 style: 'expanded',
-                loadPath: 'bower_components/bootstrap-sass-official/assets/stylesheets'
+//                loadPath: 'bower_components/bootstrap-sass-official/assets/stylesheets'
+                loadPath: ['bower_components/bootstrap-sass-official/assets/stylesheets', 'bower_components/font-awesome/scss']
             },
             files: [{
                 expand: true,
