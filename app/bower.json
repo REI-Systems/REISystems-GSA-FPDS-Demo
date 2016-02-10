@@ -17,7 +17,8 @@
     "d3": "*",
     "moment": "*",
     "angular-spinner": "*",
-    "angular-nvd3": "*"
+    "angular-nvd3": "*",
+    "bcrypt": "*"
   },
   "devDependencies": {
   },

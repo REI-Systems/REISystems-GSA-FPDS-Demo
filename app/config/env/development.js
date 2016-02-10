@@ -19,6 +19,17 @@ module.exports = {
     connections: {
           pgService: {
               adapter: 'sails-postgresql'
+          },
+          //see dev-dependencies.sh (Database section for installing DB/ Configuring PostgreSQL)
+          pgLocal: {
+            adapter: 'sails-postgresql',
+            database: 'fpds_demo',
+            host: 'localhost',
+            user: 'postgres',
+            password: 'postgres',
+            port: 5432,
+            //poolSize: 10,
+            //ssl: false 
           }
     }
 };

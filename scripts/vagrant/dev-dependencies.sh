@@ -63,3 +63,22 @@ su vagrant -c "bower install"
 #echo "Opening port for dev ..."
 /sbin/iptables -I INPUT -p tcp -m tcp --dport 1337 -j ACCEPT
 #/sbin/iptables -I INPUT -p tcp -m tcp --dport 35729 -j ACCEPT
+
+
+
+#### DATABASE #####
+#su postgres
+#psql
+#create database fpds_demo;
+
+# http://www.unixmen.com/postgresql-9-4-released-install-centos-7/
+#vim /var/lib/pgsql/9.4/data/pg_hba.conf
+# "local" is for Unix domain socket connections only
+#local   all             all                                     md5 #peer
+# IPv4 local connections:
+#host    all             all             127.0.0.1/32            md5 #ident
+#host    all             all             192.168.56.108/24       md5
+# IPv6 local connections:
+#host    all             all             ::1/128                 md5 #ident
+
+#service postgresql-9.4 restart
