@@ -7,7 +7,7 @@ providers.AuthProvider = [function () {
                 loginUser: function (credentials) {
                     return ApiService.call('userLogin', '', '', {username: credentials.username, password: credentials.password}, 'POST');
                 },
-                isUserAuthenticated: function (callBackFnSuccess, callBackFnError) {
+                isUserAuthenticated: function (callBackFnSuccess, callBackFnError, callBackFnFinally) {
                     return ApiService.call('userIsLoggedIn', '', '', {}, 'POST')
                         .then(function (data) {  //  , status, headers, config
 
@@ -29,15 +29,27 @@ providers.AuthProvider = [function () {
                             }
                         }, function () {    //  data, status, headers, config
                             SessionFactory.destroySession();
+                        })
+                        .finally(function () {
+                            if(typeof callBackFnFinally === 'function') {
+                                callBackFnFinally();
+                            }
                         });
                 },
-                logoutUser: function ($location) {
+                logoutUser: function (callBackFnSuccess, callBackFnError) {
                     return ApiService.call('userLogOut', '', '', {}, 'POST')
                         .then(function (data) {  //  , status, headers, config
                             if (data.success) {
                                 SessionFactory.destroySession();
-
-                                $location.path('/');
+    
+                                if(typeof callBackFnSuccess === 'function') {
+                                    callBackFnSuccess(data);
+                                }
+                            }
+                        },
+                        function(error){
+                            if(typeof callBackFnError === 'function') {
+                                callBackFnError(error);
                             }
                         });
                 }

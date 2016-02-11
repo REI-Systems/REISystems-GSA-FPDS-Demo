@@ -1,18 +1,15 @@
 var controllers = controllers || {};
 
-controllers.HomeController = ['$scope', 'AuthProvider', function($scope, AuthProvider){
+controllers.HomeController = ['$scope', 'AuthProvider', 'SessionFactory', function($scope, AuthProvider, SessionFactory){
     //verify if user is aythenticated, if yes init scope
     AuthProvider.isUserAuthenticated(
     function(){
         $scope.isUserAuth = true;
     }, function(){
         $scope.isUserAuth = false;
+    }, function() {
+        //get logged in user info
+        $scope.user = SessionFactory.getSession().user;
     });
 
-    AuthProvider.loginUser({'username':null,'password':null}).then(function(data){
-        console.log(data);
-    }, 
-    function(error){
-        console.log(error);
-    });
 }];

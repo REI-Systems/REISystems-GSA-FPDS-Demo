@@ -1,7 +1,7 @@
 var controllers = controllers || {};
 
-controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiService', 'usSpinnerService',
-    function($scope, $location, AuthProvider, ApiService, usSpinnerService){
+controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiService', 'SessionFactory', 'usSpinnerService',
+    function($scope, $location, AuthProvider, ApiService, SessionFactory, usSpinnerService){
 
     //verify if user is aythenticated, if yes init scope
     AuthProvider.isUserAuthenticated(
@@ -11,6 +11,9 @@ controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiSer
         $location.path('/');
     }, function(){
         $scope.isUserAuth = false;
+    }, function() {
+        //get logged in user info
+        $scope.user = SessionFactory.getSession().user;
     });
 
     //Register function
