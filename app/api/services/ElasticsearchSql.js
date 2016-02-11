@@ -7,6 +7,8 @@
 
 'use strict';
 
+const httpClient = require('request');
+
 class ElasticsearchSql {
 
   constructor() {}
@@ -23,9 +25,6 @@ class ElasticsearchSql {
     };
 
     httpClient(httpClientOptions, (err, res, payload) => {
-      if (err || res.statusCode != 200) {
-        return reply.serverError(err);
-      }
       var result = {};
       if ( isCsvRequest ) {
         let handler = ResultHandler.create(JSON.parse(payload),true);
@@ -47,17 +46,17 @@ class ElasticsearchSql {
         result = handler.getBody();
       }
 
-      const response = reply(result);
-
       if ( isCsvRequest ) {
-        response.type('text/csv');
+        reply.type('text/csv');
       } else {
-        response.type('application/json');
+        reply.type('application/json');
       }
 
       if ( isDownloadRequest ) {
-        response.header('Content-Disposition','attachment; filename=data.'+((isCsvRequest)?'csv':'json'));
+        reply.setHeader('Content-Disposition','attachment; filename=data.'+((isCsvRequest)?'csv':'json'));
       }
+
+      reply.send(result);
     });
   }
 }

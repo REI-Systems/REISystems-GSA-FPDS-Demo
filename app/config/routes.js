@@ -32,8 +32,23 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
+  'get /': {
     view: 'homepage'
+  },
+
+  'get /api/search/:source': {
+    controller: 'Search',
+    action: 'index',
+    skipAssets: true
+  },
+
+  'get /api/search/query': {
+    controller: 'Search',
+    action: 'query',
+    skipAssets: true,
+    locals: {
+      layout: null
+    }
   }
 
   /***************************************************************************

@@ -7,8 +7,6 @@
 
 'use strict';
 
-const httpClient = require('request');
-
 module.exports = {
 
   index: (request, reply) => {
