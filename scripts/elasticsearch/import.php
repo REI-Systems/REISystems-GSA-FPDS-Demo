@@ -38,7 +38,7 @@ try {
 // load data into index
 $importer->push('/Users/cedwards/Downloads/Contracts-2015.csv',array(
     'batchSize' => 1000,
-    'rowLimit' => 100000
+    'rowLimit' => 99999999999
 ));
 
 
@@ -167,11 +167,11 @@ class ContractImporter {
                 ]
             ];
 
-            $item = array();
-            foreach ( $data as $key => $value ) {
-                $item[$this->contract_field_map[$key]] = $value;
+            $item = array_combine($this->contract_field_map,$data); // keys, values
+
+            if ( $item !== false ) {
+                $package['body'][] = $item;
             }
-            $package['body'][] = $item;
 
             if ( ($i+1) % $options['batchSize'] === 0 ) {
                 echo "\nBatch sending ".(count($package['body'])/2)." items starting at ".($batch*$options['batchSize'])." ... \n";
