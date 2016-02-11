@@ -3,17 +3,10 @@ var controllers = controllers || {};
 controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiService', 'SessionFactory', 'usSpinnerService',
     function($scope, $location, AuthProvider, ApiService, SessionFactory, usSpinnerService){
 
-    //verify if user is aythenticated, if yes init scope
+    //verify if user is aythenticated, if yes redirect to home page
     AuthProvider.isUserAuthenticated(
     function(){
-        //user connected, redirect to home page
-        $scope.isUserAuth = true;
         $location.path('/');
-    }, function(){
-        $scope.isUserAuth = false;
-    }, function() {
-        //get logged in user info
-        $scope.user = SessionFactory.getSession().user;
     });
 
     //Register function
@@ -41,7 +34,7 @@ controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiSer
                 function(data){
                     $scope.flash = {
                         "type": "alert-success",
-                        "message": "User created !",
+                        "message": "User created !"
                     };
 
                     //stop spinner
@@ -50,7 +43,7 @@ controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiSer
                 function(error){
                     $scope.flash = {
                         "type": "alert-danger",
-                        "message": "An error has occured, please make sure you are not using the same username !",
+                        "message": "An error has occured, please make sure you are not using the same username !"
                     };
 
                     //stop spinner

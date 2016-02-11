@@ -1,15 +1,26 @@
 var controllers = controllers || {};
 
-controllers.CommonController = ['$scope', 'AuthProvider', 'SessionFactory', 'usSpinnerService', '$location', function($scope, AuthProvider, SessionFactory, usSpinnerService, $location){
-    //verify if user is aythenticated, if yes init scope
-    AuthProvider.isUserAuthenticated(
-    function(){
-        $scope.isUserAuth = true;
-    }, function(){
-        $scope.isUserAuth = false;
-    }, function() {
-        //get logged in user info
-        $scope.user = SessionFactory.getSession().user;
+controllers.CommonController = ['$scope', '$rootScope', 'AuthProvider', 'SessionFactory', 'usSpinnerService', '$location', function($scope, $rootScope, AuthProvider, SessionFactory, usSpinnerService, $location){
+    
+    $scope.isUserAuthenticated = function() {
+        //verify if user is aythenticated, if yes init scope
+        AuthProvider.isUserAuthenticated(
+        function(){
+            $scope.isUserAuth = true;
+        }, function(){
+            $scope.isUserAuth = false;
+        }, function() {
+            //get logged in user info
+            $scope.user = SessionFactory.getSession().user;
+        });
+    };
+
+    //verify if user is authenticated
+    $scope.isUserAuthenticated();
+
+    //create event caller in order to refresh nav bar
+    $rootScope.$on('refreshNavBar', function (event, args) {
+        $scope.isUserAuthenticated();
     });
 
     //log out user
@@ -22,6 +33,9 @@ controllers.CommonController = ['$scope', 'AuthProvider', 'SessionFactory', 'usS
         function(){
             //show spinner
             usSpinnerService.stop('spinner');
+
+            //verify if user is authenticated
+            $scope.isUserAuthenticated();
 
             //redirect to homepage 
             $location.path('/').search({'disconnected':true});

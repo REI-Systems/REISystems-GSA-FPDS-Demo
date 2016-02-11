@@ -1,18 +1,12 @@
 var controllers = controllers || {};
 
-controllers.LoginController = ['$scope', '$location', '$timeout', 'AuthProvider', 'usSpinnerService', 'SessionFactory',
-    function($scope, $location, $timeout, AuthProvider, usSpinnerService, SessionFactory){
+controllers.LoginController = ['$scope', '$rootScope', '$location', '$timeout', 'AuthProvider', 'usSpinnerService', 'SessionFactory',
+    function($scope, $rootScope, $location, $timeout, AuthProvider, usSpinnerService, SessionFactory){
 
-    //verify if user is aythenticated, if yes init scope
+    //verify if user is aythenticated, if yes redirect to home page
     AuthProvider.isUserAuthenticated(
     function(){
-        $scope.isUserAuth = true;
         $location.path('/');
-    }, function(){
-        $scope.isUserAuth = false;
-    }, function() {
-        //get logged in user info
-        $scope.user = SessionFactory.getSession().user;
     });
 
     //Register function
@@ -39,6 +33,9 @@ controllers.LoginController = ['$scope', '$location', '$timeout', 'AuthProvider'
 
                     //create user session
                     SessionFactory.setSession(data.user);
+
+                    //refresh nav bar
+                    $rootScope.$emit('refreshNavBar', { });
 
                     //stop spinner
                     usSpinnerService.stop('spinner');
