@@ -4,6 +4,7 @@ services.ApiService = ['$http', '$q', '$log', function ($http, $q, $log){
     var APIs = {
         "userLogin": "/user/login",
         "userCreate": "/user/create",
+        "userUpdate": "/user/update/",
         "userIsLoggedIn": "/user/isLoggedIn",
         "userLogOut": "/user/logout",
     };

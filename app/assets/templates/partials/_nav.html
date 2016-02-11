@@ -28,7 +28,7 @@
                 </li>
                 <!--Is user logged in -->
                 <li ng-show="isUserAuth">
-                    <a href="#/user/edit"><i class="fa fa-pencil fa-fw"></i> Profile</a>
+                    <a ng-href="#/user/edit/{{ user.id }}"><i class="fa fa-pencil fa-fw"></i> Profile</a>
                 </li>
                 <li ng-show="isUserAuth" class="divider"></li>
                 <li ng-show="isUserAuth">

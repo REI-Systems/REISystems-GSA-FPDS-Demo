@@ -23,8 +23,13 @@ config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, u
         })
         .when('/register',
         {
-            controller: 'RegisterController',
-            templateUrl: 'templates/partials/user/_register.html'
+            controller: 'FormController',
+            templateUrl: 'templates/partials/user/_form.html',
+        })
+        .when('/user/edit/:id',
+        {
+            controller: 'FormController',
+            templateUrl: 'templates/partials/user/_form.html',
         })
         .otherwise({redirectTo: '/'});
 
