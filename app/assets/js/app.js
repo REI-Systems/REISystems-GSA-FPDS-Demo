@@ -6,9 +6,10 @@ var fpds = angular.module('FPDS', [
     'ngCookies',
     'ngMessages',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angularSpinner'
 ]).
-config(['$routeProvider', function ($routeProvider) {
+config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, usSpinnerConfigProvider) {
     $routeProvider
         .when('/',
         {
@@ -26,6 +27,9 @@ config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/partials/user/_register.html'
         })
         .otherwise({redirectTo: '/'});
+
+        //customizing spinner
+        usSpinnerConfigProvider.setDefaults({color: 'black', radius:30, width:12, length: 25});
 }]);
 
 //assign all defined factories to this module 'factory'

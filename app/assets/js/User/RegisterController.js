@@ -1,6 +1,8 @@
 var controllers = controllers || {};
 
-controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiService', function($scope, $location, AuthProvider, ApiService){
+controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiService', 'usSpinnerService',
+    function($scope, $location, AuthProvider, ApiService, usSpinnerService){
+
     //verify if user is aythenticated, if yes init scope
     AuthProvider.isUserAuthenticated(
     function(){
@@ -18,6 +20,9 @@ controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiSer
             typeof $scope.user.email !== 'undefined' && 
             typeof $scope.user.password !== 'undefined') {
 
+            //show spinner
+            usSpinnerService.spin('spinner');
+
             var aParams = {
                 'username': $scope.user.username,
                 'email': $scope.user.email,
@@ -31,10 +36,22 @@ controllers.RegisterController = ['$scope', '$location', 'AuthProvider', 'ApiSer
             //create user
             ApiService.call('userCreate', '', {}, aParams, 'POST').then(
                 function(data){
-                    console.log(data);
-                }, 
+                    $scope.flash = {
+                        "type": "alert-success",
+                        "message": "User created !",
+                    };
+
+                    //stop spinner
+                    usSpinnerService.stop('spinner');
+                },
                 function(error){
-                    console.log(error);
+                    $scope.flash = {
+                        "type": "alert-danger",
+                        "message": "An error has occured, please make sure you are not using the same username !",
+                    };
+
+                    //stop spinner
+                    usSpinnerService.stop('spinner');
             });
         }
     };
