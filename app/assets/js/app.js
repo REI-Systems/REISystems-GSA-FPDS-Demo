@@ -7,7 +7,8 @@ var fpds = angular.module('FPDS', [
     'ngMessages',
     'ngSanitize',
     'ngTouch',
-    'angularSpinner'
+    'angularSpinner',
+    'jqwidgets'
 ]).
 config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, usSpinnerConfigProvider) {
     $routeProvider
@@ -30,6 +31,11 @@ config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, u
         {
             controller: 'FormController',
             templateUrl: 'templates/partials/user/_form.html',
+        })
+        .when('/search',
+        {
+            controller: 'SearchController',
+            templateUrl: 'templates/partials/search/_index.html'
         })
         .otherwise({redirectTo: '/'});
 

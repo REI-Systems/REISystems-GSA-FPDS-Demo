@@ -19,6 +19,7 @@
     "angular-spinner": "*",
     "angular-nvd3": "*",
     "font-awesome": "*",
+    "jqwidgets": "*",
     
     "morrisjs": "*",
     "metisMenu": "*"
