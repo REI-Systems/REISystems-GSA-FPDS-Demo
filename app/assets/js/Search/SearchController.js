@@ -61,9 +61,11 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
         loadComplete: function (data) { },
         loadError: function (xhr, status, error) { }      
     });
+    
 
     $("#jqxgrid").jqxGrid(
     {
+        theme: 'ui-sunny',
         width: 850,
         source: source,
         selectionmode: 'multiplerowsextended',

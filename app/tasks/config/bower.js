@@ -13,6 +13,7 @@ module.exports = function(grunt) {
               'jqwidgets': {
                   files: [
                       './jqwidgets/styles/jqx.base.css',
+                      './jqwidgets/styles/jqx.ui-sunny.css',
                       './jqwidgets/styles/images/**',
                       './jqwidgets/jqxcore.js',
                       './jqwidgets/jqxdata.js',
