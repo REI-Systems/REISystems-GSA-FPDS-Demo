@@ -7,6 +7,7 @@ services.ApiService = ['$http', '$q', '$log', function ($http, $q, $log){
         "userUpdate": "/user/update/",
         "userIsLoggedIn": "/user/isLoggedIn",
         "userLogOut": "/user/logout",
+        "search": "/api/search/query"
     };
 
     this.APIs = APIs;
@@ -76,5 +77,42 @@ services.ApiService = ['$http', '$q', '$log', function ($http, $q, $log){
         );
 
         return deferred.promise;
+    };
+}];
+
+//Search service for common function to use
+services.SearchService = ['ApiService', function(ApiService){
+    var facetQuery = 'SELECT FIELDNAME, COUNT(FIELDNAME) as count FROM fpds_contracts_2015 GROUP BY FIELDNAME'
+    this.facetQuery = facetQuery;
+
+    /**
+     * 
+     * @param String fieldName
+     * @returns {$q@call;defer.promise}
+     */
+    this.getFieldFacet = function(fieldName) {
+        return ApiService.call('search', '', {'q': facetQuery.replace(new RegExp('FIELDNAME', 'g'), fieldName)}, {}, 'GET');
+    };
+
+    /**
+     * 
+     * @param Array aFieldNames
+     * @returns {$q@call;defer.promise}
+     */
+    this.getFieldsFacet = function(aFieldNames) {
+        var aApiParams = [];
+
+        angular.each(aFieldNames, function(fieldName){
+            aApiParams.push({
+                'method': 'GET',
+                'url': 'search', 
+                'params': {
+                    'q': facetQuery.replace(new RegExp('FIELDNAME', 'g'), fieldName)
+                },
+                'data': {}
+            });
+        });
+
+        return ApiService.calls(aApiParams);
     };
 }];
