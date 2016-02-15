@@ -102,14 +102,15 @@ services.SearchService = ['ApiService', function(ApiService){
     this.getFieldsFacet = function(aFieldNames) {
         var aApiParams = [];
 
-        angular.each(aFieldNames, function(fieldName){
+        angular.forEach(aFieldNames, function(fieldName){
             aApiParams.push({
                 'method': 'GET',
-                'url': 'search', 
-                'params': {
+                'name': 'search', 
+                'oParams': {
                     'q': facetQuery.replace(new RegExp('FIELDNAME', 'g'), fieldName)
                 },
-                'data': {}
+                'oData': {},
+                'suffix': ''
             });
         });
 

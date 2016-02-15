@@ -24,30 +24,88 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Keyword</label>
-                            <input class="form-control" name="keyword" placeholder="Keyword" ng-model="search.keyword">
+                            <label>Agency</label>
+                            <select class="form-control" name="agency" id="agency" ng-model="search.agency">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.agencies" value="{{item}}">{{item}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Keyword</label>
-                            <input class="form-control" name="keyword" placeholder="Keyword" ng-model="search.keyword">
+                            <label>Contract Type</label>
+                            <select class="form-control" name="contractType" id="contractType" ng-model="search.contractType">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.contractTypes" value="{{item}}">{{item}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Keyword</label>
-                            <input class="form-control" name="keyword" placeholder="Keyword" ng-model="search.keyword">
+                            <label>Contracting Agency</label>
+                            <select class="form-control" name="contractingAgency" id="contractingAgency" ng-model="search.contractingAgency">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.contractingAgencies" value="{{item}}">{{item}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Keyword</label>
-                            <input class="form-control" name="keyword" placeholder="Keyword" ng-model="search.keyword">
+                            <label>Local Area</label>
+                            <select class="form-control" name="localArea" id="localArea" ng-model="search.localArea">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.localAreas" value="{{item}}">{{item}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Keyword</label>
-                            <input class="form-control" name="keyword" placeholder="Keyword" ng-model="search.keyword">
+                            <label>Department Full Name</label>
+                            <select class="form-control" name="department" id="department" ng-model="search.department">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.department" value="{{item}}">{{item}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Keyword</label>
-                            <input class="form-control" name="keyword" placeholder="Keyword" ng-model="search.keyword">
+                            <label>PoP State Name</label>
+                            <select class="form-control" name="popState" id="pop_state" ng-model="search.popState">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.popStates" value="{{item}}">{{item}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>PSC</label>
+                            <select class="form-control" name="psc" id="psc" ng-model="search.psc">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.psc" value="{{item}}">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Vendor Name</label>
+                            <select class="form-control" name="vendorname" id="vendorname" ng-model="search.vendorname">
+                                <option value=''></option>
+                                <option ng-repeat="item in filters.vendorname" value="{{item}}">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date Signed</label>
+                            <input class="form-control" name="dateSigned" placeholder="Date Signed" ng-model="search.dateSigned">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Action Obligation ($)</label>
+                            <input class="form-control" name="actionObligation" placeholder="Action Obligation ($)" ng-model="search.actionObligation">
+                        </div>
+                        <div class="form-group">
+                            <label>NAICS</label>
+                            <input class="form-control" name="naics" placeholder="NAICS" ng-model="search.naics">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Fiscal Year</label>
+                            <input class="form-control" name="fiscalYear" placeholder="Fiscal Year" ng-model="search.fiscalYear">
+                        </div>
+                        <div class="form-group">
+                            <label>Zip Code</label>
+                            <input class="form-control" name="zipCode" placeholder="Zip Code" ng-model="search.zipcode">
                         </div>
                     </div>
                 </div>
@@ -59,7 +117,7 @@
 <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
     <div id="jqxgrid"></div>
     <div style="margin-top: 30px;">
-        <input type="button" id="saveState" value="Save State" />
+        <input type="button" id="saveState" value="Save State" ng-click="" />
         <input type="button" id="loadState" value="Load State" />
     </div>
 </div>

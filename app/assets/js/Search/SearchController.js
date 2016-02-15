@@ -10,20 +10,51 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
         $location.path('/');
     });
 
-//    SearchService.getFieldFacet('contractactiontype').then(
-//        function(data){
-//            console.log(data);
-//        }, function(error){
-//        console.log(error);
-//    });
+    //show spinner
+    usSpinnerService.spin('spinner');
 
-//    SearchService.getFieldsFacet(['contractactiontype', 'agencyid']).then(
-//        function(data){
+    //populate filter fields
+     var aFilterCol = ['contractactiontype', 'agencyid', 'contractingofficeagencyid',
+                'maj_agency_cat', 'psc_cat', 'vendorname',
+                'pop_state_code', 'localareasetaside'];
+    var aResultFilterCol = {};
+
+    SearchService.getFieldsFacet(aFilterCol)
+        .then(function(data){
 //            console.log(data);
-//        }, function(error){
-//        console.log(error);
-//    });
-    
+            angular.forEach(data, function(row){
+//                console.log(row.data);
+                if(row.data) {
+                    angular.forEach(row.data, function(element){
+                        var key = Object.keys(element)[0];
+                        var value = element[Object.keys(element)[0]];
+
+                        //make sure the value is not empty
+                        if(value !== '') {
+                            if(aResultFilterCol.hasOwnProperty(key)) { //exist
+                                aResultFilterCol[key].push(value);
+                            } else { //doesnt exist, create entry
+                                aResultFilterCol[key] = [value];
+                            }
+                        }
+                    });
+                }
+            });
+
+//        console.log(aResultFilterCol);
+        $scope.filters = {
+            agencies: aResultFilterCol.agencyid,
+            contractTypes: aResultFilterCol.contractactiontype,
+            contractingAgencies: aResultFilterCol.contractingofficeagencyid,
+            localAreas: aResultFilterCol.localareasetaside,
+            department: aResultFilterCol.maj_agency_cat,
+            popStates: aResultFilterCol.pop_state_code,
+            psc: aResultFilterCol.psc_cat,
+            vendorname: aResultFilterCol.vendorname
+        };
+
+        usSpinnerService.stop('spinner');
+    });
 
     var data = new Array();
     var firstNames =

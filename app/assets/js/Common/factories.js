@@ -11,16 +11,16 @@ factories.SessionFactory = [function(){
             session.user = oUser;
             session.isAuth = true;
             
-            console.log('Set Session');
-            console.log(session);
+//            console.log('Set Session');
+//            console.log(session);
         },
         destroySession: function() {
             session.user = null;
             session.isAuth = false;
         },
         getSession: function() {
-            console.log('Get Session');
-            console.log(session);
+//            console.log('Get Session');
+//            console.log(session);
             return session;
         },
         isUserAuthenticated: function() {
