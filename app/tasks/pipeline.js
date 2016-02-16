@@ -52,6 +52,7 @@ var jsFilesToInject = [
   'js/dependencies/jqwidgets/jqxgrid.selection.js',
   'js/dependencies/jqwidgets/jqxpanel.js',
   'js/dependencies/jqwidgets/jqxcheckbox.js',
+  'js/dependencies/jqwidgets/jqxtabs.js',
   'js/dependencies/jqwidgets/jqxangular.js',
   'js/dependencies/**/*.js',
 

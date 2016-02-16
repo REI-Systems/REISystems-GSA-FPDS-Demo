@@ -47,7 +47,8 @@ controllers.FormController = ['$scope', 'AuthProvider', 'ApiService', 'SessionFa
                 'password': $scope.user.password,
                 'name': $scope.user.name,
                 'preferences': {
-                    'typeDashboard': $scope.user.typeDashboard
+                    'typeDashboard': $scope.user.typeDashboard,
+                    'jqxGridState': ($scope.user.hasOwnProperty('preferences') && $scope.user.preferences.hasOwnProperty('jqxGridState')) ? $scope.user.preferences.jqxGridState : null,
                 }
             };
 
