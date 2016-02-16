@@ -72,7 +72,7 @@ create table contract (
     mod_parent string,
     locationcode string,
     statecode string,
-    PlaceofPerformanceCity string,
+    placeofperformancecity string,
     pop_state_code string,
     placeofperformancecountrycode string,
     placeofperformancezipcode string,
