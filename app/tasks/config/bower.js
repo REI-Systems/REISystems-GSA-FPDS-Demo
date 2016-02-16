@@ -32,6 +32,7 @@ module.exports = function(grunt) {
                       './jqwidgets/jqxgrid.selection.js',
                       './jqwidgets/jqxpanel.js',
                       './jqwidgets/jqxcheckbox.js',
+                      './jqwidgets/jqxtabs.js',
                       './jqwidgets/jqxangular.js'
                   ],
                   'images_dest': '.tmp/public/styles',

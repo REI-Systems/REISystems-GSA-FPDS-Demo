@@ -91,7 +91,9 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
                     { name: 'signeddate'},{ name: 'contractingofficeagencyid'},{ name: 'maj_agency_cat'},
                     { name: 'dollarsobligated'},{ name: 'principalnaicscode'},{ name: 'psc_cat'},
                     { name: 'vendorname'},{ name: 'zipcode'},{ name: 'placeofperformancecountrycode'},
-                    { name: 'pop_state_code'},{ name: 'localareasetaside'},{ name: 'fiscal_year'}
+                    { name: 'pop_state_code'},{ name: 'localareasetaside'},{ name: 'fiscal_year'},
+                    { name: 'effectivedate'}, { name: 'unique_transaction_id'}, { name: 'solicitationid'},
+                    { name: 'dunsnumber'}, { name: 'descriptionofcontractrequirement'}
                 ],
                 id: 'unique_transaction_id',
                 datatype: "json"
@@ -116,8 +118,8 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
                 columns: [
                   //pre-default user column's order
                     { datafield: 'contractactiontype', text: 'Contract Type', width: '20%'},
-                    { datafield: 'agencyid', text: ' Agency Code', width: '20%'},
-                    { datafield: 'signeddate', text: ' Date Signed', width: '20%'},
+                    { datafield: 'agencyid', text: 'Agency Code', width: '20%'},
+                    { datafield: 'signeddate', text: 'Date Signed', width: '20%'},
                     { datafield: 'contractingofficeagencyid', text: 'Contracting Agency ID', width: '20%'},
                     { datafield: 'maj_agency_cat', text: 'Department Full Name', width: '20%'},
                     { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%'},
@@ -130,6 +132,22 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
                     { datafield: 'localareasetaside', text: 'Local Area Set Aside', width: '20%'},
                     { datafield: 'fiscal_year', text: 'Contract Fiscal Year', width: '20%'}
                 ]
+            });
+
+            //on click event, 
+            $("#jqxgrid").on("cellclick", function (event) 
+            {
+                // event arguments.
+                var args = event.args;
+                console.log(args.row.bounddata);
+
+                $scope.$apply(function(){
+                    // perform any model changes or method invocations here on angular app.
+                    $scope.row = args.row.bounddata;
+
+                    //load tabs
+                    $('#jqxtabs').jqxTabs({ width: jQuery('#jqxWidget').parent().width(), height: 250, theme: 'ui-sunny' });
+                });
             });
 
             //stop spinner

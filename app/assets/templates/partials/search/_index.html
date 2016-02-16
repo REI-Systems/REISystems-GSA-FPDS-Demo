@@ -119,3 +119,48 @@
     </div>
 </div>
 
+<div class="row" ng-show="row">
+    <div class="col-lg-12">
+        <h4>Contract Information</h4>
+        <div id='jqxtabs'>
+            <ul style='margin-left: 20px;'>
+                <li>Tab 1</li>
+                <li>Tab 2</li>
+                <li>Tab 3</li>
+                <li>Tab 4</li>
+                <li>Tab 5</li>
+            </ul>
+            <div class="panel-body">
+                <p><b>Contract Type:</b> {{ row.contractactiontype }}</p>
+                <p><b>Agency Code:</b> {{ row.agencyid }}</p>
+                <p><b>Date Signed:</b> {{ row.signeddate }}</p>
+                <p><b>Contracting Agency ID:</b> {{ row.contractingofficeagencyid }}</p>
+            </div>
+            <div class="panel-body">
+                <p><b>Department Full Name:</b> {{ row.maj_agency_cat }}</p>
+                <p><b>Action Obligation ($):</b> {{ row.dollarsobligated }}</p>
+                <p><b>NAICS:</b> {{ row.principalnaicscode }}</p>
+                <p><b>PSC:</b> {{ row.psc_cat }}</p>
+            </div>
+            <div class="panel-body">
+                <p><b>Vendor State:</b> {{ row.vendorname }}</p>
+                <p><b>Vendor ZIP Code:</b> {{ row.zipcode }}</p>
+                <p><b>PoP Country Name:</b> {{ row.placeofperformancecountrycode }}</p>
+                <p><b>PoP State Name:</b> {{ row.pop_state_code }}</p>
+            </div>
+            <div class="panel-body">
+                <p><b>Local Area Set Aside:</b> {{ row.localareasetaside }}</p>
+                <p><b>Contract Fiscal Year:</b> {{ row.fiscal_year }}</p>
+                <p><b>Effective:</b> {{ row.effectivedate }}</p>
+            </div>
+            <div class="panel-body">
+                <p><b>Transaction #:</b> {{ row.unique_transaction_id }}</p>
+                <p><b>Solicitation ID:</b> {{ row.solicitationid }}</p>
+                <p><b>DUNS No:</b> {{ row.dunsnumber }}</p>
+                <p><b>Contract Data:</b> {{ row.descriptionofcontractrequirement }}</p>
+            </div>
+        </div>
+        <!-- /.panel -->
+    </div>
+
+</div>
