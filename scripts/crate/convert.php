@@ -25,20 +25,22 @@ class ContractConvert {
         }
 
         $ep = fopen($exportFile,'w');
+        $dateFields = array('signeddate','effectivedate','currentcompletiondate','ultimatecompletiondate','lastdatetoorder','registrationdate','renewaldate','last_modified_date');
         while ( ($data = fgetcsv($fp, 8096, ',')) !== false ) {
 
             $item = array_combine($this->contract_field_map,$data); // keys, values
 
             if ( $item !== false ) {
 
-                $item['signeddate'] = strtotime($item['signeddate']);
-                $item['effectivedate'] = strtotime($item['effectivedate']);
-                $item['currentcompletiondate'] = strtotime($item['currentcompletiondate']);
-                $item['ultimatecompletiondate'] = strtotime($item['ultimatecompletiondate']);
-                $item['lastdatetoorder'] = strtotime($item['lastdatetoorder']);
-                $item['registrationdate'] = strtotime($item['registrationdate']);
-                $item['renewaldate'] = strtotime($item['renewaldate']);
-                $item['last_modified_date'] = strtotime($item['last_modified_date']);
+                foreach ($dateFields as $dateField) {
+                    $timestamp = strtotime($item[$dateField]);
+                    if ( !$timestamp ) {
+                        $item[$dateField] = null;
+                    } else {
+                        $item[$dateField] = $timestamp;
+                    }
+
+                }
 
                 if (fwrite($ep, json_encode($item) . "\n") === FALSE) {
                     echo "Cannot write to file ($exportFile)";
