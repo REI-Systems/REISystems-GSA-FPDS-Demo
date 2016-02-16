@@ -82,8 +82,11 @@ services.ApiService = ['$http', '$q', '$log', function ($http, $q, $log){
 
 //Search service for common function to use
 services.SearchService = ['ApiService', function(ApiService){
-    var facetQuery = 'SELECT FIELDNAME, COUNT(FIELDNAME) as count FROM fpds_contracts_2015 GROUP BY FIELDNAME'
+    var facetQuery = 'SELECT FIELDNAME, COUNT(FIELDNAME) as count FROM fpds_contracts_2015 GROUP BY FIELDNAME';
+    var query = 'SELECT * FROM fpds_contracts_2015 ';
+
     this.facetQuery = facetQuery;
+    this.query = query;
 
     /**
      * 
@@ -115,5 +118,14 @@ services.SearchService = ['ApiService', function(ApiService){
         });
 
         return ApiService.calls(aApiParams);
+    };
+
+    /**
+     * 
+     * @param String sql
+     * @returns {$q@call;defer.promise}
+     */
+    this.sqlSearch = function(sql) {
+        return ApiService.call('search', '', {'q': query+sql}, {}, 'GET');
     };
 }];
