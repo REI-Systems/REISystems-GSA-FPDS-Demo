@@ -176,7 +176,7 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
             });
 
             //on click event, 
-            $("#jqxgrid").on("cellclick", function (event) 
+            $("#jqxgrid").on("rowselect", function (event) 
             {
                 // event arguments.
                 var args = event.args;
@@ -184,7 +184,7 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
 
                 $scope.$apply(function(){
                     // perform any model changes or method invocations here on angular app.
-                    $scope.row = args.row.bounddata;
+                    $scope.row = args.row;
 
                     //load tabs
                     $('#jqxtabs').jqxTabs({ width: jQuery('#jqxWidget').parent().width(), height: 250, theme: 'ui-sunny' });
