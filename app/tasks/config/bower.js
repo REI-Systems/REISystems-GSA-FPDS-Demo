@@ -19,7 +19,6 @@ module.exports = function(grunt) {
                       './jqwidgets/jqxdata.js',
                       './jqwidgets/jqxbuttons.js',
                       './jqwidgets/jqxscrollbar.js',
-                      './jqwidgets/jqxlistbox.js',
                       './jqwidgets/jqxdropdownlist.js',
                       './jqwidgets/jqxmenu.js',
                       './jqwidgets/jqxgrid.js',
@@ -33,6 +32,7 @@ module.exports = function(grunt) {
                       './jqwidgets/jqxpanel.js',
                       './jqwidgets/jqxcheckbox.js',
                       './jqwidgets/jqxtabs.js',
+                      './jqwidgets/jqxlistbox.js',
                       './jqwidgets/jqxangular.js'
                   ],
                   'images_dest': '.tmp/public/styles',
