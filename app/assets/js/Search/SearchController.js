@@ -1,10 +1,13 @@
 var controllers = controllers || {};
 
-controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinnerService', 'SearchService', function($scope, $location, AuthProvider, usSpinnerService, SearchService){
+controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinnerService', 'SearchService', 'SessionFactory', 'ApiService', function($scope, $location, AuthProvider, usSpinnerService, SearchService, SessionFactory, ApiService){
     //verify if user is aythenticated, if yes redirect to home page
     AuthProvider.isUserAuthenticated(
     function(){
         $scope.isUserAuth = true;
+
+        //get logged in user info
+        $scope.user = SessionFactory.getSession().user;
 
         //show spinner
         usSpinnerService.spin('spinner');
@@ -81,7 +84,7 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
 //            console.log(key, value);
         });
 
-        console.log('Clause Where, '+sqlClause);
+//        console.log('Clause Where, '+sqlClause);
 
         SearchService.sqlSearch(sqlClause).then(function(data){
             var source =
@@ -134,12 +137,71 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
                 ]
             });
 
+            //load user jgxGrid last state and apply it
+            var state = $scope.user.preferences.jqxGridState;
+            if (state) {
+                console.log($scope.user.preferences.jqxGridState);
+                $("#jqxgrid").jqxGrid('loadstate', state);
+            }
+
+            //on column reorder, save state in user database
+            $("#jqxgrid").on('columnreordered', function (event) {
+                //get new state jqxGrid
+                state = $("#jqxgrid").jqxGrid('savestate');
+//                console.log(state);
+
+                $scope.$apply(function(){
+                    //update state in user scope preferences
+                    $scope.user.preferences.jqxGridState = state;
+
+                    /**
+                     * SAVE jqxGris State in user preferences
+                     */
+                    //show spinner
+                    usSpinnerService.spin('spinner');
+
+                    var oAPI = {
+                        'name': 'userUpdate',
+                        'suffix': $scope.user.id
+                    };
+
+                    var oParams = {
+                        'preferences': {
+                            'typeDashboard': $scope.user.preferences.typeDashboard,
+                            'jqxGridState': state
+                        }
+                    };
+
+                    //update user
+                    ApiService.call(oAPI.name, oAPI.suffix, {}, oParams, 'POST').then(
+                        function(data){
+                            $scope.flash = {
+                                "type": "alert-success",
+                                "message": "User preferences are saved !"
+                            };
+
+                            //stop spinner
+                            usSpinnerService.stop('spinner');
+                        },
+                        function(error){
+                            $scope.flash = {
+                                "type": "alert-danger",
+                                "message": "There was an error with saving User preferences, Please try again !"
+                            };
+
+                            //stop spinner
+                            usSpinnerService.stop('spinner');
+                        }
+                    );
+                });
+            });
+
             //on click event, 
             $("#jqxgrid").on("cellclick", function (event) 
             {
                 // event arguments.
                 var args = event.args;
-                console.log(args.row.bounddata);
+                //console.log(args.row.bounddata);
 
                 $scope.$apply(function(){
                     // perform any model changes or method invocations here on angular app.
