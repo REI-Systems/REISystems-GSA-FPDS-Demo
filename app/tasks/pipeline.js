@@ -39,7 +39,6 @@ var jsFilesToInject = [
   'js/dependencies/jqwidgets/jqxdata.js',
   'js/dependencies/jqwidgets/jqxbuttons.js',
   'js/dependencies/jqwidgets/jqxscrollbar.js',
-  'js/dependencies/jqwidgets/jqxlistbox.js',
   'js/dependencies/jqwidgets/jqxdropdownlist.js',
   'js/dependencies/jqwidgets/jqxmenu.js',
   'js/dependencies/jqwidgets/jqxgrid.js',
@@ -53,6 +52,7 @@ var jsFilesToInject = [
   'js/dependencies/jqwidgets/jqxpanel.js',
   'js/dependencies/jqwidgets/jqxcheckbox.js',
   'js/dependencies/jqwidgets/jqxtabs.js',
+  'js/dependencies/jqwidgets/jqxlistbox.js',
   'js/dependencies/jqwidgets/jqxangular.js',
   'js/dependencies/**/*.js',
 
