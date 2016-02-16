@@ -1,48 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace GSA;
 
-define('ELASTICSEARCH_HOST','ogpsql.reisys.com');
-define('CONTRACT_INDEX','fpds_contracts_2015');
-define('CONTRACT_TYPE','contract');
+use Elasticsearch;
 
-$importer = new ContractImporter(ELASTICSEARCH_HOST);
-
-// check connection
-if ( !$importer->isReady() ) {
-    echo 'No Connection!'.PHP_EOL;
-    exit();
-}
-
-// create index
-try {
-    $importer->createIndex(CONTRACT_INDEX);
-} catch (Exception $e) {
-    if ( $e->getMessage() !== 'Index already exists.' ) {
-        echo $e->getMessage() . PHP_EOL;
-        exit();
-    }
-}
-
-// create type
-try {
-    $definition = json_decode(file_get_contents('../../schemas/contract.json'), true);
-    $importer->createType(CONTRACT_INDEX,CONTRACT_TYPE,$definition);
-} catch (Exception $e) {
-    if ( $e->getMessage() !== 'Type already exists.' ) {
-        echo $e->getMessage() . PHP_EOL;
-        exit();
-    }
-}
-
-// load data into index
-$importer->push('/Users/cedwards/Downloads/Contracts-2015.csv',array(
-    'batchSize' => 1000,
-    'rowLimit' => 99999999999
-));
-
-
-class ContractImporter {
+class ContractImport {
 
     const BATCH_SIZE = 5000;
     const MAX_ROWS = 100000000;
@@ -57,7 +19,7 @@ class ContractImporter {
     public function isReady() {
         try {
             $this->client->ping();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
         return true;
@@ -69,7 +31,7 @@ class ContractImporter {
 
         try {
             return $this->client->indices()->getSettings($params);
-        } catch ( Exception $e ) {
+        } catch ( \Exception $e ) {
             if ( $e->getCode() === 404 ) {
                 return null;
             }
@@ -80,7 +42,7 @@ class ContractImporter {
     public function createIndex( $indexName, $types = null ) {
 
         if ( $this->getIndex($indexName) ) {
-            throw new Exception('Index already exists.');
+            throw new \Exception('Index already exists.');
         }
 
         $indexParams = array();
@@ -102,7 +64,7 @@ class ContractImporter {
     public function createType ( $indexName, $typeName, $definition ) {
 
         if ( $this->getType($indexName,$typeName) ) {
-            throw new Exception('Type already exists.');
+            throw new \Exception('Type already exists.');
         }
 
         $params = array(
@@ -123,7 +85,7 @@ class ContractImporter {
 
         try {
             return $this->client->indices()->getMapping($params);
-        } catch ( Exception $e ) {
+        } catch ( \Exception $e ) {
             if ( $e->getCode() === 404 ) {
                 return null;
             }
