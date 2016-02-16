@@ -55,39 +55,18 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
             //stop spinner
             usSpinnerService.stop('spinner');
 
-            //load search and show table
-            $scope.searchDataset();
+            //load dataset and show table
+            $scope.loadDataSet();
         });
     },
     function(){
         $location.path('/');
     });
 
-    //search dataset
-    $scope.searchDataset = function() {
-        //show spinner
-        usSpinnerService.spin('spinner');
-
-        var sqlClause = '';
-        //build query clause/order... dynamically based on searchFilterForm form
-        angular.forEach($scope.searchFilterForm, function(value, key) {
-            if(key[0] === '$') return;
-
-            //this field have changed
-            if(!value.$pristine && value.$modelValue !== '') {
-//                var str = ' '+key+" like '%"+value.$modelValue+"%'";
-                var str = ' '+key+"='"+value.$modelValue+"'";
-
-                sqlClause += (sqlClause !== '') ? ' AND'+str : ' WHERE'+str;
-            }
-//            console.log(key, value.$pristine);
-//            console.log(key, value);
-        });
-
-//        console.log('Clause Where, '+sqlClause);
-
-        SearchService.sqlSearch(sqlClause).then(function(data){
-            var source =
+    //load datasets
+    $scope.loadDataSet = function() {
+        SearchService.sqlSearch('').then(function(data){
+        $scope.source =
             {
                 localdata: data,
                 datafields: [{ name: 'contractactiontype'},{ name: 'agencyid'},
@@ -102,12 +81,14 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
                 datatype: "json"
             };
 
+            var dataAdapter = new $.jqx.dataAdapter($scope.source, {});
+
             jQuery("#jqxgrid").jqxGrid(
             {
                 theme: 'ui-sunny',
                 width: jQuery('#jqxWidget').parent().width(),
                 height: 450,
-                source: source,
+                source: dataAdapter,
                 selectionmode: 'multiplerowsextended',
                 sortable: true,
                 pageable: true,
@@ -214,9 +195,46 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
 
             //stop spinner
             usSpinnerService.stop('spinner');
+            },
+            function(error) {
+            usSpinnerService.stop('spinner');
+        });
+    };
+
+    //search dataset
+    $scope.searchDataset = function() {
+        //show spinner
+        usSpinnerService.spin('spinner');
+
+        var sqlClause = '';
+        //build query clause/order... dynamically based on searchFilterForm form
+        angular.forEach($scope.searchFilterForm, function(value, key) {
+            if(key[0] === '$') return;
+
+            //this field have changed
+            if(!value.$pristine && value.$modelValue !== '') {
+//                var str = ' '+key+" like '%"+value.$modelValue+"%'";
+                var str = ' '+key+"='"+value.$modelValue+"'";
+
+                sqlClause += (sqlClause !== '') ? ' AND'+str : ' WHERE'+str;
+            }
+//            console.log(key, value.$pristine);
+//            console.log(key, value);
+        });
+
+//        console.log('Clause Where, '+sqlClause);
+
+        SearchService.sqlSearch(sqlClause).then(function(data){
+            $scope.source.localdata = data;
+            // passing "cells" to the 'updatebounddata' method will refresh only the cells values when the new rows count is equal to the previous rows count.
+            $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+
+            //stop spinner
+            usSpinnerService.stop('spinner');
         },
         function(error) {
-            
+            //stop spinner
+            usSpinnerService.stop('spinner');
         });
     };
 }];
