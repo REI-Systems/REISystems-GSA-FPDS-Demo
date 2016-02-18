@@ -25,12 +25,12 @@ config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, u
         .when('/register',
         {
             controller: 'FormController',
-            templateUrl: 'templates/partials/user/_form.html',
+            templateUrl: 'templates/partials/user/_form.html'
         })
         .when('/user/edit/:id',
         {
             controller: 'FormController',
-            templateUrl: 'templates/partials/user/_form.html',
+            templateUrl: 'templates/partials/user/_form.html'
         })
         .when('/search',
         {
