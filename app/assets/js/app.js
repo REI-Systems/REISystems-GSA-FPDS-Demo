@@ -14,8 +14,8 @@ config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, u
     $routeProvider
         .when('/',
         {
-            controller: 'HomeController',
-            templateUrl: 'templates/partials/home/_index.html'
+            controller: 'DefaultController',
+            templateUrl: 'templates/partials/default/_index.html'
         })
         .when('/login',
         {
