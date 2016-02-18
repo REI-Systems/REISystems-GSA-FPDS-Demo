@@ -34,10 +34,10 @@
     <link rel="stylesheet" href="/styles/importer.css">
     <link rel="stylesheet" href="/styles/jqwidgets/styles/jqx.base.css">
     <link rel="stylesheet" href="/styles/jqwidgets/styles/jqx.ui-sunny.css">
+    <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/metisMenu/metisMenu.css">
     <link rel="stylesheet" href="/styles/morrisjs/morris.css">
     <link rel="stylesheet" href="/styles/nvd3/nv.d3.css">
-    <link rel="stylesheet" href="/styles/sb-admin-2.css">
     <link rel="stylesheet" href="/styles/timeline.css">
     <!--STYLES END-->
 
@@ -52,18 +52,16 @@
   <body ng-cloak>
     <span us-spinner spinner-key="spinner" spinner-start-active="false"></span>
 
-    <div id="wrapper">
 
-        <% include ../assets/templates/partials/_nav.html %>
+    <% include nav.ejs %>
 
-        <div id="page-wrapper">
-            <%- body %>
-            <div ng-view></div>
-        </div>
-
-        <% include ../assets/templates/partials/_footer.html %>
-
+    <div class="container">
+        <%- body %>
+        <div ng-view></div>
     </div>
+
+    <% include footer.ejs %>
+
 
     <!--
         Client-side Templates
