@@ -22,7 +22,7 @@ module.exports = {
 
     pgService: {
       adapter: 'sails-postgresql',
-      database: 'fpds_demo',
+      database: 'gsa_fpds_demo',
       host: 'localhost',
       user: 'postgres',
       password: 'postgres',
