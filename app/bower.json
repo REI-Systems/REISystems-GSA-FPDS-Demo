@@ -20,14 +20,12 @@
     "angular-nvd3": "*",
     "font-awesome": "*",
     "jqwidgets": "*",
-    
     "morrisjs": "*",
     "metisMenu": "*"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "resolutions": {
-      "d3": "^3.3.13"
+    "d3": "^3.3.13"
   },
   "appPath": "app",
   "moduleName": "frontendApp",
