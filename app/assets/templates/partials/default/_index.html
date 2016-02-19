@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-12">
+        <div class="alert" ng-show="flash && flash.type && flash.message" ng-class="flash.type" role="alert">{{ flash.message }}</div>
 
         <div class="jumbotron well">
             <h1>Welcome</h1>

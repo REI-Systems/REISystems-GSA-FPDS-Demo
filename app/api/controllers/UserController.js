@@ -118,6 +118,105 @@ module.exports = {
             success: true, msg: 'Session destroyed successfully.'
         });
     },
+    activateAccount: function (req, res) {
+        var params = req.params.all();
+
+        if (req.session.user) {
+            res.status(403).json({
+                message: 'Forbidden - User already logged in.'
+            });
+        }
+
+        if (typeof params.token === 'undefined') {
+            res.status(403).json({
+                message: 'Forbidden - Missing token !'
+            });
+        } else {
+             User.findOneByEmailToken(params.token).exec(function (err, user) {
+                if (err || !user) {
+                    res.status(403).json({
+                        message: 'Forbidden - Invalid token !'
+                    });
+                }
+
+                if (user && !user.isActive) {
+                    //generate new token and send email
+                    user.isActive = true;
+                    user.emailToken = '';
+
+                    user.save(function(err, usr) { 
+                        if (err) {
+                            res.status(403).json({
+                                message: 'Forbidden - An error occured while activating your account !'
+                            });
+                        }
+                    });
+
+                    res.json({
+                        message: 'Your account has been successfully activated !'
+                    });
+                } else if(user) {
+                    res.status(403).json({
+                        message: 'Forbidden - User account already activated !'
+                    });
+                }
+            });
+        }
+    },
+    resetPassword: function (req, res) {
+        var params = req.params.all();
+        var bcrypt = require('bcryptjs');
+
+        if (req.session.user) {
+            res.status(403).json({
+                message: 'Forbidden - User already logged in.'
+            });
+        }
+
+        if (typeof params.password === 'undefined' || typeof params.token === 'undefined') {
+            res.status(403).json({
+                message: 'Forbidden - Missing parameters !'
+            });
+        } else {
+            User.findOneByEmailToken(params.token).exec(function (err, user) {
+                if (err || !user) {
+                    res.status(403).json({
+                        message: 'Forbidden - Invalid token !'
+                    });
+                }
+
+                if (user && user.isActive) {
+                    //generate new token and send email
+                    user.emailToken = '';
+
+                    bcrypt.genSalt(10, function (err, salt) {
+                      if (err) return next(err);
+                      bcrypt.hash(params.password, salt, function (err, hash) {
+                        if (err) return next(err);
+
+                            user.password = hash;
+                        });
+                    });
+
+                    user.save(function(err, usr) {
+                        if (err) {
+                            res.status(403).json({
+                                message: 'Forbidden - An error occured while activating your account !'
+                            });
+                        }
+                    });
+
+                    res.json({
+                        message: 'Your password has been successfully changed !'
+                    });
+                } else if(user && !user.isActive) {
+                    res.status(403).json({
+                        message: 'Forbidden - User account not activated yet !'
+                    });
+                }
+            });
+        }
+    },
     sendEmailToken: function (req, res) {
         var uuid = require('uuid');
         var params = req.params.all();
