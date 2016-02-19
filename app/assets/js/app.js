@@ -32,6 +32,21 @@ config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, u
             controller: 'FormController',
             templateUrl: 'templates/partials/user/_form.html'
         })
+        .when('/forgot-password',
+        {
+            controller: 'RequestEmailController',
+            templateUrl: 'templates/partials/user/_forgotPassword.html'
+        })
+        .when('/resend-email',
+        {
+            controller: 'RequestEmailController',
+            templateUrl: 'templates/partials/user/_resendEmail.html'
+        })
+        .when('/reset-password',
+        {
+            controller: 'ResetPasswordController',
+            templateUrl: 'templates/partials/user/_resetPassword.html'
+        })
         .when('/search',
         {
             controller: 'SearchController',

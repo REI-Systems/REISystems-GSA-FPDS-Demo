@@ -46,7 +46,7 @@ controllers.LoginController = ['$scope', '$rootScope', '$location', '$timeout', 
                 function(error){
                     $scope.flash = {
                         "type": "alert-danger",
-                        "message": "Forbidden - user not found.",
+                        "message": error.message
                     };
 
                     //stop spinner
