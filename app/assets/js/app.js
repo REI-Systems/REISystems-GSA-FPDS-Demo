@@ -37,6 +37,11 @@ config(['$routeProvider', 'usSpinnerConfigProvider', function ($routeProvider, u
             controller: 'SearchController',
             templateUrl: 'templates/partials/search/_index.html'
         })
+        .when('/newsearch',
+        {
+          controller: 'NewSearchController',
+          templateUrl: 'templates/partials/newsearch/_index.html'  
+        })
         .otherwise({redirectTo: '/'});
 
         //customizing spinner
