@@ -4,6 +4,7 @@
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
+var uuid = require('uuid');
 
 module.exports = {
 
@@ -14,8 +15,19 @@ module.exports = {
       unique: true,
       required: true
     },
-    password: {type: 'string'},
-    email: {type: 'email'},
+    password: {
+        type: 'string', 
+        unique: true, 
+        required: true
+    },
+    email: { type: 'email' },
+    isActive: { type: 'boolean', defaultsTo: false},
+    emailToken: { 
+        type: 'string', 
+        defaultsTo: function() { 
+            return uuid.v4(); 
+        } 
+    },
     preferences: {type: 'json'},
     savedSearches: {type: 'json'}
   },
@@ -28,6 +40,16 @@ module.exports = {
         if (err) return next(err);
 
         attrs.password = hash;
+
+        //send email account activation
+        MailerService
+        .send({
+          to: attrs.email,
+          subject: '[FPDS] Account Activation !',
+          body: "Please click on this <a href='"+sails.getBaseurl()+"/#/?token="+attrs.emailToken+"'>link</a> to activate your account !"
+        },
+        function(){ console.log('email sent'); },
+        function(err){ console.log(err); });
         next();
       });
     });

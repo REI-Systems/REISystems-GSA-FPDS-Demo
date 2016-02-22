@@ -7,6 +7,9 @@ services.ApiService = ['$http', '$q', '$log', function ($http, $q, $log){
         "userUpdate": "/user/update/",
         "userIsLoggedIn": "/user/isLoggedIn",
         "userLogOut": "/user/logout",
+        "userSendActivation": '/user/sendEmailToken',
+        "activateAccount": "/user/activateAccount",
+        "resetPassword": "/user/resetPassword",
         "search": "/api/search/query"
     };
 

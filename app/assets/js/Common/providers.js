@@ -52,6 +52,9 @@ providers.AuthProvider = [function () {
                                 callBackFnError(error);
                             }
                         });
+                },
+                sendEmailToken: function (oParam) {
+                    return ApiService.call('userSendActivation', '', '', {email: oParam.email, type: oParam.type}, 'POST');
                 }
             };
         }]

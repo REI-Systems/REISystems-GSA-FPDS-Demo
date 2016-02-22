@@ -63,6 +63,7 @@ su vagrant -c "bower install"
 #echo "Opening port for dev ..."
 /sbin/iptables -I INPUT -p tcp -m tcp --dport 1337 -j ACCEPT
 #/sbin/iptables -I INPUT -p tcp -m tcp --dport 35729 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp -m tcp --dport 25 -j ACCEPT
 
 
 
@@ -82,3 +83,8 @@ su vagrant -c "bower install"
 #host    all             all             ::1/128                 md5 #ident
 
 #service postgresql-9.4 restart
+
+
+#http://tecadmin.net/install-sendmail-server-on-centos-rhel-server/
+echo "Install Sendmail ..."
+yum install sendmail sendmail-cf m4
