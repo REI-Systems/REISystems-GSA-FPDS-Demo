@@ -45,4 +45,14 @@ controllers.CommonController = ['$scope', '$rootScope', 'AuthProvider', 'Session
             
         });
     };
+    
+    // Init main nav dropdowns
+    $scope.initDropdown = function(){
+      $(function () {
+        // wait till all resources are available
+        $('.ui.dropdown').dropdown();
+      });
+    };
+    $scope.initDropdown();
+    
 }];

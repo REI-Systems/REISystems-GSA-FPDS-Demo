@@ -16,9 +16,9 @@ module.exports = function(grunt) {
     'clean:dev',
     'bower:dev',
     'jst:dev',
-    'sass:dev',
+    //'sass:dev',
     'copy:dev',
-    'copy:fonts',
+    //'copy:fonts',
     'coffee:dev'
   ]);
 };
