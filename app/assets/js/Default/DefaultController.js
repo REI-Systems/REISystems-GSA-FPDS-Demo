@@ -4,7 +4,7 @@ controllers.DefaultController = ['$scope', '$routeParams', 'ApiService', functio
 
     if(typeof $routeParams.disconnected !== 'undefined') {
         $scope.flash = {
-            "type": "alert-success",
+            "type": "positive",
             "message": "You have been successfully disconnected !"
         };
     }
@@ -15,13 +15,13 @@ controllers.DefaultController = ['$scope', '$routeParams', 'ApiService', functio
         ApiService.call('activateAccount', '', {}, {token: $routeParams.token}, 'POST').then(
           function(data) {
             $scope.flash = {
-                "type": "alert-success",
+                "type": "positive",
                 "message": data.message
             };
           },
           function(error){
             $scope.flash = {
-                "type": "alert-danger",
+                "type": "negative",
                 "message": error.message
             };
         });

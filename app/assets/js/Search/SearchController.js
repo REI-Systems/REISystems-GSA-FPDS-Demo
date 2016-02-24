@@ -5,6 +5,16 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
     AuthProvider.isUserAuthenticated(
     function(){
         $scope.isUserAuth = true;
+        
+        // Init semantic ui modules
+        $scope.initSemanticModules = function(){
+          $(function () {
+            // wait till all resources are available
+            $('.ui.accordion').accordion();
+            $('.ui.dropdown').dropdown();
+          });
+        };
+        $scope.initSemanticModules();
 
         //get logged in user info
         $scope.user = SessionFactory.getSession().user;
@@ -263,7 +273,7 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
         ApiService.call(oAPI.name, oAPI.suffix, {}, oParams, 'POST').then(
             function(data){
                 $scope.flash = {
-                    "type": "alert-success",
+                    "type": "positive",
                     "message": "User preferences are saved !"
                 };
 
@@ -272,7 +282,7 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
             },
             function(error){
                 $scope.flash = {
-                    "type": "alert-danger",
+                    "type": "negative",
                     "message": "There was an error with saving User preferences, Please try again !"
                 };
 
