@@ -6,7 +6,7 @@
 
 <!--Search bar-->
 <div class="ui fluid category search">
-  <div class="ui fluid icon input">
+  <div class="ui fluid big icon input">
     <input class="prompt" type="text" placeholder="Search for Vendor, Agencies or Offices">
     <i class="search icon"></i>
   </div>
@@ -16,7 +16,7 @@
 <!--Advanced Search-->
 <div class="ui accordion">
   <div class="title">
-    <i class="dropdown icon"></i> Advanced Search
+    <i class="dropdown blue icon"></i> Advanced Search
   </div>
   <div class="content field">
 
@@ -129,6 +129,11 @@
   </div>
 </div>
 
+<h4 class="ui horizontal divider header">
+  <i class="table icon"></i>
+  Results
+</h4>
+
 <!--Number of results-->
 <div class="ui horizontal statistics">
   <div class="statistic">
@@ -142,27 +147,20 @@
 </div>
 
 <!--Show/hide Table Columns-->
-<div class="row">
-  <div class="col-lg-12">
-    <h4>Table Columns Show/Hide</h4>
-    <div id="jqxlistbox"></div>
-  </div>
-</div>
+<div id="jqxlistbox"></div>
 
 
 <!--Table-->
-<div class="row">
-  <div class="col-lg-12">
-    <h4>Table Datasets</h4>
-    <div id='jqxWidget'>
-      <div id="jqxgrid"></div>
-    </div>
-  </div>
+<div id='jqxWidget'>
+  <div id="jqxgrid"></div>
 </div>
 
 
 
-<div class="ui medium header">Contract Information</div>
+<h4 class="ui horizontal divider header">
+  <i class="file outline icon"></i>
+  Contract information
+</h4>
 
 <!--Info message-->
 <div ng-hide="row">
