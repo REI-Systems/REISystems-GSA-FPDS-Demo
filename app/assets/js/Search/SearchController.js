@@ -12,6 +12,7 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
             // wait till all resources are available
             $('.ui.accordion').accordion();
             $('.ui.dropdown').dropdown();
+            $('.pointing.secondary.menu .item').tab();
           });
         };
         $scope.initSemanticModules();
