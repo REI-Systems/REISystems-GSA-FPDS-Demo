@@ -10,20 +10,39 @@
 module.exports = {
 
   index: (request, reply) => {
-    const params = request.query;
-    params.source = request.params.source;
-    ElasticsearchSql.query(request,reply,params);
+    return CrateService.query(QueryBuilder.getString(request.query))
+      .then(function (result) {
+        ReplyHandler.finalize(request,reply);
+        reply.send(result);
+      })
+      .error(function (e) {
+        reply.type('application/json');
+        reply.send(500,e);
+      });
   },
 
   query: (request, reply) => {
-    const params = request.query;
-    ElasticsearchSql.query(request,reply,params);
+    return CrateService.query(QueryBuilder.getString(request.query))
+      .then(function (result) {
+        ReplyHandler.finalize(request,reply);
+        reply.send(result);
+      })
+      .error(function (e) {
+        reply.type('application/json');
+        reply.send(500,e);
+      });
   },
 
   category: (request, reply) => {
-    const params = request.query;
-    console.log('Search.category');
-    CrateService.queryCategory(request,reply,params);
+    return CrateService.queryCategory(request.query.q)
+      .then(function (result) {
+        ReplyHandler.finalize(request,reply);
+        reply.send(result);
+      })
+      .error(function (e) {
+        reply.type('application/json');
+        reply.send(500,e);
+      });
   }
 
 };

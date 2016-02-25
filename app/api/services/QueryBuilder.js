@@ -13,11 +13,11 @@ class Sql {
 
   getString(params) {
 
-    if ( typeof params.q !== 'undefined' ) {
-      if (!params.q.startsWith('SELECT')) {
+    if ( typeof params.sql !== 'undefined' ) {
+      if (!params.sql.startsWith('SELECT')) {
         throw new Error('Unsupported query string.');
       } else {
-        return params.q;
+        return params.sql;
       }
     }
 

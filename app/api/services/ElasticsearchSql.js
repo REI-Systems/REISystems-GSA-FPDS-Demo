@@ -27,7 +27,7 @@ class ElasticsearchSql {
     httpClient(httpClientOptions, (err, res, payload) => {
       var result = {};
       if ( isCsvRequest ) {
-        let handler = ResultHandler.create(JSON.parse(payload),true);
+        let handler = ElasticResultHandler.create(JSON.parse(payload),true);
         let body = handler.getBody();
 
         // convert to csv
@@ -42,7 +42,7 @@ class ElasticsearchSql {
         result = csv.join("\n");
       } else {
 
-        let handler = ResultHandler.create(JSON.parse(payload),false);
+        let handler = ElasticResultHandler.create(JSON.parse(payload),false);
         result = handler.getBody();
       }
 
