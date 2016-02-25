@@ -11,8 +11,6 @@ var transporter = nodemailer.createTransport(directConfig);
 
 module.exports = {
     send: function(oOption, callBackFnSuccess, callBackFnError) {
-        console.log(transporter);
-
         transporter.sendMail({
             from: 'no-reply@fpds.local',
             to: oOption.to,
