@@ -5,84 +5,37 @@
         Log in to your account
       </div>
     </h2>
-    <form class="ui large form">
+    <form class="ui small form" name="userForm">
       <div class="ui segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="username" placeholder="Username" ng-model="user.username" ng-minlength="3">
+            <p class="text-danger" ng-show="userForm.$submitted && userForm.username.$error.minlength">The username field is required.</p>
           </div>
         </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password" ng-model="user.password" ng-minlength="3">
+            <p class="text-danger" ng-show="userForm.$submitted && userForm.password.$error.minlength">The email field is required.</p>
           </div>
         </div>
-        <div class="ui fluid large submit button">Login</div>
+        <button type="submit" class="ui fluid large submit button" ng-click="loginUser()">Login</button>
       </div>
 
-      <div class="ui error message"></div>
+      <div class="ui message" ng-show="flash && flash.type && flash.message" ng-class="flash.type">
+        {{ flash.message }}
+      </div>
 
     </form>
 
     <div class="ui message">
-       <a href="#/forgot-password" class="btn btn-link">Forgot Password?</a>
-       <a href="#/resend-email" class="btn btn-link">Still haven't received the email?</a>
+      <div class="ui list">
+        <a class="item" href="#/forgot-password">Forgot Password?</a>
+        <a class="item" href="#/resend-email">Still haven't received the email?</a>
+      </div>
     </div>
   </div>
 </div>
 
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Sign In</h1>
-        <div class="alert" ng-show="flash && flash.type && flash.message" ng-class="flash.type" role="alert">{{ flash.message }}</div>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Login to your account...
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form role="form" name="userForm">
-                            <div class="form-group">
-                                <label>Username *</label>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" class="form-control" name="username" placeholder="Username" ng-model="user.username" ng-minlength="3">
-                                </div>
-                                <p class="text-danger" ng-show="userForm.$submitted && userForm.username.$error.minlength">The username field is required.</p>
-                            </div>
-                            <div class="form-group">
-                                <label>Password *</label>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-                                    <input type="password" class="form-control" name="password" placeholder="Password" ng-model="user.password" ng-minlength="3">
-                                </div>
-                                <p class="text-danger" ng-show="userForm.$submitted && userForm.password.$error.minlength">The email field is required.</p>
-                            </div>
-
-                            <button type="reset" class="btn btn-outline btn-info" ng-click="flash={}">Reset</button>
-                            <button type="submit" class="btn btn-primary" ng-click="loginUser()">Login</button>
-                            <a href="#/forgot-password" class="btn btn-link">Forgot Password?</a>
-                            <a href="#/resend-email" class="btn btn-link">Still haven't received the email?</a>
-                        </form>
-                    </div>
-                    <!-- /.col-lg-12 (nested) -->
-                </div>
-                <!-- /.row (nested) -->
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->

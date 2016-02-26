@@ -173,6 +173,19 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
                     $scope.saveGridState(state);
                 });
             });
+            
+            
+            var sel = $('#showhidecolumns');
+            //var selectedOptions = [];
+            for(var obj in $scope.listSource){
+              sel.append( $("<option>").attr('value',$scope.listSource[obj].value).text($scope.listSource[obj].label) );
+              //if($scope.listSource[obj].checked){
+                //selectedOptions.push($scope.listSource[obj].value);
+              //}
+            }
+            //console.log(selectedOptions);
+            //sel.dropdown('set exactly', selectedOptions);
+            sel.parent().removeClass("loading");
 
             //on column reorder, save state in user database
             $("#jqxgrid").on('columnreordered', function (event) {
@@ -197,8 +210,6 @@ controllers.SearchController = ['$scope', '$location', 'AuthProvider', 'usSpinne
                     // perform any model changes or method invocations here on angular app.
                     $scope.row = args.row;
 
-                    //load tabs
-                    $('#jqxtabs').jqxTabs({ width: jQuery('#jqxWidget').parent().width(), height: 250, theme: 'ui-sunny' });
                 });
             });
 

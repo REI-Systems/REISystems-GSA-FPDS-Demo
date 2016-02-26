@@ -27,7 +27,7 @@ controllers.LoginController = ['$scope', '$rootScope', '$location', '$timeout', 
             AuthProvider.loginUser(aParams).then(
                 function(data){
                     $scope.flash = {
-                        "type": "alert-success",
+                        "type": "positive",
                         "message": "Welcome! You have been successfully logged in.",
                     };
 
@@ -45,7 +45,7 @@ controllers.LoginController = ['$scope', '$rootScope', '$location', '$timeout', 
                 },
                 function(error){
                     $scope.flash = {
-                        "type": "alert-danger",
+                        "type": "negative",
                         "message": error.message
                     };
 

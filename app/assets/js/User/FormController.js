@@ -2,6 +2,15 @@ var controllers = controllers || {};
 
 controllers.FormController = ['$scope', 'AuthProvider', 'ApiService', 'SessionFactory', 'usSpinnerService',
     function($scope, AuthProvider, ApiService, SessionFactory, usSpinnerService){
+      
+    // Init semantic ui modules
+      $scope.initCheckboxes = function(){
+        $(function () {
+          // wait till all resources are available
+          $('.ui.radio.checkbox').checkbox();
+        });
+      };
+      $scope.initCheckboxes();
 
     //verify if user is aythenticated, if yes init scope
     AuthProvider.isUserAuthenticated(
@@ -63,7 +72,7 @@ controllers.FormController = ['$scope', 'AuthProvider', 'ApiService', 'SessionFa
             ApiService.call(oAPI.name, oAPI.suffix, {}, oParams, 'POST').then(
                 function(data){
                     $scope.flash = {
-                        "type": "alert-success",
+                        "type": "positive",
                         "message": ($scope.isUserAuth) ? "User updated !" : "User created !"
                     };
 
@@ -72,7 +81,7 @@ controllers.FormController = ['$scope', 'AuthProvider', 'ApiService', 'SessionFa
                 },
                 function(error){
                     $scope.flash = {
-                        "type": "alert-danger",
+                        "type": "negative",
                         "message": ($scope.isUserAuth) ? "An error has occured, please try later !" : "An error has occured, please make sure you are not using the same username and your email is valid !"
                     };
 
