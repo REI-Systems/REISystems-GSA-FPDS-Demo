@@ -53,13 +53,13 @@
 
 
     <% include nav.ejs %>
+    <%- body %>
+    <div ui-view class="pusher"></div>
 
-    <div class="ui container">
-        <%- body %>
-        <div ng-view></div>
-    </div>
 
     <% include footer.ejs %>
+    
+    
 
 
     <!--
@@ -145,6 +145,7 @@
     <script src="/js/dependencies/angular-route/angular-route.js"></script>
     <script src="/js/dependencies/angular-sanitize/angular-sanitize.js"></script>
     <script src="/js/dependencies/angular-touch/angular-touch.js"></script>
+    <script src="/js/dependencies/angular-ui-router/angular-ui-router.js"></script>
     <script src="/js/dependencies/d3/d3.js"></script>
     <script src="/js/dependencies/metisMenu/metisMenu.js"></script>
     <script src="/js/dependencies/mocha/mocha.js"></script>
@@ -162,7 +163,6 @@
     <script src="/js/Common/providers.js"></script>
     <script src="/js/Common/services.js"></script>
     <script src="/js/Default/DefaultController.js"></script>
-    <script src="/js/NewSearch/NewSearchController.js"></script>
     <script src="/js/Search/SearchController.js"></script>
     <script src="/js/User/FormController.js"></script>
     <script src="/js/User/LoginController.js"></script>

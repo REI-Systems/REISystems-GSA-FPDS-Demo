@@ -1,33 +1,37 @@
-<!-- Fixed navbar -->
-
-<div class="ui top fixed stackable menu" ng-controller="CommonController">
-  
+<!-- Following Menu -->
+<div class="ui large top fixed menu" ng-controller="CommonController">
   <div class="ui container">
-  
-    <a href="/#/" class="header item">FPDS Demo</a>
-    
-    <!-- Some options disabled for not authenticated users -->
-    <a href="#/search" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Search</a>
-    <a href="#/api" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">API</a>
-    <a href="#/feedback" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Feedback</a>
-    <a href="#/about" class="item">About</a>
-
-    <!-- Is user logged out -->
-    <div ng-show="!isUserAuth" class="right menu">
-      <a href="#/login" class="item">Login</a>
-      <a href="#/register" class="item">Register</a>
-    </div>
-
-    <!--Is user logged in -->
-    <div ng-show="isUserAuth" class="ui right dropdown item">
-      {{ user.name }}
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <a ng-href="#/user/edit/{{ user.id }}" class="item">Edit profile</a>
-        <a href="javascript:void(0);" ng-click="logOut();" class="item">Logout</a>
+    <a ui-sref="home" class="active item">Home</a>
+    <a ui-sref="search" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Search</a>
+    <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">API</a>
+    <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+    <div class="right menu">
+      <div ng-show="!isUserAuth" class="item">
+        <a ui-sref="login" class="ui button">Login</a>
       </div>
-    </div>
-  
-  </div>
+      <div ng-show="!isUserAuth" class="item">
+        <a ui-sref="register" class="ui primary button">Register</a>
+      </div>
 
+      <div ng-show="isUserAuth" class="item">
+        <a ui-sref="user({id: user.id})" class="ui button">Edit profile</a>
+      </div>
+      <div ng-show="isUserAuth" class="item">
+        <a href="javascript:void(0);" ng-click="logOut();" class="ui button">Logout</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu" ng-controller="CommonController">
+  <a ui-sref="home" class="active item">Home</a>
+  <a ui-sref="search" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Search</a>
+  <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">API</a>
+  <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+  <a ng-show="!isUserAuth" ui-sref="login" class="item">Login</a>
+  <a ng-show="!isUserAuth" ui-sref="register" class="item">Register</a>
+  <a ng-show="isUserAuth" ui-sref="user({id: user.id})" class="item">Edit Profile</a>
+  <a ng-show="isUserAuth" href="javascript:void(0);" ng-click="logOut();" class="item">Logout</a>
 </div>

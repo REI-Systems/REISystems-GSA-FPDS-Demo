@@ -38,7 +38,7 @@ controllers.CommonController = ['$scope', '$rootScope', 'AuthProvider', 'Session
             $scope.isUserAuthenticated();
 
             //redirect to homepage 
-            $location.path('/').search({'disconnected':true});
+            $location.path('/logout').search({'disconnected':true});
         }, 
         //error function
         function(){

@@ -18,7 +18,8 @@
     "angular-nvd3": "*",
     "jqwidgets": "*",
     "morrisjs": "*",
-    "metisMenu": "*"
+    "metisMenu": "*",
+    "angular-ui-router": "~0.2.18"
   },
   "devDependencies": {},
   "resolutions": {
