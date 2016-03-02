@@ -12,6 +12,8 @@ class Sql {
   constructor() {}
 
   getString(params) {
+    
+    console.log(params);
 
     if ( typeof params.sql !== 'undefined' ) {
       if (!params.sql.startsWith('SELECT')) {
@@ -50,7 +52,8 @@ class Sql {
     if ( params['$limit'] ) {
       query += 'LIMIT ' + params['$limit'];
     }
-
+     
+     console.log(query);
     return query;
   }
 

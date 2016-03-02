@@ -1,0 +1,70 @@
+ <span us-spinner spinner-key="spinner" spinner-start-active="false"></span>
+
+<!-- Following Menu -->
+<div class="ui large top fixed menu" ng-controller="CommonController">
+  <div class="ui container">
+    <a ui-sref="home" class="active item">Home</a>
+    <a ui-sref="search" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Search</a>
+    <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">API</a>
+    <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+    <div class="right menu">
+      <div ng-show="!isUserAuth" class="item">
+        <a ui-sref="login" class="ui button">Login</a>
+      </div>
+      <div ng-show="!isUserAuth" class="item">
+        <a ui-sref="register" class="ui primary button">Register</a>
+      </div>
+
+      <div ng-show="isUserAuth" class="item">
+        <a ui-sref="user({id: user.id})" class="ui button">Edit profile</a>
+      </div>
+      <div ng-show="isUserAuth" class="item">
+        <a href="javascript:void(0);" ng-click="logOut();" class="ui button">Logout</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu" ng-controller="CommonController">
+  <a ui-sref="home" class="active item">Home</a>
+  <a ui-sref="search" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Search</a>
+  <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">API</a>
+  <a ui-sref="home" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+  <a ng-show="!isUserAuth" ui-sref="login" class="item">Login</a>
+  <a ng-show="!isUserAuth" ui-sref="register" class="item">Register</a>
+  <a ng-show="isUserAuth" ui-sref="user({id: user.id})" class="item">Edit Profile</a>
+  <a ng-show="isUserAuth" href="javascript:void(0);" ng-click="logOut();" class="item">Logout</a>
+</div>
+
+<!-- Content -->
+<div ui-view="content"></div>
+
+<!-- Footer -->
+<div class="ui inverted vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">Sitemap</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item">Search</a>
+          <a href="#" class="item">API</a>
+          <a href="#" class="item">Feedback</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header">Agencies</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item">IAE</a>
+          <a href="#" class="item">GSA</a>
+          <a href="#" class="item">GitHub</a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header">FDPS - NG</h4>
+        <p>Federal Procurement Data System &#8212; Next Generation</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+{
+  "name": "frontend",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "CarlosValle <REI Systems>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/REI-Systems/REISystems-GSA-FPDS-Demo",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-ui-router": "~0.2.18",
+    "jquery": "~2.2.1",
+    "jqwidgets": "~4.0.0"
+  },
+  "overrides": {
+    "jqwidgets": {
+      "main": [
+        "jqwidgets/jqxcore.js",
+        "jqwidgets/jqxcore.js",
+        "jqwidgets/jqxdata.js",
+        "jqwidgets/jqxbuttons.js",
+        "jqwidgets/jqxscrollbar.js",
+        "jqwidgets/jqxdropdownlist.js",
+        "jqwidgets/jqxmenu.js",
+        "jqwidgets/jqxgrid.js",
+        "jqwidgets/jqxgrid.pager.js",
+        "jqwidgets/jqxgrid.sort.js",
+        "jqwidgets/jqxgrid.filter.js",
+        "jqwidgets/jqxgrid.storage.js",
+        "jqwidgets/jqxgrid.columnsresize.js",
+        "jqwidgets/jqxgrid.columnsreorder.js",
+        "jqwidgets/jqxgrid.selection.js",
+        "jqwidgets/jqxpanel.js",
+        "jqwidgets/jqxcheckbox.js",
+        "jqwidgets/jqxtabs.js",
+        "jqwidgets/jqxlistbox.js",
+        "jqwidgets/jqxangular.js",
+        "jqwidgets/styles/jqx.base.css",
+        "jqwidgets/styles/jqx.ui-sunny.css"
+      ]
+    }
+  }
+}

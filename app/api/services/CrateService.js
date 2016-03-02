@@ -50,15 +50,15 @@ class CrateService {
 
     // vendername category
     let vendorOptions = _.cloneDeep(httpClientOptions);
-    vendorOptions.body.stmt = 'SELECT vendorname AS title, count(1) AS count FROM contract WHERE vendorname like \''+_.toUpper(text)+'%\' GROUP BY vendorname ORDER BY title LIMIT 10 ';
+    vendorOptions.body.stmt = 'SELECT vendorname AS title, count(1) AS count FROM contract WHERE vendorname like \''+_.toUpper(text)+'%\' GROUP BY vendorname ORDER BY title LIMIT 5 ';
 
     // contracting agency category
     let contractingAgencyOptions = _.cloneDeep(httpClientOptions);
-    contractingAgencyOptions.body.stmt = 'SELECT maj_agency_cat AS title, count(1) AS count FROM contract WHERE maj_agency_cat like \''+_.toUpper(text)+'%\' GROUP BY maj_agency_cat ORDER BY title LIMIT 10 ';
+    contractingAgencyOptions.body.stmt = 'SELECT maj_agency_cat AS title, count(1) AS count FROM contract WHERE maj_agency_cat like \''+_.toUpper(text)+'%\' GROUP BY maj_agency_cat ORDER BY title LIMIT 5 ';
 
     // funding agency category
     let fundingAgencyOptions = _.cloneDeep(httpClientOptions);
-    fundingAgencyOptions.body.stmt = 'SELECT maj_fund_agency_cat AS title, count(1) AS count FROM contract WHERE maj_fund_agency_cat like \''+_.toUpper(text)+'%\' GROUP BY maj_fund_agency_cat ORDER BY title LIMIT 10 ';
+    fundingAgencyOptions.body.stmt = 'SELECT maj_fund_agency_cat AS title, count(1) AS count FROM contract WHERE maj_fund_agency_cat like \''+_.toUpper(text)+'%\' GROUP BY maj_fund_agency_cat ORDER BY title LIMIT 5 ';
 
     return Promise.join(
       httpClient(vendorOptions),
@@ -73,11 +73,11 @@ class CrateService {
               results: []
             },
             maj_agency_cat: {
-              name: "Contracting Agency",
+              name: "Agency",
               results: []
             },
             maj_fund_agency_cat: {
-              name: "Funding Agency",
+              name: "Office",
               results: []
             }
           }
@@ -87,7 +87,8 @@ class CrateService {
         for ( let i = 0; i < recordCount; i++ ) {
           payload.results.vendorname.results.push({
             title: cat1.body.rows[i][0],
-            count: cat1.body.rows[i][1]
+            count: cat1.body.rows[i][1],
+            category: 'vendor'
           });
         }
 
@@ -95,7 +96,8 @@ class CrateService {
         for ( let i = 0; i < recordCount; i++ ) {
           payload.results.maj_agency_cat.results.push({
             title: cat2.body.rows[i][0],
-            count: cat2.body.rows[i][1]
+            count: cat2.body.rows[i][1],
+            category: 'agency'
           });
         }
 
@@ -103,7 +105,8 @@ class CrateService {
         for ( let i = 0; i < recordCount; i++ ) {
           payload.results.maj_fund_agency_cat.results.push({
             title: cat3.body.rows[i][0],
-            count: cat3.body.rows[i][1]
+            count: cat3.body.rows[i][1],
+            category: 'office'
           });
         }
 

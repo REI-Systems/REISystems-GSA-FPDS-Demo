@@ -1,0 +1,88 @@
+<style type="text/css">
+  .pagecontent .column {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    max-width: 450px;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .pagecontent .column {
+      margin:30px;
+      max-width: none;
+    }
+  }
+</style>
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header">
+      <div class="content">
+        {{ isUserAuth ? "Edit Profile" : "Register" }}
+      </div>
+    </h2>
+    <form class="ui small form" name="userForm">
+      <div class="ui segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="username" ng-disabled="isUserAuth" placeholder="Username" ng-model="user.username" ng-minlength="3">
+            <p ng-show="userForm.$submitted && userForm.username.$error.minlength">Your username is too short.</p>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="mail icon"></i>
+            <input type="text" name="email" placeholder="Email address" ng-model="user.email" ng-minlength="3">
+            <p ng-show="userForm.$submitted && userForm.email.$error.minlength">Your email is too short.</p>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password" ng-model="user.password" ng-minlength="3">
+            <p ng-show="userForm.$submitted && userForm.password.$error.minlength">Your password is too short.</p>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input name="name" placeholder="Last Name & First Name" ng-model="user.name">
+          </div>
+        </div>
+        <div class="inline fields">
+          <label for="fruit">Type of Dashboard:</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="type_dashboard" tabindex="0" value="public" ng-model="user.typeDashboard" class="hidden">
+              <label>Public</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="type_dashboard" tabindex="0" value="gov" ng-model="user.typeDashboard" class="hidden">
+              <label>Gov</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="type_dashboard" tabindex="0" value="power" ng-model="user.typeDashboard" class="hidden">
+              <label>Power</label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="ui fluid large submit primary button" ng-click="saveUser()">{{ isUserAuth ? "Save" : "Create Account" }}</button>
+      </div>
+
+      <div class="ui message" ng-show="flash && flash.type && flash.message" ng-class="flash.type">
+        {{ flash.message }}
+      </div>
+
+    </form>
+
+
+  </div>
+</div>
+
+
+

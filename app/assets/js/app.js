@@ -12,9 +12,27 @@ var fpds = angular.module('FPDS', [
 ]).
 config(['$stateProvider','$urlRouterProvider','usSpinnerConfigProvider', function ($stateProvider, $urlRouterProvider, usSpinnerConfigProvider) {
     
-    $urlRouterProvider.otherwise('/');
+    //$urlRouterProvider.otherwise('/');
     
     $stateProvider
+        .state('main',{
+          abstract: true,
+          url: '/main',
+          templateUrl: 'templates/main.html',
+          controller: 'MainController',
+          controllerAs: 'main',
+          params: {
+            message: { value: 'Test Message'}
+          }
+        })
+        .state('main.home',{
+            url: '/home',
+            views: {
+            'content': {
+              templateUrl: 'templates/home.html'
+            }
+          }
+        })
         .state('home',{
           url: '/',
           controller: 'DefaultController',

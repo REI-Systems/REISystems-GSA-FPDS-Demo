@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'get /': {
-    view: 'homepage'
-  },
+  // 'get /': {
+  //   view: 'homepage'
+  // },
 
   'get /api/search/query': {
     controller: 'Search',

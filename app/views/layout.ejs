@@ -49,19 +49,15 @@
   </head>
 
   <body ng-cloak>
-    <span us-spinner spinner-key="spinner" spinner-start-active="false"></span>
-
-
+   
     <% include nav.ejs %>
-    <%- body %>
-    <div ui-view class="pusher"></div>
 
+    <%- body %>
+    
+    <div ui-view class="pusher"></div>
 
     <% include footer.ejs %>
     
-    
-
-
     <!--
         Client-side Templates
         ========================
@@ -169,6 +165,7 @@
     <script src="/js/User/RequestEmailController.js"></script>
     <script src="/js/User/ResetPasswordController.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/controllers/MainController.js"></script>
     <script src="/semantic/dist/semantic.js"></script>
     <!--SCRIPTS END-->
   </body>
