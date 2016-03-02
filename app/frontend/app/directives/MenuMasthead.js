@@ -1,14 +1,13 @@
 (function () {
 
   angular.module('app')
-    .directive('menuSide', ['AuthProvider', '$state', '$rootScope', function (AuthProvider, $state, $rootScope) {
+    .directive('menuMasthead', ['AuthProvider', '$state', '$rootScope', function (AuthProvider, $state, $rootScope) {
       return {
         restrict: 'E',
-        replace: true,
+        templateUrl: 'templates/menu-masthead.html',
         scope: {},
-        templateUrl: 'templates/menu-side.html',
         controller: function ($scope) {
-          
+
           $rootScope.$on('updateNav', function (e, args) {
             if(args === 'login'){
               $scope.isUserAuth = true;
@@ -34,14 +33,6 @@
               }
               );
           };
-
-          angular.element(document).ready(function () {
-     
-            // create sidebar and attach to menu open
-            $('.ui.sidebar')
-              .sidebar('attach events', '.toc.item');
-
-          });
 
         }
       }

@@ -1,15 +1,21 @@
 <div class="ui large top fixed hidden menu">
   <div class="ui container">
-    <a class="active item">Home</a>
-    <a class="item">Lorem</a>
-    <a class="item">Ipust</a>
-    <a class="item">Test</a>
+    <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
+    <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Search</a>
+    <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">API</a>
+    <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Feedback</a>
     <div class="right menu">
-      <div class="item">
-        <a class="ui button">Log in</a>
+      <div class="item" ng-show="!isUserAuth">
+        <a ui-sref-active="active" ui-sref="login" class="ui button">Log in</a>
       </div>
-      <div class="item">
-        <a class="ui primary button">Sign Up</a>
+      <div class="item" ng-show="!isUserAuth">
+        <a ui-sref-active="active" ui-sref="register" class="ui primary button">Sign Up</a>
+      </div>
+      <div class="item" ng-show="isUserAuth">
+        <a ui-sref-active="active" ui-sref="profile" class="ui button">Profile</a>
+      </div>
+      <div class="item" ng-show="isUserAuth">
+        <a ui-sref-active="active" ng-click="logOut()" class="ui button">Log out</a>
       </div>
     </div>
   </div>

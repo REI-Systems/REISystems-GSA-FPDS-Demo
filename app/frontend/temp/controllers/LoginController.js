@@ -37,7 +37,7 @@
             SessionFactory.setSession(data.user);
 
             //refresh nav bar
-            $rootScope.$emit('refreshNavBar', {});
+            $rootScope.$broadcast('updateNav','login');
 
             //redirect to homepage after 2 secs
             $timeout(function () { $location.path('/').search({ 'logged': true }); }, 2000);

@@ -106,21 +106,7 @@
 
     <div class="ui inverted vertical masthead center aligned segment">
 
-      <div class="ui container">
-        <div class="ui large secondary inverted pointing menu">
-          <a class="toc item">
-            <i class="sidebar icon"></i>
-          </a>
-          <a class="active item">Home</a>
-          <a class="item">Lorem</a>
-          <a class="item">Ipsum</a>
-          <a class="item">Dolor</a>
-          <div class="right item">
-            <a class="ui inverted button">Log in</a>
-            <a class="ui inverted button">Sign Up</a>
-          </div>
-        </div>
-      </div>
+      <menu-masthead></menu-masthead>
 
       <div ui-view="masthead"></div>
 
@@ -185,17 +171,18 @@
 
   <!-- inject:js -->
   <script src="app.js"></script>
-  <script src="directives/MenuFixed.js"></script>
-  <script src="directives/MenuSide.js"></script>
-  <script src="directives/SearchBar.js"></script>
-  <script src="factories/SessionFactory.js"></script>
   <script src="controllers/HomeController.js"></script>
   <script src="controllers/LoginController.js"></script>
   <script src="controllers/RegisterController.js"></script>
   <script src="controllers/SearchController.js"></script>
+  <script src="factories/SessionFactory.js"></script>
+  <script src="providers/AuthProvider.js"></script>
+  <script src="directives/MenuFixed.js"></script>
+  <script src="directives/MenuMasthead.js"></script>
+  <script src="directives/MenuSide.js"></script>
+  <script src="directives/SearchBar.js"></script>
   <script src="services/ApiService.js"></script>
   <script src="services/SearchService.js"></script>
-  <script src="providers/AuthProvider.js"></script>
   <!-- endinject -->
 
   <script src="../semantic/dist/semantic.js"></script>

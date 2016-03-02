@@ -1,0 +1,20 @@
+<div class="ui container">
+  <div class="ui large secondary inverted pointing menu">
+    <a class="toc item">
+      <i class="sidebar icon"></i>
+    </a>
+    
+    <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
+    <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Search</a>
+    <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">API</a>
+    <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+    
+    <div class="right item">
+      <a ui-sref-active="active" ng-show="!isUserAuth" ui-sref="login" class="ui inverted button">Log in</a>
+      <a ui-sref-active="active" ng-show="!isUserAuth" ui-sref="register" class="ui inverted button">Sign Up</a>
+      <a ui-sref-active="active" ng-show="isUserAuth" ui-sref="profile" class="ui inverted button">Profile</a>
+      <a ng-show="isUserAuth" ng-click="logOut()" class="ui inverted button">Log out</a>
+    </div>
+    
+  </div>
+</div>
