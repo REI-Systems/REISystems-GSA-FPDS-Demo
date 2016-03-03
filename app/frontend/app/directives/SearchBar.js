@@ -31,9 +31,11 @@
         controller: function ($scope) {
 
           $scope.$on('updateTable', function (element, sqlClause) {
+            $('#jqxgrid').jqxGrid('showloadelement');
             SearchService.sqlSearchAdvanced(ColumnsValue, sqlClause).then(function (data) {
               $scope.source.localdata = data.rows;
-              $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+              $("#jqxgrid").jqxGrid('updatebounddata', 'data');
+              $('#jqxgrid').jqxGrid('hideloadelement');
             }, function (error) { });
           });
 
