@@ -61,6 +61,7 @@
 
             jQuery("#jqxgrid").jqxGrid(
               {
+                width: 900,
                 source: dataAdapter,
                 selectionmode: 'multiplerowsextended',
                 sortable: true,
