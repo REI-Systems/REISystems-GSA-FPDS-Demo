@@ -127,7 +127,7 @@
         link: function (scope, element, attrs, controller) {
 
           scope.searchDataset = function () {
-
+            
             var sqlClause = '';
 
             angular.forEach(scope.searchFilterForm, function (value, key) {
