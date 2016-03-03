@@ -98,7 +98,7 @@
     }]);
 
   angular.module('app')
-    .directive('searchBar', function () {
+    .directive('searchBar', ['SearchService',function (SearchService) {
       return {
         restrict: 'E',
         replace: true,
@@ -115,13 +115,39 @@
                 type: 'category',
                 onSelect: function (result, response) {
                   controller.getTableResults(result);
+
+                  var columns = 'contractactiontype,agencyid,signeddate,contractingofficeagencyid,maj_agency_cat,dollarsobligated,principalnaicscode,psc_cat,vendorname,zipcode,placeofperformancecountrycode,pop_state_code,localareasetaside,fiscal_year,effectivedate,unique_transaction_id,solicitationid,dunsnumber,descriptionofcontractrequirement';
+
+                  var sqlClause = '';
+                  
+                  if(result.category == 'vendor'){
+                    var category = 'vendorname';
+                  }else if(result.category == 'agency'){
+                    var category = 'maj_agency_cat';
+                  }else{
+                    var category = 'maj_fund_agency_cat';
+                  }
+                  
+                  sqlClause = 'WHERE ' + category + "=" + "'" + result.title + "'";
+
+                  SearchService.sqlSearchAdvanced(columns, sqlClause).then(function (data) {
+                    scope.source.localdata = data.rows;
+                    // passing "cells" to the 'updatebounddata' method will refresh only the cells values when the new rows count is equal to the previous rows count.
+                    $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+
+                  },
+                    function (error) {
+
+                    });
+
+
                 }
               });
           });
 
         }
       };
-    });
+    }]);
 
 
   angular.module('app')
@@ -134,31 +160,27 @@
         link: function (scope, element, attrs, controller) {
 
           scope.searchDataset = function () {
-            
+
             var columns = 'contractactiontype,agencyid,signeddate,contractingofficeagencyid,maj_agency_cat,dollarsobligated,principalnaicscode,psc_cat,vendorname,zipcode,placeofperformancecountrycode,pop_state_code,localareasetaside,fiscal_year,effectivedate,unique_transaction_id,solicitationid,dunsnumber,descriptionofcontractrequirement';
-            
+
             var sqlClause = '';
 
-            console.log(scope.searchFilterForm);
-
             angular.forEach(scope.searchFilterForm, function (value, key) {
-              
-              if(key[0] === '$') return;
-              
+
+              if (key[0] === '$') return;
+
               if (!value.$pristine && value.$modelValue !== '') {
                 var str = key + "='" + value.$modelValue + "'";
 
                 sqlClause += (sqlClause !== '') ? ' AND ' + str : 'WHERE ' + str;
               }
-              console.log(key, value);
+
             });
-            
 
             SearchService.sqlSearchAdvanced(columns, sqlClause).then(function (data) {
               scope.source.localdata = data.rows;
               // passing "cells" to the 'updatebounddata' method will refresh only the cells values when the new rows count is equal to the previous rows count.
               $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
-
 
             },
               function (error) {
