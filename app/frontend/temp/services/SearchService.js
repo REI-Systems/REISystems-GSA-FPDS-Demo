@@ -48,6 +48,10 @@
       this.sqlSearch = function (sql) {
         return ApiService.call('search', '', { 'sql': 'SELECT ' + sql + ' FROM contract ' }, {}, 'GET');
       };
+      
+      this.sqlSearchAdvanced = function (columns, filter) {
+        return ApiService.call('search', '', { 'sql': 'SELECT ' + columns + ' FROM contract ' + filter }, {}, 'GET');
+      };
 
     }]);
 

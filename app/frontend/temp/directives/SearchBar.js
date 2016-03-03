@@ -11,12 +11,12 @@
 
         },
         controller: function ($scope) {
-          
+
           this.getTableResults = function (selectedResult) {
-            $scope.results = selectedResult;   
+            $scope.results = selectedResult;
             $scope.$broadcast('updateTable');
           }
-          
+
         }
       };
     });
@@ -122,16 +122,49 @@
         }
       };
     });
-    
-    
-    angular.module('app')
-    .directive('advancedSearch', function () {
+
+
+  angular.module('app')
+    .directive('advancedSearch', ['SearchService', function (SearchService) {
       return {
         restrict: 'E',
         replace: true,
         require: '^searchContainer',
         templateUrl: 'templates/search-advanced.html',
         link: function (scope, element, attrs, controller) {
+
+          scope.searchDataset = function () {
+            
+            var columns = 'contractactiontype,agencyid,signeddate,contractingofficeagencyid,maj_agency_cat,dollarsobligated,principalnaicscode,psc_cat,vendorname,zipcode,placeofperformancecountrycode,pop_state_code,localareasetaside,fiscal_year,effectivedate,unique_transaction_id,solicitationid,dunsnumber,descriptionofcontractrequirement';
+            
+            var sqlClause = '';
+
+            console.log(scope.searchFilterForm);
+
+            angular.forEach(scope.searchFilterForm, function (value, key) {
+              
+              if(key[0] === '$') return;
+              
+              if (!value.$pristine && value.$modelValue !== '') {
+                var str = key + "='" + value.$modelValue + "'";
+
+                sqlClause += (sqlClause !== '') ? ' AND ' + str : 'WHERE ' + str;
+              }
+              console.log(key, value);
+            });
+            
+
+            SearchService.sqlSearchAdvanced(columns, sqlClause).then(function (data) {
+              scope.source.localdata = data.rows;
+              // passing "cells" to the 'updatebounddata' method will refresh only the cells values when the new rows count is equal to the previous rows count.
+              $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+
+
+            },
+              function (error) {
+
+              });
+          };
 
           angular.element(document).ready(function () {
             $('.ui.accordion').accordion();
@@ -140,7 +173,7 @@
 
         }
       };
-    });
+    }]);
 
 
 } ());
