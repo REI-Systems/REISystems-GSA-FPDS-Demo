@@ -1,16 +1,20 @@
 (function () {
 
   angular.module('app')
-    .directive('searchContainer', function () {
+    .directive('searchContainer', ['SessionFactory', 'AuthProvider', function (SessionFactory, AuthProvider) {
       return {
         restrict: 'E',
         replace: true,
         template: '<div><div ng-transclude ></div></div>',
         transclude: true,
-        link: function (scope, element, attrs, controller) {
-
-        },
         controller: function ($scope) {
+
+          AuthProvider.isUserAuthenticated(function () {
+            $scope.user = SessionFactory.getSession().user;
+            if ($scope.user.preferences.jqxGridState) {
+              $scope.$broadcast('loadTableState', $scope.user.preferences.jqxGridState);
+            }
+          });
 
           this.updateTableResults = function (sqlClause) {
             $scope.$broadcast('updateTable', sqlClause);
@@ -18,16 +22,27 @@
 
         }
       };
-    });
+    }]);
 
 
   angular.module('app')
-    .directive('resultsTable', ['SearchService', 'ColumnsValue', function (SearchService, ColumnsValue) {
+    .directive('resultsTable', ['SearchService', 'ColumnsValue', 'ApiService', function (SearchService, ColumnsValue, ApiService) {
       return {
         restrict: 'E',
         replace: true,
         require: '^searchContainer',
         templateUrl: 'templates/results-table.html',
+        link: function (scope, element, attrs, controller) {
+          angular.element(document).ready(function () {
+            
+            //on column reorder, save state in user database
+            $("#jqxgrid").on('columnreordered', function (event) {
+              var state = $("#jqxgrid").jqxGrid('savestate');
+              scope.saveGridState(state);
+            });
+
+          });
+        },
         controller: function ($scope) {
 
           $scope.$on('updateTable', function (element, sqlClause) {
@@ -39,8 +54,13 @@
             }, function (error) { });
           });
 
+
+          $scope.$on('loadTableState', function (element, preferences) {
+            $("#jqxgrid").jqxGrid('loadstate', preferences);
+          });
+
           $scope.createTable = function (data) {
-            
+
             $scope.source =
             {
               localdata: data,
@@ -86,8 +106,48 @@
                 ]
               });
           }
-          
+
           $scope.createTable();
+          
+          
+          //save jqxGrid state in user preferences
+          $scope.saveGridState = function (state) {
+            
+            $scope.$parent.user.preferences.jqxGridState = state;
+            
+            /**
+             * SAVE jqxGris State in user preferences
+             */
+
+            var oAPI = {
+              'name': 'userUpdate',
+              'suffix': $scope.$parent.user.id
+            };
+
+            var oParams = {
+              'preferences': {
+                'typeDashboard': $scope.$parent.user.preferences.typeDashboard,
+                'jqxGridState': $scope.$parent.user.preferences.jqxGridState = state
+              }
+            };
+
+            //update user
+            ApiService.call(oAPI.name, oAPI.suffix, {}, oParams, 'POST').then(
+              function (data) {
+                $scope.flash = {
+                  "type": "positive",
+                  "message": "User preferences are saved !"
+                };
+              },
+              function (error) {
+                console.log(error);
+                $scope.flash = {
+                  "type": "negative",
+                  "message": "There was an error with saving User preferences, Please try again !"
+                };
+              }
+              );
+          }
 
         }
       };
@@ -129,7 +189,7 @@
         link: function (scope, element, attrs, controller) {
 
           scope.searchDataset = function () {
-            
+
             var sqlClause = '';
 
             angular.forEach(scope.searchFilterForm, function (value, key) {

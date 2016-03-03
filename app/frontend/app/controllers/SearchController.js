@@ -15,6 +15,7 @@
 
         //get logged in user info
         $scope.user = SessionFactory.getSession().user;
+        //console.log($scope);
 
         //populate filter fields
         var aFilterCol = ['contractactiontype', 'agencyid', 'contractingofficeagencyid',
