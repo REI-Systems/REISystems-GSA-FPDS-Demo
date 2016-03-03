@@ -88,7 +88,8 @@ class CrateService {
           payload.results.vendorname.results.push({
             title: cat1.body.rows[i][0],
             count: cat1.body.rows[i][1],
-            category: 'vendor'
+            category: 'vendor',
+            column: "vendorname"
           });
         }
 
@@ -97,7 +98,8 @@ class CrateService {
           payload.results.maj_agency_cat.results.push({
             title: cat2.body.rows[i][0],
             count: cat2.body.rows[i][1],
-            category: 'agency'
+            category: 'agency',
+            column: "maj_agency_cat"
           });
         }
 
@@ -106,7 +108,8 @@ class CrateService {
           payload.results.maj_fund_agency_cat.results.push({
             title: cat3.body.rows[i][0],
             count: cat3.body.rows[i][1],
-            category: 'office'
+            category: 'office',
+            column: "maj_fund_agency_cat"
           });
         }
 
