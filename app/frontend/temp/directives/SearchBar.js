@@ -122,6 +122,25 @@
         }
       };
     });
+    
+    
+    angular.module('app')
+    .directive('advancedSearch', function () {
+      return {
+        restrict: 'E',
+        replace: true,
+        require: '^searchContainer',
+        templateUrl: 'templates/search-advanced.html',
+        link: function (scope, element, attrs, controller) {
+
+          angular.element(document).ready(function () {
+            $('.ui.accordion').accordion();
+            $('.ui.dropdown').dropdown();
+          });
+
+        }
+      };
+    });
 
 
 } ());
