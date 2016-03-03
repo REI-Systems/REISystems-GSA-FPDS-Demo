@@ -10,7 +10,10 @@ var livereload = require('gulp-livereload');
 var paths = {
   temp: 'temp',
   tempVendor: 'temp/vendor',
+  tempVendorImages: 'temp/vendor/images',
   tempIndex: 'temp/index.html',
+  
+  jqxImages: ['bower_components/jqwidgets/jqwidgets/styles/images/icon-up.png','bower_components/jqwidgets/jqwidgets/styles/images/icon-down.png','bower_components/jqwidgets/jqwidgets/styles/images/icon-left.png','bower_components/jqwidgets/jqwidgets/styles/images/icon-right.png','bower_components/jqwidgets/jqwidgets/styles/images/loader.gif','bower_components/jqwidgets/jqwidgets/styles/images/sortasc.png','bower_components/jqwidgets/jqwidgets/styles/images/sortdesc.png','bower_components/jqwidgets/jqwidgets/styles/images/sortremove.png'],
   
   index: 'app/index.html',
   appSrc: ['app/**/*', '!app/index.html'],
@@ -19,18 +22,21 @@ var paths = {
 
 gulp.task('default', ['watch']);
 
-gulp.task('watch', ['copyAll'], function(){
+gulp.task('watch', ['copyAll','copyImages'], function(){
   livereload.listen();
   gulp.watch(paths.appSrc, ['scripts']);
   gulp.watch(paths.bowerSrc, ['vendors']);
   gulp.watch(paths.index, ['copyAll']);
 });
 
+gulp.task('copyImages', function(){
+  return gulp.src(paths.jqxImages).pipe(gulp.dest(paths.tempVendorImages));
+});
 
 gulp.task('copyAll', function(){
   var tempVendors = gulp.src(mainBowerFiles()).pipe(gulp.dest(paths.tempVendor));
-  
-  var appFiles = gulp.src(paths.appSrc).pipe(gulp.dest(paths.temp));
+
+  var appFiles = gulp.src(paths.appSrc).pipe(gulp.dest(paths.temp));  
   
   return gulp.src(paths.index)
     .pipe(gulp.dest(paths.temp))
