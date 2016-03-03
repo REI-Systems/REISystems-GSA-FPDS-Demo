@@ -24,37 +24,22 @@
         var aResultFilterCol = {};
 
         SearchService.getFieldsFacet(aFilterCol)
-          .then(function (data) {
-            angular.forEach(data, function (row) {
-              if (row.data) {
-                angular.forEach(row.data, function (element) {
-                  // console.log("row data------");
-                  // console.log(row.data);
-                  // console.log("cols data------");
-                  // console.log(row.data.cols[0]);
-                  var key = row.data.cols[0];
+          .then(function (response) {
 
-                  angular.forEach(row.data.rows, function (row) {
-                    // console.log(row[0]);
-                    if (row[0]) {
-                      if (aResultFilterCol.hasOwnProperty(key)) { //exist
-                        aResultFilterCol[key].push(row[0][0]);
-                      } else { //doesnt exist, create entry
-                        aResultFilterCol[key] = [row[0]];
-                      }
-                    }
-                  });
+            angular.forEach(response, function (content) {
+              
+              if (content.data && !content.data.error) {
+                
+                var key = content.data.cols[0];
+                
+                angular.forEach(content.data.rows, function (row) {
+
+                  if (aResultFilterCol.hasOwnProperty(key)) {
+                    aResultFilterCol[key].push(row[0]);
+                  } else {
+                    aResultFilterCol[key] = [];
+                  }
                   
-                  //var value = element[Object.keys(element)[0]];
-
-                  //make sure the value is not empty
-                  // if (value !== '') {
-                  //   if (aResultFilterCol.hasOwnProperty(key)) { //exist
-                  //     aResultFilterCol[key].push(value);
-                  //   } else { //doesnt exist, create entry
-                  //     aResultFilterCol[key] = [value];
-                  //   }
-                  // }
                 });
               }
             });
@@ -70,14 +55,11 @@
               vendorname: aResultFilterCol.vendorname
             };
 
-            console.log($scope.filters.vendorname);
-
             //load dataset and show table
             //$scope.loadDataSet();
           });
       },
       function () {
-        console.log("not authorized");
         $location.path('/login');
       });
       
