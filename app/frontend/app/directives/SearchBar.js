@@ -79,7 +79,7 @@
 
             jQuery("#jqxgrid").jqxGrid(
               {
-                width: 900,
+                width: '100%',
                 source: dataAdapter,
                 selectionmode: 'multiplerowsextended',
                 sortable: true,
@@ -127,7 +127,7 @@
             var oParams = {
               'preferences': {
                 'typeDashboard': $scope.$parent.user.preferences.typeDashboard,
-                'jqxGridState': $scope.$parent.user.preferences.jqxGridState = state
+                'jqxGridState': state
               }
             };
 
