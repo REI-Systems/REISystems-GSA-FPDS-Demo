@@ -9,60 +9,60 @@
     $scope.results = "from controller";
     
     //verify if user is aythenticated, if yes redirect to home page
-    AuthProvider.isUserAuthenticated(
-      function () {
-        $scope.isUserAuth = true;
+    // AuthProvider.isUserAuthenticated(
+    //   function () {
+    //     $scope.isUserAuth = true;
 
-        //get logged in user info
-        $scope.user = SessionFactory.getSession().user;
-        //console.log($scope);
+    //     //get logged in user info
+    //     $scope.user = SessionFactory.getSession().user;
+    //     //console.log($scope);
 
-        //populate filter fields
-        var aFilterCol = ['contractactiontype', 'agencyid', 'contractingofficeagencyid',
-          'maj_agency_cat', 'psc_cat', 'vendorname',
-          'pop_state_code', 'localareasetaside'];
+    //     //populate filter fields
+    //     var aFilterCol = ['contractactiontype', 'agencyid', 'contractingofficeagencyid',
+    //       'maj_agency_cat', 'psc_cat', 'vendorname',
+    //       'pop_state_code', 'localareasetaside'];
 
-        var aResultFilterCol = {};
+    //     var aResultFilterCol = {};
 
-        SearchService.getFieldsFacet(aFilterCol)
-          .then(function (response) {
+    //     SearchService.getFieldsFacet(aFilterCol)
+    //       .then(function (response) {
 
-            angular.forEach(response, function (content) {
+    //         angular.forEach(response, function (content) {
               
-              if (content.data && !content.data.error) {
+    //           if (content.data && !content.data.error) {
                 
-                var key = content.data.cols[0];
+    //             var key = content.data.cols[0];
                 
-                angular.forEach(content.data.rows, function (row) {
+    //             angular.forEach(content.data.rows, function (row) {
 
-                  if (aResultFilterCol.hasOwnProperty(key)) {
-                    aResultFilterCol[key].push(row[0]);
-                  } else {
-                    aResultFilterCol[key] = [];
-                  }
+    //               if (aResultFilterCol.hasOwnProperty(key)) {
+    //                 aResultFilterCol[key].push(row[0]);
+    //               } else {
+    //                 aResultFilterCol[key] = [];
+    //               }
                   
-                });
-              }
-            });
+    //             });
+    //           }
+    //         });
 
-            $scope.filters = {
-              agencies: aResultFilterCol.agencyid,
-              contractTypes: aResultFilterCol.contractactiontype,
-              contractingAgencies: aResultFilterCol.contractingofficeagencyid,
-              localAreas: aResultFilterCol.localareasetaside,
-              department: aResultFilterCol.maj_agency_cat,
-              popStates: aResultFilterCol.pop_state_code,
-              psc: aResultFilterCol.psc_cat,
-              vendorname: aResultFilterCol.vendorname
-            };
+    //         $scope.filters = {
+    //           agencies: aResultFilterCol.agencyid,
+    //           contractTypes: aResultFilterCol.contractactiontype,
+    //           contractingAgencies: aResultFilterCol.contractingofficeagencyid,
+    //           localAreas: aResultFilterCol.localareasetaside,
+    //           department: aResultFilterCol.maj_agency_cat,
+    //           popStates: aResultFilterCol.pop_state_code,
+    //           psc: aResultFilterCol.psc_cat,
+    //           vendorname: aResultFilterCol.vendorname
+    //         };
 
-            //load dataset and show table
-            //$scope.loadDataSet();
-          });
-      },
-      function () {
-        $location.path('/login');
-      });
+    //         //load dataset and show table
+    //         //$scope.loadDataSet();
+    //       });
+    //   },
+    //   function () {
+    //     $location.path('/login');
+    //   });
       
       
       
