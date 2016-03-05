@@ -4,7 +4,11 @@
     'ui.router'
   ]);
 
-  app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  app.config(AppConfig);
+
+  AppConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+  function AppConfig($stateProvider, $urlRouterProvider) {
 
     $stateProvider
       .state('home', {
@@ -56,7 +60,10 @@
 
     $urlRouterProvider.otherwise('/');
 
-  }]);
+  }
 
-
-} ());
+  app.run(function(){
+    console.log("run function");
+  });
+  
+})();

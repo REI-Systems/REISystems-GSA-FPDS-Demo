@@ -1,9 +1,11 @@
 (function () {
 
   angular.module('app')
-    .controller('HomeController', ['$scope', HomeController]);
+    .controller('HomeController', HomeController);
+   
+   HomeController.$inject = ['$state']; 
 
-  function HomeController($scope) {
+  function HomeController($state) {
     
     // View Model
     var vm = this;
@@ -11,5 +13,5 @@
 
   }
 
-} ());
+})();
 

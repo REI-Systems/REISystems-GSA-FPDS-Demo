@@ -1,9 +1,9 @@
 (function () {
 
   angular.module('app')
-    .controller('LoginController', ['$scope', '$rootScope', '$location', '$timeout', 'AuthProvider', 'SessionFactory', LoginController]);
+    .controller('LoginController', ['$scope', '$rootScope', '$location', '$timeout', 'AuthProvider', 'SessionFactory', '$state', LoginController]);
 
-  function LoginController($scope, $rootScope, $location, $timeout, AuthProvider, SessionFactory) {
+  function LoginController($scope, $rootScope, $location, $timeout, AuthProvider, SessionFactory, $state) {
 
     var vm = this;
     vm.greeting = "Hola login";

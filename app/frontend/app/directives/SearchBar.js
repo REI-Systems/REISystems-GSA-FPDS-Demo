@@ -1,7 +1,10 @@
 (function () {
 
-  angular.module('app')
-    .directive('searchContainer', ['SessionFactory', 'AuthProvider', function (SessionFactory, AuthProvider) {
+  angular.module('app').directive('searchContainer', searchContainer);
+    
+    searchContainer.$inject = ['SessionFactory', 'AuthProvider'];
+    
+    function searchContainer(SessionFactory, AuthProvider){
       return {
         restrict: 'E',
         replace: true,
@@ -22,7 +25,7 @@
 
         }
       };
-    }]);
+    }
 
 
   angular.module('app')
