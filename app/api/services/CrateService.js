@@ -50,15 +50,15 @@ class CrateService {
 
     // vendername category
     let vendorOptions = _.cloneDeep(httpClientOptions);
-    vendorOptions.body.stmt = 'SELECT vendorname AS title, count(1) AS count FROM contract WHERE vendorname like \''+_.toUpper(text)+'%\' GROUP BY vendorname ORDER BY title LIMIT 5 ';
+    vendorOptions.body.stmt = 'SELECT vendorname AS title, count(1) AS count FROM contract WHERE vendorname like \'%'+_.toUpper(text)+'%\' GROUP BY vendorname ORDER BY title LIMIT 5 ';
 
     // contracting agency category
     let contractingAgencyOptions = _.cloneDeep(httpClientOptions);
-    contractingAgencyOptions.body.stmt = 'SELECT maj_agency_cat AS title, count(1) AS count FROM contract WHERE maj_agency_cat like \''+_.toUpper(text)+'%\' GROUP BY maj_agency_cat ORDER BY title LIMIT 5 ';
+    contractingAgencyOptions.body.stmt = 'SELECT maj_agency_cat AS title, count(1) AS count FROM contract WHERE maj_agency_cat like \'%'+_.toUpper(text)+'%\' GROUP BY maj_agency_cat ORDER BY title LIMIT 5 ';
 
     // funding agency category
     let fundingAgencyOptions = _.cloneDeep(httpClientOptions);
-    fundingAgencyOptions.body.stmt = 'SELECT maj_fund_agency_cat AS title, count(1) AS count FROM contract WHERE maj_fund_agency_cat like \''+_.toUpper(text)+'%\' GROUP BY maj_fund_agency_cat ORDER BY title LIMIT 5 ';
+    fundingAgencyOptions.body.stmt = 'SELECT maj_fund_agency_cat AS title, count(1) AS count FROM contract WHERE maj_fund_agency_cat like \'%'+_.toUpper(text)+'%\' GROUP BY maj_fund_agency_cat ORDER BY title LIMIT 5 ';
 
     return Promise.join(
       httpClient(vendorOptions),
