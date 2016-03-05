@@ -42,7 +42,7 @@
           'pagecontent@': {
             templateUrl: 'templates/search.html',
             controller: 'SearchController',
-            controllerAs: 'search',
+            controllerAs: 'vm',
           }
         }
       })

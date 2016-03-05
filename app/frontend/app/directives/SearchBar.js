@@ -1,47 +1,29 @@
 (function () {
 
-  angular.module('app').directive('searchContainer', searchContainer);
-    
-    searchContainer.$inject = ['SessionFactory', 'AuthProvider'];
-    
-    function searchContainer(SessionFactory, AuthProvider){
-      return {
-        restrict: 'E',
-        replace: true,
-        template: '<div><div ng-transclude ></div></div>',
-        transclude: true,
-        controller: function ($scope) {
-
-          AuthProvider.isUserAuthenticated(function () {
-            $scope.user = SessionFactory.getSession().user;
-            if ($scope.user.preferences.jqxGridState) {
-              $scope.$broadcast('loadTableState', $scope.user.preferences.jqxGridState);
-            }
-          });
-
-          this.updateTableResults = function (sqlClause) {
-            $scope.$broadcast('updateTable', sqlClause);
-          }
-
-        }
-      };
-    }
-
 
   angular.module('app')
     .directive('resultsTable', ['SearchService', 'ColumnsValue', 'ApiService', function (SearchService, ColumnsValue, ApiService) {
       return {
         restrict: 'E',
         replace: true,
-        require: '^searchContainer',
         templateUrl: 'templates/results-table.html',
         link: function (scope, element, attrs, controller) {
           angular.element(document).ready(function () {
             
-            //on column reorder, save state in user database
+            // Initialize tabs
+            $('.pointing.secondary.menu .item').tab();
+            
+            // Save State
             $("#jqxgrid").on('columnreordered', function (event) {
               var state = $("#jqxgrid").jqxGrid('savestate');
               scope.saveGridState(state);
+            });
+
+            // On row select populate tabs
+            $("#jqxgrid").on("rowselect", function (event) {
+              scope.$apply(function () {
+                scope.row = event.args.row;
+              });
             });
 
           });
@@ -52,6 +34,7 @@
             $('#jqxgrid').jqxGrid('showloadelement');
             SearchService.sqlSearchAdvanced(ColumnsValue, sqlClause).then(function (data) {
               $scope.source.localdata = data.rows;
+              $scope.vm.numresults = data.rowcount;
               $("#jqxgrid").jqxGrid('updatebounddata', 'data');
               $('#jqxgrid').jqxGrid('hideloadelement');
             }, function (error) { });
@@ -115,7 +98,7 @@
           
           //save jqxGrid state in user preferences
           $scope.saveGridState = function (state) {
-            
+
             $scope.$parent.user.preferences.jqxGridState = state;
             
             /**
@@ -161,7 +144,6 @@
       return {
         restrict: 'E',
         replace: true,
-        require: '^searchContainer',
         templateUrl: 'templates/search-bar.html',
         link: function (scope, element, attrs, controller) {
           angular.element(document).ready(function () {
@@ -173,7 +155,7 @@
                 type: 'category',
                 onSelect: function (result, response) {
                   var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.title + "'";
-                  controller.updateTableResults(sqlClause);
+                  scope.vm.updateTableResults(sqlClause);
                 }
               });
           });
@@ -187,11 +169,12 @@
       return {
         restrict: 'E',
         replace: true,
-        require: '^searchContainer',
         templateUrl: 'templates/search-advanced.html',
         link: function (scope, element, attrs, controller) {
 
           scope.searchDataset = function () {
+
+            $('.ui.accordion').accordion('toggle', 0);
 
             var sqlClause = '';
 
@@ -203,7 +186,7 @@
               }
             });
 
-            controller.updateTableResults(sqlClause);
+            scope.vm.updateTableResults(sqlClause);
 
           };
 
@@ -219,3 +202,60 @@
 
 } ());
 
+
+
+//verify if user is aythenticated, if yes redirect to home page
+    // AuthProvider.isUserAuthenticated(
+    //   function () {
+    //     $scope.isUserAuth = true;
+
+    //     //get logged in user info
+    //     $scope.user = SessionFactory.getSession().user;
+    //     //console.log($scope);
+
+    //     //populate filter fields
+    //     var aFilterCol = ['contractactiontype', 'agencyid', 'contractingofficeagencyid',
+    //       'maj_agency_cat', 'psc_cat', 'vendorname',
+    //       'pop_state_code', 'localareasetaside'];
+
+    //     var aResultFilterCol = {};
+
+    //     SearchService.getFieldsFacet(aFilterCol)
+    //       .then(function (response) {
+
+    //         angular.forEach(response, function (content) {
+              
+    //           if (content.data && !content.data.error) {
+                
+    //             var key = content.data.cols[0];
+                
+    //             angular.forEach(content.data.rows, function (row) {
+
+    //               if (aResultFilterCol.hasOwnProperty(key)) {
+    //                 aResultFilterCol[key].push(row[0]);
+    //               } else {
+    //                 aResultFilterCol[key] = [];
+    //               }
+                  
+    //             });
+    //           }
+    //         });
+
+    //         $scope.filters = {
+    //           agencies: aResultFilterCol.agencyid,
+    //           contractTypes: aResultFilterCol.contractactiontype,
+    //           contractingAgencies: aResultFilterCol.contractingofficeagencyid,
+    //           localAreas: aResultFilterCol.localareasetaside,
+    //           department: aResultFilterCol.maj_agency_cat,
+    //           popStates: aResultFilterCol.pop_state_code,
+    //           psc: aResultFilterCol.psc_cat,
+    //           vendorname: aResultFilterCol.vendorname
+    //         };
+
+    //         //load dataset and show table
+    //         //$scope.loadDataSet();
+    //       });
+    //   },
+    //   function () {
+    //     $location.path('/login');
+    //   });

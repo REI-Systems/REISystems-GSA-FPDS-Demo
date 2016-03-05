@@ -9,17 +9,18 @@
 
     <br>
 
-    <search-container>
-      <search-bar></search-bar>
-      <advanced-search></advanced-search>
-      <h4 class="ui horizontal divider header"><i class="table icon"></i>2,204 Results found</h4>
-      <!--Show/hide Table Columns-->
-      <select name="showhidecolumns" class="ui loading search dropdown" id="showhidecolumns" multiple="">
-        <option value=''>Columns</option>
-      </select>
-      <results-table></results-table>
-    </search-container>
+    <search-bar></search-bar>
 
+    <advanced-search></advanced-search>
+
+    <h4 class="ui horizontal divider header"><i class="table icon"></i>{{ vm.numresults }} Results found</h4>
+
+    <!--Show/hide Table Columns-->
+    <!--<select name="showhidecolumns" class="ui loading search dropdown" id="showhidecolumns" multiple="">
+      <option value=''>Columns</option>
+    </select>
+    -->
+    <results-table></results-table>
 
     <!--Show/hide Table Columns-->
     <div id="jqxlistbox"></div>
@@ -38,9 +39,6 @@
         <p>Click on a result from the table above to see more information</p>
       </div>
     </div>
-
-    <br>
-    <br>
 
     <!--Tabs-->
     <div ng-show="row">
@@ -218,5 +216,9 @@
         </div>
       </div>
     </div>
+    
+    <br>
+    <br>
+    
   </div>
 </div>

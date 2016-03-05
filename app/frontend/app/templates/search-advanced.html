@@ -10,8 +10,8 @@
         <div class="field">
           <label>Agency</label>
           <select class="ui fluid dropdown" name="agencyid" id="agencyid" ng-model="search.agencyid">
-            <option value=''></option>
-            <option ng-repeat="item in filters.agencies" value="{{item}}">{{item}}</option>
+            <option value=''>Select</option>
+            <option ng-repeat="item in vm.filters.agencies" value="{{item}}">{{item}}</option>
           </select>
         </div>
 
@@ -19,7 +19,7 @@
           <label>Contract Type</label>
           <select class="ui fluid dropdown" name="contractactiontype" id="contractactiontype" ng-model="search.contractactiontype">
             <option value=''></option>
-            <option ng-repeat="item in filters.contractTypes" value="{{item}}">{{item}}</option>
+            <option ng-repeat="item in vm.filters.contractTypes" value="{{item}}">{{item}}</option>
           </select>
         </div>
       </div>
@@ -29,7 +29,7 @@
           <label>Contracting Agency</label>
           <select class="ui fluid dropdown" name="contractingofficeagencyid" id="contractingofficeagencyid" ng-model="search.contractingofficeagencyid">
             <option value=''></option>
-            <option ng-repeat="item in filters.contractingAgencies" value="{{item}}">{{item}}</option>
+            <option ng-repeat="item in vm.filters.contractingAgencies" value="{{item}}">{{item}}</option>
           </select>
         </div>
 
@@ -37,7 +37,7 @@
           <label>Local Area</label>
           <select class="ui fluid dropdown" name="localareasetaside" id="localareasetaside" ng-model="search.localareasetaside">
             <option value=''></option>
-            <option ng-repeat="item in filters.localAreas" value="{{item}}">{{item}}</option>
+            <option ng-repeat="item in vm.filters.localAreas" value="{{item}}">{{item}}</option>
           </select>
         </div>
       </div>
@@ -47,7 +47,7 @@
           <label>Department Full Name</label>
           <select class="ui fluid dropdown" name="maj_agency_cat" id="maj_agency_cat" ng-model="search.maj_agency_cat">
             <option value=''></option>
-            <option ng-repeat="item in filters.department" value="{{item}}">{{item}}</option>
+            <option ng-repeat="item in vm.filters.department" value="{{item}}">{{item}}</option>
           </select>
         </div>
 
@@ -55,7 +55,7 @@
           <label>PoP State Name</label>
           <select class="ui fluid dropdown" name="pop_state_code" id="pop_state_code" ng-model="search.pop_state_code">
             <option value=''></option>
-            <option ng-repeat="item in filters.popStates" value="{{item}}">{{item}}</option>
+            <option ng-repeat="item in vm.filters.popStates" value="{{item}}">{{item}}</option>
           </select>
         </div>
       </div>
@@ -65,7 +65,7 @@
           <label>PSC</label>
           <select class="ui fluid dropdown" name="psc_cat" id="psc_cat" ng-model="search.psc_cat">
             <option value=''></option>
-            <option ng-repeat="item in filters.psc" value="{{item}}">{{item}}</option>
+            <option ng-repeat="item in vm.filters.psc" value="{{item}}">{{item}}</option>
           </select>
         </div>
 
@@ -73,7 +73,7 @@
           <label>Vendor Name</label>
           <select class="ui fluid dropdown" name="vendorname" id="vendorname" ng-model="search.vendorname">
             <option value=''></option>
-            <option ng-repeat="item in filters.vendorname" value="{{item}}">{{item}}</option>
+            <option ng-repeat="item in vm.filters.vendorname" value="{{item}}">{{item}}</option>
           </select>
         </div>
       </div>
