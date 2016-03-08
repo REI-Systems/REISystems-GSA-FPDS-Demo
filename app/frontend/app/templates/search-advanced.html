@@ -9,7 +9,7 @@
       <div class="two fields">
         <div class="field">
           <label>Agency</label>
-          <select class="ui fluid dropdown" name="agencyid" id="agencyid" ng-model="search.agencyid">
+          <select class="ui fluid dropdown" name="agencyid" multiple="" id="agencyid" ng-model="search.agencyid">
             <option value=''>Select</option>
             <option ng-repeat="item in vm.filters.agencies" value="{{item}}">{{item}}</option>
           </select>
@@ -17,7 +17,7 @@
 
         <div class="field">
           <label>Contract Type</label>
-          <select class="ui fluid dropdown" name="contractactiontype" id="contractactiontype" ng-model="search.contractactiontype">
+          <select class="ui fluid dropdown" name="contractactiontype" multiple="" id="contractactiontype" ng-model="search.contractactiontype">
             <option value=''></option>
             <option ng-repeat="item in vm.filters.contractTypes" value="{{item}}">{{item}}</option>
           </select>

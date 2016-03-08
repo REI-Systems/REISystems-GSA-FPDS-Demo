@@ -248,7 +248,22 @@
             angular.forEach(scope.searchFilterForm, function (value, key) {
               if (key[0] === '$') return;
               if (!value.$pristine && value.$modelValue !== '') {
-                var str = key + "='" + value.$modelValue + "'";
+                console.log(value);
+                var str = '';
+                if(Array.isArray(value.$modelValue)){
+                  value.$modelValue.forEach(function(value, index, array){
+                    //str += key+"='"+value+"'";
+                    if(str === ''){
+                      str += key+"='"+value+"'";
+                    }else{
+                      str += " OR "+key+"='"+value+"'";
+                    }
+                  });
+                  str = '(' + str + ')';
+                }else{
+                  str = key + "='" + value.$modelValue + "'";
+                }
+                
                 sqlClause += (sqlClause !== '') ? ' AND ' + str : 'WHERE ' + str;
               }
             });
