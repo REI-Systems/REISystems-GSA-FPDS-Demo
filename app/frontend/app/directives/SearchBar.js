@@ -31,7 +31,6 @@
               .checkbox({
                 // check all children
                 onChecked: function () {
-                  console.log("checked");
                   var
                     $childCheckbox = $(this).closest('.checkbox').siblings('.grid').find('.checkbox')
                     ;
@@ -79,6 +78,15 @@
                   else {
                     $parentCheckbox.checkbox('set indeterminate');
                   }
+                  scope.saveGridState($("#jqxgrid").jqxGrid('savestate'));
+                },
+                onChecked: function(){
+                  $("#jqxgrid").jqxGrid('showcolumn', this.name);
+                  //scope.saveGridState($("#jqxgrid").jqxGrid('savestate'));
+                },
+                onUnchecked: function () {
+                  $("#jqxgrid").jqxGrid('hidecolumn', this.name);
+                  //scope.saveGridState($("#jqxgrid").jqxGrid('savestate'));
                 }
               })
             ;
@@ -100,6 +108,7 @@
 
 
           $scope.$on('loadTableState', function (element, preferences) {
+            console.log(preferences);
             $("#jqxgrid").jqxGrid('loadstate', preferences);
           });
 
@@ -157,7 +166,7 @@
           //save jqxGrid state in user preferences
           $scope.saveGridState = function (state) {
 
-            $scope.$parent.user.preferences.jqxGridState = state;
+            $scope.vm.user.preferences.jqxGridState = state;
             
             /**
              * SAVE jqxGris State in user preferences
@@ -165,12 +174,12 @@
 
             var oAPI = {
               'name': 'userUpdate',
-              'suffix': $scope.$parent.user.id
+              'suffix': $scope.vm.user.id
             };
 
             var oParams = {
               'preferences': {
-                'typeDashboard': $scope.$parent.user.preferences.typeDashboard,
+                'typeDashboard': $scope.vm.user.preferences.typeDashboard,
                 'jqxGridState': state
               }
             };
