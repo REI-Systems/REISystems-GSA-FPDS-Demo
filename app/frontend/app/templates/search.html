@@ -16,19 +16,134 @@
     <h4 class="ui horizontal divider header"><i class="table icon"></i>{{ vm.numresults }} Results found</h4>
 
     <!--Show/hide Table Columns-->
-    <!--<select name="showhidecolumns" class="ui loading search dropdown" id="showhidecolumns" multiple="">
-      <option value=''>Columns</option>
-    </select>
-    -->
+    <div class="ui accordion field">
+      <div class="title">
+        <i class="icon dropdown"></i> Show/Hide Columns
+      </div>
+      <div class="content">
+        <div class="ui relaxed list">
+          <div class="item">
+            <div class="ui master checkbox" style="z-index: 2;">
+              <input type="checkbox" name="columns">
+              <label>Columns</label>
+            </div>
+            <div class="ui stackable four column grid">
+              <div class="column">
+                <div class="list">
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="apple">
+                      <label>Contract Type</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="orange">
+                      <label>Agency Code</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="pear">
+                      <label>Contracting Agency ID</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="pear">
+                      <label>Date Signed</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="list">
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="apple">
+                      <label>Department Full Name</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="orange">
+                      <label>Action Obligation ($)</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="pear">
+                      <label>NAICS</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="pear">
+                      <label>PSC</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="list">
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="apple">
+                      <label>Vendor State</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="orange">
+                      <label>Vendor ZIP Code</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="pear">
+                      <label>PoP Country Name</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="pear">
+                      <label>Pop State Name</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="list">
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="apple">
+                      <label>Local Area Set Aside</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="orange">
+                      <label>Contract Fiscal Year</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
     <results-table></results-table>
 
     <!--Show/hide Table Columns-->
     <div id="jqxlistbox"></div>
 
-    <h4 class="ui horizontal divider header">
-  <i class="file outline icon"></i>
-  Contract information
-</h4>
+    <h4 class="ui horizontal divider header"><i class="file outline icon"></i> Contract information</h4>
 
     <!--Info message-->
     <div ng-hide="row">
@@ -216,9 +331,9 @@
         </div>
       </div>
     </div>
-    
+
     <br>
     <br>
-    
+
   </div>
 </div>
