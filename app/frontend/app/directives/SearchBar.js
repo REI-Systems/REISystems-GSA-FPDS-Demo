@@ -19,6 +19,15 @@
               scope.saveGridState(state);
             });
 
+            $('.message .close')
+              .on('click', function () {
+                $(this)
+                  .closest('.message')
+                  .transition('fade')
+                ;
+              })
+            ;
+
             // On row select populate tabs
             $("#jqxgrid").on("rowselect", function (event) {
               scope.$apply(function () {
@@ -80,7 +89,7 @@
                   }
                   scope.saveGridState($("#jqxgrid").jqxGrid('savestate'));
                 },
-                onChecked: function(){
+                onChecked: function () {
                   $("#jqxgrid").jqxGrid('showcolumn', this.name);
                   //scope.saveGridState($("#jqxgrid").jqxGrid('savestate'));
                 },
@@ -250,20 +259,20 @@
               if (!value.$pristine && value.$modelValue !== '') {
                 console.log(value);
                 var str = '';
-                if(Array.isArray(value.$modelValue)){
-                  value.$modelValue.forEach(function(value, index, array){
+                if (Array.isArray(value.$modelValue)) {
+                  value.$modelValue.forEach(function (value, index, array) {
                     //str += key+"='"+value+"'";
-                    if(str === ''){
-                      str += key+"='"+value+"'";
-                    }else{
-                      str += " OR "+key+"='"+value+"'";
+                    if (str === '') {
+                      str += key + "='" + value + "'";
+                    } else {
+                      str += " OR " + key + "='" + value + "'";
                     }
                   });
                   str = '(' + str + ')';
-                }else{
+                } else {
                   str = key + "='" + value.$modelValue + "'";
                 }
-                
+
                 sqlClause += (sqlClause !== '') ? ' AND ' + str : 'WHERE ' + str;
               }
             });
