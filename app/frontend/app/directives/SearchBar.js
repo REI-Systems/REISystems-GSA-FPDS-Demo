@@ -267,16 +267,16 @@
                     }
                   });
                   str = '(' + str + ')';
-                } else if(!Array.isArray(value.$modelValue)) {
+                } else if (!Array.isArray(value.$modelValue)) {
                   str = key + "='" + value.$modelValue + "'";
                 }
-                
-                if(str){
+
+                if (str) {
                   sqlClause += (sqlClause !== '') ? ' AND ' + str : 'WHERE ' + str;
                 }
-                
+
                 scope.vm.updateTableResults(sqlClause);
-                
+
               }
             });
 
@@ -285,6 +285,19 @@
           angular.element(document).ready(function() {
             $('.ui.accordion').accordion();
             $('.ui.dropdown').dropdown();
+            
+            // Temp location
+            $("#slider-range").slider({
+              range: true,
+              min: 0,
+              max: 500,
+              values: [75, 300],
+              slide: function(event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+              }
+            });
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+              " - $" + $("#slider-range").slider("values", 1));
           });
 
         }

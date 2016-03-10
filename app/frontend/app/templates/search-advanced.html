@@ -61,8 +61,16 @@
         </div>
 
         <div class="field">
-          <label>Action Obligation ($)</label>
-          <input name="dollarsobligated" placeholder="Action Obligation ($)" ng-model="search.dollarsobligated">
+          <label>Action Obligation</label>
+          <div class="fields">
+            <div class="six wide field">
+              <input type="text" id="amount" readonly="">
+              <!--<input name="dollarsobligated" placeholder="Action Obligation ($)" ng-model="search.dollarsobligated">-->
+            </div>
+            <div class="ten wide field">
+              <div id="slider-range" style="margin-top: 10px;"></div>
+            </div>
+          </div>
         </div>
       </div>
 
