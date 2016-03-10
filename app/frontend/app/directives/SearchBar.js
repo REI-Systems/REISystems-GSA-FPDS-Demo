@@ -258,7 +258,7 @@
               if (!value.$pristine && value.$modelValue !== '') {
                 console.log(value);
                 var str = '';
-                if (Array.isArray(value.$modelValue)) {
+                if (Array.isArray(value.$modelValue) && value.$modelValue.length !== 0) {
                   value.$modelValue.forEach(function(value, index, array) {
                     if (str === '') {
                       str += key + "='" + value + "'";
@@ -267,15 +267,18 @@
                     }
                   });
                   str = '(' + str + ')';
-                } else {
+                } else if(!Array.isArray(value.$modelValue)) {
                   str = key + "='" + value.$modelValue + "'";
                 }
-
-                sqlClause += (sqlClause !== '') ? ' AND ' + str : 'WHERE ' + str;
+                
+                if(str){
+                  sqlClause += (sqlClause !== '') ? ' AND ' + str : 'WHERE ' + str;
+                }
+                
+                scope.vm.updateTableResults(sqlClause);
+                
               }
             });
-
-            scope.vm.updateTableResults(sqlClause);
 
           };
 

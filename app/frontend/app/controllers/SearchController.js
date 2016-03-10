@@ -29,45 +29,45 @@
     }
     
     //populate filter fields
-    var aFilterCol = ['contractactiontype', 'agencyid', 'contractingofficeagencyid',
-      'maj_agency_cat', 'psc_cat', 'vendorname',
-      'pop_state_code', 'localareasetaside'];
+    // var aFilterCol = ['contractactiontype', 'agencyid', 'contractingofficeagencyid',
+    //   'maj_agency_cat', 'psc_cat', 'vendorname',
+    //   'pop_state_code', 'localareasetaside'];
 
-    var aResultFilterCol = {};
+    // var aResultFilterCol = {};
 
-    SearchService.getFieldsFacet(aFilterCol)
-      .then(function (response) {
+    // SearchService.getFieldsFacet(aFilterCol)
+    //   .then(function (response) {
 
-        angular.forEach(response, function (content) {
+    //     angular.forEach(response, function (content) {
 
-          if (content.data && !content.data.error) {
+    //       if (content.data && !content.data.error) {
 
-            var key = content.data.cols[0];
+    //         var key = content.data.cols[0];
 
-            angular.forEach(content.data.rows, function (row) {
+    //         angular.forEach(content.data.rows, function (row) {
 
-              if (aResultFilterCol.hasOwnProperty(key)) {
-                aResultFilterCol[key].push(row[0]);
-              } else {
-                aResultFilterCol[key] = [];
-              }
+    //           if (aResultFilterCol.hasOwnProperty(key)) {
+    //             aResultFilterCol[key].push(row[0]);
+    //           } else {
+    //             aResultFilterCol[key] = [];
+    //           }
 
-            });
-          }
-        });
+    //         });
+    //       }
+    //     });
 
-        vm.filters = {
-          agencies: aResultFilterCol.agencyid,
-          contractTypes: aResultFilterCol.contractactiontype,
-          contractingAgencies: aResultFilterCol.contractingofficeagencyid,
-          localAreas: aResultFilterCol.localareasetaside,
-          department: aResultFilterCol.maj_agency_cat,
-          popStates: aResultFilterCol.pop_state_code,
-          psc: aResultFilterCol.psc_cat,
-          vendorname: aResultFilterCol.vendorname
-        };
+    //     vm.filters = {
+    //       agencies: aResultFilterCol.agencyid,
+    //       contractTypes: aResultFilterCol.contractactiontype,
+    //       contractingAgencies: aResultFilterCol.contractingofficeagencyid,
+    //       localAreas: aResultFilterCol.localareasetaside,
+    //       department: aResultFilterCol.maj_agency_cat,
+    //       popStates: aResultFilterCol.pop_state_code,
+    //       psc: aResultFilterCol.psc_cat,
+    //       vendorname: aResultFilterCol.vendorname
+    //     };
         
-      });
+    //   });
 
   }
 
