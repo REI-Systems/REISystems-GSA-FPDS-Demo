@@ -16,10 +16,12 @@
       vm.user = SessionFactory.getSession().user;
       if (vm.user.preferences.jqxGridState) {
         $scope.$broadcast('loadTableState', vm.user.preferences.jqxGridState);
-        for (var columnName in vm.user.preferences.jqxGridState.columns) {
-          if (!vm.user.preferences.jqxGridState.columns[columnName].hidden) {
-            $('input[type=checkbox][name=' + columnName + ']').parent().checkbox('set checked');
-          }
+      } else {
+        vm.user.preferences.jqxGridState = $("#jqxgrid").jqxGrid('savestate');
+      }
+      for (var columnName in vm.user.preferences.jqxGridState.columns) {
+        if (!vm.user.preferences.jqxGridState.columns[columnName].hidden) {
+          $('input[type=checkbox][name=' + columnName + ']').parent().checkbox('set checked');
         }
       }
     });
