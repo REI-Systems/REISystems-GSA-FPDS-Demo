@@ -261,6 +261,18 @@
                 field.$setViewValue($("#slider-range").slider("values"));
               }
 
+              if (field.$name === "signeddate") {
+                var fromMilliseconds = new Date($("#from").datepicker("getDate"));
+                var toMilliseconds = new Date($("#to").datepicker("getDate"));
+
+                //Remove last 3 zeros to match DB format
+                var fromMillisecondsFormat = Number((fromMilliseconds.getTime().toString()).slice(0, -3));
+                var toMillisecondsFormat = Number((toMilliseconds.getTime().toString()).slice(0, -3));
+
+                field.$setViewValue([fromMillisecondsFormat, toMillisecondsFormat]);
+                console.log(field);
+              }
+
               if (!field.$pristine && field.$modelValue !== '') {
 
                 var str = '';
@@ -275,6 +287,14 @@
                       } else {
                         str += key + '<=' + value;
                       }
+                    } else if (field.$name === "signeddate") {
+                      if (str === '' && value !== 0 && index === 0) {
+                        str += key + '>=' + value;
+                      } else if (str !== '' && value !== 0) {
+                        str += " AND " + key + '<=' + value;
+                      } else if (str === '' && value !== 0 && index === 1) {
+                        str += key + '<=' + value;
+                      }
                     } else if (str === '') {
                       str += key + "='" + value + "'";
                     } else {
@@ -282,8 +302,11 @@
                     }
 
                   });
-
-                  str = '(' + str + ')';
+                  
+                  if(str){
+                    str = '(' + str + ')';
+                  }
+                  
 
                 } else if (!Array.isArray(field.$modelValue)) {
                   str = key + "='" + field.$modelValue + "'";
@@ -304,6 +327,27 @@
 
             $('.ui.accordion').accordion();
             $('.ui.dropdown').dropdown();
+
+            //DatePicker
+            $("#from").datepicker({
+              defaultDate: "+1w",
+              changeMonth: true,
+              numberOfMonths: 1,
+              changeYear: true,
+              onClose: function(selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+              }
+            });
+            $("#to").datepicker({
+              defaultDate: "+1w",
+              changeMonth: true,
+              numberOfMonths: 1,
+              changeYear: true,
+              onClose: function(selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+              }
+            });
+
 
             // Slider
             Number.prototype.formatMoney = function(c, d, t) {
@@ -341,7 +385,7 @@
               $("#slider-range").slider("option", "values", [0, sliderMax]);
 
               $("#dollarsobligated").val("$" + ($("#slider-range").slider("values", 0)).formatMoney(0, '.', ',') + " to $" + ($("#slider-range").slider("values", 1)).formatMoney(0, '.', ','));
-              
+
             });
 
           });

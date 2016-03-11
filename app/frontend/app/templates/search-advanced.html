@@ -57,7 +57,18 @@
       <div class="two fields">
         <div class="field">
           <label>Date Signed</label>
-          <input name="signeddate" placeholder="Date Signed" ng-model="search.signeddate">
+          <!--<input name="signeddate" placeholder="Date Signed" ng-model="search.signeddate">-->
+          <div class="fields">
+            <input type="hidden" name="signeddate" ng-model="search.signeddate">
+            <div class="eight wide inline field">
+              <label for="from">From</label>
+              <input type="text" id="from" name="from">
+            </div>
+            <div class="eight wide inline field">
+              <label for="to">To</label>
+              <input type="text" id="to" name="to">
+            </div>
+          </div>
         </div>
 
         <div class="field">
@@ -65,7 +76,6 @@
           <div class="fields">
             <div class="six wide field">
               <input id="dollarsobligated" name="dollarsobligated" ng-model="search.dollarsobligated" readonly="">
-              <!--<input name="dollarsobligated" placeholder="Action Obligation ($)" ng-model="search.dollarsobligated">-->
             </div>
             <div class="ten wide field">
               <div id="slider-range" style="margin-top: 10px;"></div>
