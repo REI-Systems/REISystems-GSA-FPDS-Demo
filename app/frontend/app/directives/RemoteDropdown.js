@@ -10,7 +10,6 @@
       templateUrl: 'templates/remote-dropdown.html',
       link: function(scope, element, attrs, controller) {
         var columnName = attrs.column;
-        console.log(columnName);
         angular.element(document).ready(function() {
           $('[column='+columnName+']')
             .dropdown({

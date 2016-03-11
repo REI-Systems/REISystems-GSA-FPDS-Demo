@@ -61,9 +61,5 @@
     $urlRouterProvider.otherwise('/');
 
   }
-
-  app.run(function(){
-    console.log("run function");
-  });
   
 })();
