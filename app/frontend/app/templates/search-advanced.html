@@ -87,17 +87,17 @@
       <div class="three fields">
         <div class="field">
           <label>NAICS</label>
-          <input name="principalnaicscode" placeholder="NAICS" ng-model="search.principalnaicscode">
+          <remote-dropdown column="principalnaicscode" name="principalnaicscode" ng-model="search.principalnaicscode"></remote-dropdown>
         </div>
 
         <div class="field">
           <label>Fiscal Year</label>
-          <input name="fiscal_year" placeholder="Fiscal Year" ng-model="search.fiscal_year">
+          <remote-dropdown column="fiscal_year" name="fiscal_year" ng-model="search.fiscal_year"></remote-dropdown>
         </div>
 
         <div class="field">
           <label>Zip Code</label>
-          <input name="zipcode" placeholder="Zip Code" ng-model="search.zipcode">
+          <remote-dropdown column="zipcode" name="zipcode" ng-model="search.zipcode"></remote-dropdown>
         </div>
       </div>
 
