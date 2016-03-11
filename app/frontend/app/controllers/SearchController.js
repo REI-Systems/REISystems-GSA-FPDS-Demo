@@ -3,9 +3,9 @@
   angular.module('app')
     .controller('SearchController', SearchController);
 
-  SearchController.$inject = ['$scope', 'AuthProvider', 'SessionFactory', 'SearchService'];
+  SearchController.$inject = ['$scope', 'AuthProvider', 'SessionFactory', 'SearchService','$state'];
 
-  function SearchController($scope, AuthProvider, SessionFactory, SearchService) {
+  function SearchController($scope, AuthProvider, SessionFactory, SearchService, $state) {
 
     var vm = this;
 
@@ -24,6 +24,9 @@
           $('input[type=checkbox][name=' + columnName + ']').parent().checkbox('set checked');
         }
       }
+    },
+    function(){
+      $state.go('login');
     });
 
     function UpdateTableResults(sqlClause) {
