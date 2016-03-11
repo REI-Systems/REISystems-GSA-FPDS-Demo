@@ -2,7 +2,7 @@
 
 
   angular.module('app')
-    .directive('resultsTable', ['SearchService', 'ColumnsValue', 'ApiService', function(SearchService, ColumnsValue, ApiService) {
+    .directive('resultsTable', ['SearchService', 'ColumnsValue', 'ApiService', '$timeout', function(SearchService, ColumnsValue, ApiService, $timeout) {
       return {
         restrict: 'E',
         replace: true,
@@ -107,14 +107,19 @@
 
           $scope.$on('updateTable', function(element, sqlClause) {
             $('#jqxgrid').jqxGrid('showloadelement');
-            SearchService.sqlSearchAdvanced(ColumnsValue, sqlClause).then(function(data) {
-              $scope.source.localdata = data.rows;
-              $scope.vm.numresults = data.rowcount;
-              $("#jqxgrid").jqxGrid('updatebounddata', 'data');
-              $('#jqxgrid').jqxGrid('hideloadelement');
-            }, function(error) { });
+
+            $scope.source.url = '/api/search/query?sql=SELECT ' + ColumnsValue + ' FROM contract ' + sqlClause;
+            $("#jqxgrid").jqxGrid({ source: $scope.source });
+
           });
 
+          $("#jqxgrid").on('bindingcomplete', function() {
+            var datainformation = $('#jqxgrid').jqxGrid('getdatainformation');
+            var rowscount = datainformation.rowscount;
+            $timeout(function() {
+              $scope.vm.numresults = rowscount;
+            });
+          });
 
           $scope.$on('loadTableState', function(element, preferences) {
             $("#jqxgrid").jqxGrid('loadstate', preferences);
@@ -124,7 +129,7 @@
 
             $scope.source =
               {
-                localdata: data,
+                url: '',
                 datafields: [{ name: 'contractactiontype', map: '0' }, { name: 'agencyid', map: '1' },
                   { name: 'signeddate', map: '2' }, { name: 'contractingofficeagencyid', map: '3' }, { name: 'maj_agency_cat', map: '4' },
                   { name: 'dollarsobligated', map: '5' }, { name: 'principalnaicscode', map: '6' }, { name: 'psc_cat', map: '7' },
@@ -133,7 +138,8 @@
                   { name: 'effectivedate', map: '14' }, { name: 'unique_transaction_id', map: '15' }, { name: 'solicitationid', map: '16' },
                   { name: 'dunsnumber', map: '17' }, { name: 'descriptionofcontractrequirement', map: '18' }
                 ],
-                datatype: "array"
+                datatype: "json",
+                root: "rows"
               };
 
             var dataAdapter = new $.jqx.dataAdapter($scope.source);
@@ -249,7 +255,7 @@
 
           scope.searchDataset = function() {
 
-            $('.ui.accordion').accordion('toggle', 0);
+            $('.ui.accordion').accordion('close', 0);
 
             var sqlClause = '';
 
@@ -302,11 +308,11 @@
                     }
 
                   });
-                  
-                  if(str){
+
+                  if (str) {
                     str = '(' + str + ')';
                   }
-                  
+
 
                 } else if (!Array.isArray(field.$modelValue)) {
                   str = key + "='" + field.$modelValue + "'";
