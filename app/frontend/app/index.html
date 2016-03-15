@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Demo</title>
- 
+
   <!-- vendorInject:css -->
   <!-- endinject -->
 
   <!-- inject:css -->
   <!-- endinject -->
-  
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  
+
   <style type="text/css">
     .hidden.menu {
       display: none;
@@ -95,17 +95,69 @@
 
 <body>
 
-  <menu-fixed></menu-fixed>
+  <!-- Top Navigation -->
+  <div class="ui large top fixed hidden menu" ng-controller="Navigation as vm">
+    <div class="ui container">
+      <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
+      <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Search</a>
+      <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
+      <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+      <div class="right menu">
+        <div class="item" ng-show="!vm.isUserAuth">
+          <a ui-sref-active="active" ui-sref="login" class="ui button">Log in</a>
+        </div>
+        <div class="item" ng-show="!vm.isUserAuth">
+          <a ui-sref-active="active" ui-sref="register" class="ui primary button">Sign Up</a>
+        </div>
+        <div class="item" ng-show="vm.isUserAuth">
+          <a ui-sref-active="active" ui-sref="profile" class="ui button">Profile</a>
+        </div>
+        <div class="item" ng-show="vm.isUserAuth">
+          <a ui-sref-active="active" ng-click="vm.logOut()" class="ui button">Log out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Top Navigation -->
 
-  <!-- This menu is for mobile only -->
-  <menu-side></menu-side>
-
+  <!-- Sidebar -->
+  <div class="ui vertical inverted sidebar menu left" ng-controller="Navigation as vm">
+    <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
+    <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Search</a>
+    <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
+    <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+    <a ng-show="!vm.isUserAuth" ui-sref-active="active" ui-sref="login" class="item">Login</a>
+    <a ng-show="!vm.isUserAuth" ui-sref-active="active" ui-sref="register" class="item">Sign Up</a>
+    <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="profile" class="item">Profile</a>
+    <a ng-show="vm.isUserAuth" ui-sref-active="active" ng-click="vm.logOut()" class="item">Log out</a>
+  </div>
+  <!-- /Sidebar -->
 
   <div class="pusher">
 
     <div class="ui inverted vertical masthead center aligned segment">
 
-      <menu-masthead></menu-masthead>
+      <!-- Menu -->
+      <div class="ui container" ng-controller="Navigation as vm">
+        <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+
+          <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
+          <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Search</a>
+          <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
+          <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+
+          <div class="right item">
+            <a ui-sref-active="active" ng-show="!vm.isUserAuth" ui-sref="login" class="ui inverted button">Log in</a>
+            <a ui-sref-active="active" ng-show="!vm.isUserAuth" ui-sref="register" class="ui inverted button">Sign Up</a>
+            <a ui-sref-active="active" ng-show="vm.isUserAuth" ui-sref="profile" class="ui inverted button">Profile</a>
+            <a ng-show="vm.isUserAuth" ng-click="vm.logOut()" class="ui inverted button">Log out</a>
+          </div>
+        </div>
+      </div>
+      <!-- /Menu -->
 
       <div ui-view="masthead"></div>
 
@@ -140,6 +192,7 @@
         </div>
       </div>
     </div>
+    <!-- /Footer -->
 
   </div>
 
