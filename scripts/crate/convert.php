@@ -3,7 +3,7 @@
 $Converter = new ContractConvert();
 
 
-$Converter->toJson('/Users/cedwards/Downloads/contracts-2013.csv','dumps/contracts-2013.json');
+$Converter->toJson('/Users/cedwards/Downloads/contracts-2015.csv','dumps/contracts-2015.json');
 
 
 class ContractConvert {
@@ -24,9 +24,17 @@ class ContractConvert {
             fgets($fp, 8096); // discard header
         }
 
-        $ep = fopen($exportFile,'w');
         $dateFields = array('signeddate','effectivedate','currentcompletiondate','ultimatecompletiondate','lastdatetoorder','registrationdate','renewaldate','last_modified_date');
+
+        $mixedFields = array('agencyid','claimantprogramcode','contractingofficeagencyid','fundingrequestingagencyid','maj_agency_cat','maj_fund_agency_cat','mod_agency','contractactiontype','placeofperformancecountrycode','pop_state_code');
+
+        $ep = fopen($exportFile,'w');
+        $fieldCount = count($this->contract_field_map);
         while ( ($data = fgetcsv($fp, 8096, ',')) !== false ) {
+
+            if ( $fieldCount !== count($data) ) {
+                continue;
+            }
 
             $item = array_combine($this->contract_field_map,$data); // keys, values
 
@@ -39,7 +47,13 @@ class ContractConvert {
                     } else {
                         $item[$dateField] = $timestamp;
                     }
+                }
 
+                foreach ($mixedFields as $mixField) {
+                    $split = explode(':',$item[$mixField]);
+                    if ( $split !== FALSE && !empty($split[1]) ) {
+                        $item[$mixField] = trim($split[1]);
+                    }
                 }
 
                 if (fwrite($ep, json_encode($item) . "\n") === FALSE) {
