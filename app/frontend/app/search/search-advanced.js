@@ -164,7 +164,8 @@
               container.append(targetItem);
               container.append(draggedItem);
               container.sortable(sortConfig);
-              container.transition('pulse');
+              
+              groupContainer.transition('pulse');
 
               $(this).remove();
               ui.draggable.remove();
