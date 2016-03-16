@@ -91,6 +91,34 @@
     }
   </style>
 
+
+  <style>
+    
+    .fields.ui-sortable{
+      min-height: 50px;
+      margin: 10px;
+    }
+    
+    .sortable-space{
+      border: 1px dashed dimgray;
+      min-height: 70px;
+      padding: 10px;
+    }
+    
+    .sortable-placeholder{
+      border: 1px dashed #ccc;
+      background-color: #ddd;
+      min-height: 70px;
+      width: 70px;
+    }
+    
+    .sortable-hover{
+      border: 1px dashed red !important;
+      padding: 10px;
+    }
+    
+  </style>
+
 </head>
 
 <body>
@@ -145,16 +173,20 @@
           </a>
 
           <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
-          <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Search</a>
-          <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
-          <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Feedback</a>
+          <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="search" class="item">Search</a>
+          <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="api" class="item">API</a>
+          <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="feedback" class="item">Feedback</a>
+          <a ng-hide="vm.isUserAuth" class="item">Search</a>
+          <a ng-hide="vm.isUserAuth" class="item">API</a>
+          <a ng-hide="vm.isUserAuth" class="item">Feedback</a>
 
           <div class="right item">
-            <a ui-sref-active="active" ng-show="!vm.isUserAuth" ui-sref="login" class="ui inverted button">Log in</a>
-            <a ui-sref-active="active" ng-show="!vm.isUserAuth" ui-sref="register" class="ui inverted button">Sign Up</a>
+            <a ui-sref-active="active" ng-hide="vm.isUserAuth" ui-sref="login" class="ui inverted button">Log in</a>
+            <a ui-sref-active="active" ng-hide="vm.isUserAuth" ui-sref="register" class="ui inverted button">Sign Up</a>
             <a ui-sref-active="active" ng-show="vm.isUserAuth" ui-sref="profile" class="ui inverted button">Profile</a>
             <a ng-show="vm.isUserAuth" ng-click="vm.logOut()" class="ui inverted button">Log out</a>
           </div>
+
         </div>
       </div>
       <!-- /Menu -->
@@ -201,6 +233,8 @@
 
   <!-- inject:js -->
   <!-- endinject -->
+  
+  <script src="http://www.appelsiini.net/projects/jeditable/jquery.jeditable.js"></script>
 
 </body>
 

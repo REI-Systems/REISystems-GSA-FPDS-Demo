@@ -5,7 +5,7 @@
     .module('app.home')
     .run(appRun);
 
-  appRun.$inject = ['routehelper']
+  appRun.$inject = ['routehelper'];
 
   function appRun(routehelper) {
     routehelper.configureRoutes(getRoutes());

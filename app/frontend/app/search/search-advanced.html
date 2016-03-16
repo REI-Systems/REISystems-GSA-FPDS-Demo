@@ -2,7 +2,7 @@
   <div class="title">
     <i class="dropdown blue icon"></i> Advanced Search
   </div>
-  <div class="content field">
+  <div class="active content field">
 
     <form name="searchFilterForm" class="ui form transition hidden">
 
@@ -57,7 +57,6 @@
       <div class="two fields">
         <div class="field">
           <label>Date Signed</label>
-          <!--<input name="signeddate" placeholder="Date Signed" ng-model="search.signeddate">-->
           <div class="fields">
             <input type="hidden" name="signeddate" ng-model="search.signeddate">
             <div class="eight wide inline field">
@@ -103,6 +102,52 @@
 
       <button type="button" class="ui button" ng-click="searchDataset()">Search</button>
 
+      <button type="button" class="ui button" ng-click="">Add Filter</button>
+
     </form>
+
+
+
+
+    <form class="ui equal width form">
+      <div class="fields">
+
+        <div class="field">
+          <label>Username</label>
+          <input type="text" placeholder="Username">
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input type="password">
+        </div>
+        
+      </div>
+
+      <div class="fields">
+
+        <div class="field">
+          <label>First name</label>
+          <input type="text" placeholder="First Name">
+        </div>
+
+        <div class="field">
+          <label>Telephone</label>
+          <input type="text" placeholder="Telephone">
+        </div>
+
+        <div class="field">
+          <label>Last name</label>
+          <input type="text" placeholder="Last Name">
+        </div>
+
+      </div>
+
+    </form>
+
+
+
+
+
   </div>
 </div>

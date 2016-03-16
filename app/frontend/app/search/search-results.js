@@ -184,7 +184,8 @@
 
         //save jqxGrid state in user preferences
         $scope.saveGridState = function(state) {
-
+          //console.log($scope);
+          //console.log($scope.vm.user.preferences);
           $scope.vm.user.preferences.jqxGridState = state;
 
           /**

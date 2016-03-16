@@ -28,6 +28,7 @@ gulp.task('watch', ['copyAll','copyImages'], function(){
   livereload.listen();
   gulp.watch(paths.angularFiles, ['scripts']);
   gulp.watch(paths.bowerSrc, ['vendors']);
+  gulp.watch(paths.appSrc, ['copyAll']);
   gulp.watch(paths.index, ['copyAll']);
 });
 

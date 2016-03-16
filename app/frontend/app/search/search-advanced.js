@@ -93,7 +93,49 @@
         angular.element(document).ready(function() {
 
           $('.ui.accordion').accordion();
-          $('.ui.dropdown').dropdown();
+
+
+          var sortConfig = {
+            cursor: "move",
+            cursorAt: { left: 10 },
+            connectWith: ".ui.equal.width.form .fields",
+            items: "> .field",
+            forcePlaceholderSize: true,
+            placeholder: "sortable-placeholder",
+            start: function(event, ui) {
+              $(ui.item).width(100);
+              $(ui.item).height(50);
+              $(".fields.ui-sortable").addClass("sortable-space");
+            },
+            stop: function(event, ui) {
+              $(".fields.ui-sortable").removeClass("sortable-space");
+            }
+          };
+
+          var dropConfig = {
+            tolerance: "fit",
+            hoverClass: "sortable-hover",
+            over: function(event, ui) {
+              $(event.target).transition('pulse');
+            },
+            drop: function(event, ui) {
+              var draggedItem = $('<div class="field">' + ui.draggable.html() + '</div>').droppable(dropConfig);
+              var targetItem = $('<div class="field">' + $(this).html() + '</div>').droppable(dropConfig);
+
+              var container = $("<div class='fields ui attached segment'>" + draggedItem.html() + targetItem.html() + "</div>").sortable(sortConfig);
+
+              $(event.target).parent().before(container);
+
+              group.before($("<h5 class='ui top attached header editName'>Group</h5>"));
+              ui.draggable.remove();
+              $('.editName').editable(function(value, settings) {
+                return (value);
+              }, { tooltip: "Click to edit..." });
+            }
+          };
+
+          $(".ui.equal.width.form .fields").sortable(sortConfig);
+          $(".ui.equal.width.form .field").droppable(dropConfig);
 
           //DatePicker
           $("#from").datepicker({
@@ -145,11 +187,12 @@
           $("#dollarsobligated").val("$" + $("#slider-range").slider("values", 0) + " to $" + $("#slider-range").slider("values", 1));
 
           apiService.call('search', '', { 'sql': 'SELECT contractactiontype,agencyid,signeddate,contractingofficeagencyid,maj_agency_cat,dollarsobligated,principalnaicscode,psc_cat,vendorname,zipcode,placeofperformancecountrycode,pop_state_code,localareasetaside,fiscal_year,effectivedate,unique_transaction_id,solicitationid,dunsnumber,descriptionofcontractrequirement FROM contract ORDER BY dollarsobligated DESC LIMIT 1' }, {}, 'GET').then(function(data) {
+            // if (data.rows[0][5] !== 'undefined') {
+            //   sliderMax = Math.round(data.rows[0][5]);
 
-            sliderMax = Math.round(data.rows[0][5]);
-
-            $("#slider-range").slider("option", "max", sliderMax);
-            $("#slider-range").slider("option", "values", [0, sliderMax]);
+            //   $("#slider-range").slider("option", "max", sliderMax);
+            //   $("#slider-range").slider("option", "values", [0, sliderMax]);
+            // }
 
             $("#dollarsobligated").val("$" + ($("#slider-range").slider("values", 0)).formatMoney(0, '.', ',') + " to $" + ($("#slider-range").slider("values", 1)).formatMoney(0, '.', ','));
 
