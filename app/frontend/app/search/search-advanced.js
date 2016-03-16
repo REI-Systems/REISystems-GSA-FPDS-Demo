@@ -97,7 +97,7 @@
 
           var sortConfig = {
             cursor: "move",
-            cursorAt: { left: 10 },
+            cursorAt: { left: 0 },
             connectWith: ".ui.equal.width.form .fields",
             items: "> .field",
             forcePlaceholderSize: true,
@@ -131,6 +131,8 @@
               
               $(this).remove();
               ui.draggable.remove();
+              
+              console.log(ui);
               
               // $('.edit').editable(function(value, settings) {
               //   return (value);
