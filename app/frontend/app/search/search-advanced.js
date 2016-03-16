@@ -97,7 +97,6 @@
           var checkIfFirstOrLastRow = function(container) {
             if (container) {
               if (!$.trim($(container).html()).length || $.trim(container.html()) === '<div class="sortable-placeholder"></div>' ) {
-                console.log("its empty");
                 if ($("form.equal.width .fields:last-child")[0] === container[0] || $("form.equal.width .fields:first-child")[0] === container[0]) {
                   container.removeClass("ui segment stacked");
                 } else {
@@ -144,7 +143,7 @@
               $(event.target).parent().before(container);
 
               container.append(targetItem);
-              container.append(draggedItem);
+              container.append(draggedItem).transition('pulse');
               container.sortable(sortConfig);
 
               $(this).remove();
