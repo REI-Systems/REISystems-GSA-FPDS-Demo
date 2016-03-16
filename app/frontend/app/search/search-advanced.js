@@ -109,6 +109,18 @@
             },
             stop: function(event, ui) {
               $(".fields.ui-sortable").removeClass("sortable-space");
+            },
+            update: function(event, ui) {
+              if (ui.sender) {
+                if (!$.trim($(ui.sender).html()).length) {
+                  // Only keep the first or last row
+                  if ($("form.equal.width .fields:last-child")[0] === ui.sender[0] ||  $("form.equal.width .fields:first-child")[0] === ui.sender[0]){
+                    console.log("its the first one or the last one");
+                  }else{
+                    ui.sender.remove();
+                  }
+                }
+              }
             }
           };
 
@@ -124,20 +136,18 @@
               var container = $("<div class='fields ui segment stacked'></div>");
 
               $(event.target).parent().before(container);
-              
+
               container.append(targetItem);
               container.append(draggedItem);
               container.sortable(sortConfig);
-              
+
               $(this).remove();
               ui.draggable.remove();
-              
-              console.log(ui);
-              
+
               // $('.edit').editable(function(value, settings) {
               //   return (value);
               // }, { tooltip: "Click to edit..." });
-              
+
             }
           };
 
