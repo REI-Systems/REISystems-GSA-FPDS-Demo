@@ -94,13 +94,25 @@
 
           $('.ui.accordion').accordion();
 
-          var checkIfFirstOrLastRow = function(container) {
+          var removeEmptyRows = function(container) {
             if (container) {
-              if (!$.trim($(container).html()).length || $.trim(container.html()) === '<div class="sortable-placeholder"></div>' ) {
+              if (!$.trim($(container).html()).length || $.trim(container.html()) === '<div class="sortable-placeholder"></div>') {
                 if ($("form.equal.width .fields:last-child")[0] === container[0] || $("form.equal.width .fields:first-child")[0] === container[0]) {
-                  container.removeClass("ui segment stacked");
+                  
+                  if (container.parent(".segments").length) {
+                    container.prev().remove();
+                    container.unwrap();
+                    container.removeClass("ui segment");
+                  } 
+
                 } else {
-                  container.remove();
+
+                  if (container.parent(".segments").length) {
+                    container.parent(".segments").remove();
+                  } else {
+                    container.remove();
+                  }
+
                 }
               }
             }
@@ -123,7 +135,7 @@
               $(".fields.ui-sortable").removeClass("sortable-space");
             },
             update: function(event, ui) {
-              checkIfFirstOrLastRow(ui.sender);
+              removeEmptyRows(ui.sender);
             }
           };
 
@@ -134,26 +146,34 @@
               $(event.target).transition('pulse');
             },
             drop: function(event, ui) {
-              
+
               var draggedItem = $('<div class="field">' + ui.draggable.html() + '</div>').droppable(dropConfig);
               var draggedItemParent = ui.draggable.parent();
               var targetItem = $('<div class="field">' + $(this).html() + '</div>').droppable(dropConfig);
-              var container = $("<div class='fields ui segment stacked'></div>");
+              var groupContainer = $('<div class="ui segments stacked"><div class="ui segment"><h4 class="ui header edit">Group</h4></div></div>');
+              var container = $("<div class='fields ui segment'></div>");
 
-              $(event.target).parent().before(container);
+              if ($(event.target).parents(".segments").length) {
+                $(event.target).parents(".segments").before(groupContainer);
+              } else {
+                $(event.target).parent().before(groupContainer);
+              }
+
+              groupContainer.append(container)
 
               container.append(targetItem);
-              container.append(draggedItem).transition('pulse');
+              container.append(draggedItem);
               container.sortable(sortConfig);
+              container.transition('pulse');
 
               $(this).remove();
               ui.draggable.remove();
-              
-              checkIfFirstOrLastRow(draggedItemParent);
 
-              // $('.edit').editable(function(value, settings) {
-              //   return (value);
-              // }, { tooltip: "Click to edit..." });
+              removeEmptyRows(draggedItemParent);
+
+              $('.edit').editable(function(value, settings) {
+                return (value);
+              }, { tooltip: "Click to edit..." });
 
             }
           };
