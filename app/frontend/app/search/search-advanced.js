@@ -94,10 +94,23 @@
 
           $('.ui.accordion').accordion();
 
+          var checkIfFirstOrLastRow = function(container) {
+            if (container) {
+              if (!$.trim($(container).html()).length || $.trim(container.html()) === '<div class="sortable-placeholder"></div>' ) {
+                console.log("its empty");
+                if ($("form.equal.width .fields:last-child")[0] === container[0] || $("form.equal.width .fields:first-child")[0] === container[0]) {
+                  container.removeClass("ui segment stacked");
+                } else {
+                  container.remove();
+                }
+              }
+            }
+          };
+
 
           var sortConfig = {
             cursor: "move",
-            cursorAt: { left: 0 },
+            cursorAt: { top: 40, left: 0 },
             connectWith: ".ui.equal.width.form .fields",
             items: "> .field",
             forcePlaceholderSize: true,
@@ -111,16 +124,7 @@
               $(".fields.ui-sortable").removeClass("sortable-space");
             },
             update: function(event, ui) {
-              if (ui.sender) {
-                if (!$.trim($(ui.sender).html()).length) {
-                  // Only keep the first or last row
-                  if ($("form.equal.width .fields:last-child")[0] === ui.sender[0] ||  $("form.equal.width .fields:first-child")[0] === ui.sender[0]){
-                    ui.sender.removeClass("ui segment stacked");
-                  }else{
-                    ui.sender.remove();
-                  }
-                }
-              }
+              checkIfFirstOrLastRow(ui.sender);
             }
           };
 
@@ -131,7 +135,9 @@
               $(event.target).transition('pulse');
             },
             drop: function(event, ui) {
+              
               var draggedItem = $('<div class="field">' + ui.draggable.html() + '</div>').droppable(dropConfig);
+              var draggedItemParent = ui.draggable.parent();
               var targetItem = $('<div class="field">' + $(this).html() + '</div>').droppable(dropConfig);
               var container = $("<div class='fields ui segment stacked'></div>");
 
@@ -143,6 +149,8 @@
 
               $(this).remove();
               ui.draggable.remove();
+              
+              checkIfFirstOrLastRow(draggedItemParent);
 
               // $('.edit').editable(function(value, settings) {
               //   return (value);
