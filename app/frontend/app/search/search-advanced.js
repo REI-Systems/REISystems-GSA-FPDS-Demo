@@ -121,16 +121,21 @@
             drop: function(event, ui) {
               var draggedItem = $('<div class="field">' + ui.draggable.html() + '</div>').droppable(dropConfig);
               var targetItem = $('<div class="field">' + $(this).html() + '</div>').droppable(dropConfig);
-
-              var container = $("<div class='fields ui attached segment'>" + draggedItem.html() + targetItem.html() + "</div>").sortable(sortConfig);
+              var container = $("<div class='fields ui attached segment'></div>");
 
               $(event.target).parent().before(container);
 
-              group.before($("<h5 class='ui top attached header editName'>Group</h5>"));
+              container.before($("<h5 class='ui top attached header editName'>Group</h5>"));
+              container.append(targetItem);
+              container.append(draggedItem);
+              container.sortable(sortConfig);
+              
               ui.draggable.remove();
+              
               $('.editName').editable(function(value, settings) {
                 return (value);
               }, { tooltip: "Click to edit..." });
+              
             }
           };
 
