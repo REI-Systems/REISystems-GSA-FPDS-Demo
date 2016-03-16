@@ -121,20 +121,20 @@
             drop: function(event, ui) {
               var draggedItem = $('<div class="field">' + ui.draggable.html() + '</div>').droppable(dropConfig);
               var targetItem = $('<div class="field">' + $(this).html() + '</div>').droppable(dropConfig);
-              var container = $("<div class='fields ui attached segment'></div>");
+              var container = $("<div class='fields ui segment stacked'></div>");
 
               $(event.target).parent().before(container);
-
-              container.before($("<h5 class='ui top attached header editName'>Group</h5>"));
+              
               container.append(targetItem);
               container.append(draggedItem);
               container.sortable(sortConfig);
               
+              $(this).remove();
               ui.draggable.remove();
               
-              $('.editName').editable(function(value, settings) {
-                return (value);
-              }, { tooltip: "Click to edit..." });
+              // $('.edit').editable(function(value, settings) {
+              //   return (value);
+              // }, { tooltip: "Click to edit..." });
               
             }
           };
