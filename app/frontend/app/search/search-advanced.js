@@ -115,7 +115,7 @@
                 if (!$.trim($(ui.sender).html()).length) {
                   // Only keep the first or last row
                   if ($("form.equal.width .fields:last-child")[0] === ui.sender[0] ||  $("form.equal.width .fields:first-child")[0] === ui.sender[0]){
-                    console.log("its the first one or the last one");
+                    ui.sender.removeClass("ui segment stacked");
                   }else{
                     ui.sender.remove();
                   }
