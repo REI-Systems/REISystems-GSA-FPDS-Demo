@@ -20,7 +20,7 @@ var paths = {
   appSrc: ['app/**/*', '!app/index.html', '!app/**/*.js'],
   angularFiles: ['app/**/*.js'],
   bowerSrc: 'bower_components/**/*'
-}
+};
 
 gulp.task('default', ['watch']);
 
