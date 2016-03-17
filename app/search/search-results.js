@@ -177,7 +177,7 @@
                 { datafield: 'fiscal_year', text: 'Contract Fiscal Year', width: '20%' }
               ]
             });
-        }
+        };
 
         $scope.createTable();
 
@@ -186,7 +186,9 @@
         $scope.saveGridState = function(state) {
           //console.log($scope);
           //console.log($scope.vm.user.preferences);
-          $scope.vm.user.preferences.jqxGridState = state;
+          if ( typeof $scope.vm.user !== "undefined" ) {
+            $scope.vm.user.preferences.jqxGridState = state;
+          }
 
           /**
            * SAVE jqxGris State in user preferences
