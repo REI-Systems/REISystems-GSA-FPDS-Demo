@@ -98,12 +98,12 @@
             if (container) {
               if (!$.trim($(container).html()).length || $.trim(container.html()) === '<div class="sortable-placeholder"></div>') {
                 if ($("form.equal.width .fields:last-child")[0] === container[0] || $("form.equal.width .fields:first-child")[0] === container[0]) {
-                  
+
                   if (container.parent(".segments").length) {
                     container.prev().remove();
                     container.unwrap();
                     container.removeClass("ui segment");
-                  } 
+                  }
 
                 } else {
 
@@ -164,7 +164,7 @@
               container.append(targetItem);
               container.append(draggedItem);
               container.sortable(sortConfig);
-              
+
               groupContainer.transition('pulse');
 
               $(this).remove();
@@ -181,6 +181,13 @@
 
           $(".ui.equal.width.form .fields").sortable(sortConfig);
           $(".ui.equal.width.form .field").droppable(dropConfig);
+
+          //Filters
+          $('.ui.multiple.dropdown')
+            .dropdown({
+              useLabels: false
+            });
+
 
           //DatePicker
           $("#from").datepicker({
