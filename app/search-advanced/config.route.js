@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.search')
+    .module('app.searchadvanced')
     .run(appRun);
 
   appRun.$inject = ['routehelper']
@@ -14,13 +14,13 @@
   function getRoutes() {
     return [
       {
-        name: 'search',
+        name: 'searchadvanced',
         config: {
-          url: '/search',
+          url: '/search-advanced',
           views: {
             'pagecontent@': {
-              templateUrl: 'search/search.html',
-              controller: 'Search',
+              templateUrl: 'search-advanced/content.html',
+              controller: 'SearchAdvanced',
               controllerAs: 'vm'
             }
           }

@@ -1,0 +1,24 @@
+<div class="ui raised very padded text container segment">
+  
+  <div class="ui form equal width">
+    
+    <div class="ui segments stacked" ng-repeat="filtersPerGroup in vm.allFilters() | filter:vm.filterByGroup">
+      
+      <div class="ui segment">
+        <h4 class="ui header">
+          {{ filtersPerGroup.groupName }}
+        </h4>
+      </div>
+      
+      <div class="fields ui segment">
+        <div class="field" ng-repeat="filter in vm.filters | filter: { group: filtersPerGroup.group } | orderBy:'-position' " ng-switch on="filter.type.directive">
+          <label>{{ filter.label }}</label>
+          <remote-dropdown ng-switch-when="remote-dropdown" column="{{ filter.type.source }}" />
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+</div>

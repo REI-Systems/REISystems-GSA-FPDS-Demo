@@ -13,6 +13,7 @@
     'app.account',
     'app.home',
     'app.search',
+    'app.searchadvanced',
     'app.layout'
 
   ]);
