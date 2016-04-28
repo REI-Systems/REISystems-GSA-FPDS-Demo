@@ -4,10 +4,8 @@
 Once time run below 
 * bower intall
 * npm install
-
-Start server
 * gulp serve
-Server will start at http://localhost:8000
+* Server will start at http://localhost:8000
 
 
 # UAT
