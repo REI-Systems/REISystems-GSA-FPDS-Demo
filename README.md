@@ -7,6 +7,8 @@ Once time run below
 
 Start server
 * gulp serve
+Server will start at http://localhost:8000
+
 
 # UAT
 https://gsa-fpds-uat.reisys.com/
