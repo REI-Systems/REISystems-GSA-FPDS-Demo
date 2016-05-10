@@ -12,6 +12,7 @@
 
     vm.numresults = '0';
     vm.updateTableResults = UpdateTableResults;
+    vm.dollarsObligated = '0';
 
     userAuthorization.isUserAuthenticated(function() {
       vm.user = userSession.getSession().user;
@@ -27,12 +28,13 @@
       }
     },
       function() {
-        $state.go('login');
+        $state.go('search');
       });
 
     function UpdateTableResults(sqlClause) {
       $scope.$broadcast('updateTable', sqlClause);
     }
+
 
   }
 

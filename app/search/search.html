@@ -9,11 +9,15 @@
 
     <br>
 
+
     <search-bar></search-bar>
+ <advanced-search></advanced-search>
 
-    <advanced-search></advanced-search>
 
-    <h4 class="ui horizontal divider header"><i class="table icon"></i>{{ vm.numresults }} Results found</h4>
+   <h4 class="ui horizontal divider header" id="h01" style="width: 50%;" onload="getAgencies()">{{ totalDollarsObligated }}</h4>
+
+    <h4 class="ui horizontal divider header"><i class="table icon"></i>{{ vm.numresults }} Results found </h4>
+
 
     <!--Show/hide Table Columns-->
     <div class="ui accordion field">
@@ -137,10 +141,8 @@
 
 
 
-
     <results-table></results-table>
 
-    
 
 
     <h4 class="ui horizontal divider header"><i class="file outline icon"></i> Contract information</h4>
@@ -334,6 +336,6 @@
 
     <br>
     <br>
-
+ 
   </div>
 </div>

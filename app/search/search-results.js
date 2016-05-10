@@ -11,7 +11,7 @@
     return {
       restrict: 'E',
       replace: true,
-      template: '<div id="jqxWidget"><div id="jqxgrid"></div></div>',
+      template: '<div id="jqxWidget"><div style="float: right;">Export: <input style="margin-right: 5px;" type="button" id="csvExport" value="CSV"><input type="button" id="pdfExport" value="PDF"></div><div id="jqxgrid"></div></div>',
       link: function(scope, element, attrs, controller) {
         angular.element(document).ready(function() {
 
@@ -113,9 +113,35 @@
         $scope.$on('updateTable', function(element, sqlClause) {
           $('#jqxgrid').jqxGrid('showloadelement');
 
+
           $scope.source.url = '/api/search/query?sql=SELECT ' + ColumnsValue + ' FROM contract ' + sqlClause;
           $("#jqxgrid").jqxGrid({ source: $scope.source });
 
+          console.log('/api/search/query?sql=SELECT ' + ColumnsValue + ' FROM contract ' + sqlClause)
+
+            var oAPI = {
+              "name": "search",
+              "suffix": "",
+              "method": "GET",
+              "oData": {},
+              "oParams": {
+                "sql": "SELECT SUM(dollarsobligated) FROM contract " + sqlClause
+              }
+            };
+
+            //call SUM Api 
+            apiService.call(oAPI.name, oAPI.suffix, oAPI.oParams, oAPI.oData, oAPI.method).then(
+              function(data) {
+                console.log(data)
+                if(data.hasOwnProperty('rows') && data.rows.length > 0) {
+                  $scope.totalDollarsObligated = data.rows[0];
+                }
+              },
+              function(error) {
+                console.log(error);
+                
+              }
+            );
         });
 
         $("#jqxgrid").on('bindingcomplete', function() {
@@ -130,6 +156,7 @@
           $("#jqxgrid").jqxGrid('loadstate', preferences);
         });
 
+
         $scope.createTable = function(data) {
 
           $scope.source =
@@ -137,7 +164,7 @@
               url: '',
               datafields: [{ name: 'contractactiontype', map: '0' }, { name: 'agencyid', map: '1' },
                 { name: 'signeddate', map: '2' }, { name: 'contractingofficeagencyid', map: '3' }, { name: 'maj_agency_cat', map: '4' },
-                { name: 'dollarsobligated', map: '5' }, { name: 'principalnaicscode', map: '6' }, { name: 'psc_cat', map: '7' },
+                { name: 'dollarsobligated', map: '5', type: 'float' }, { name: 'principalnaicscode', map: '6' }, { name: 'psc_cat', map: '7' },
                 { name: 'vendorname', map: '8' }, { name: 'zipcode', map: '9' }, { name: 'placeofperformancecountrycode', map: '10' },
                 { name: 'pop_state_code', map: '11' }, { name: 'localareasetaside', map: '12' }, { name: 'fiscal_year', map: '13' },
                 { name: 'effectivedate', map: '14' }, { name: 'unique_transaction_id', map: '15' }, { name: 'solicitationid', map: '16' },
@@ -154,19 +181,24 @@
               width: '100%',
               source: dataAdapter,
               selectionmode: 'multiplerowsextended',
+              showstatusbar: true,
+                statusbarheight: 25,
               sortable: true,
+              altrows: true,
               pageable: true,
               autoheight: true,
               columnsresize: true,
               columnsreorder: true,
+              editable: true,
+              showaggregates: true,
               filterable: true,
-              columns: [
+     columns: [
                 { datafield: 'contractactiontype', text: 'Contract Type', width: '20%' },
                 { datafield: 'agencyid', text: 'Agency Code', width: '20%' },
                 { datafield: 'signeddate', text: 'Date Signed', width: '20%' },
                 { datafield: 'contractingofficeagencyid', text: 'Contracting Agency ID', width: '20%' },
                 { datafield: 'maj_agency_cat', text: 'Department Full Name', width: '20%' },
-                { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%' },
+                { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%', cellsformat: 'c2', aggregates: ['sum', 'avg'] }, 
                 { datafield: 'principalnaicscode', text: 'NAICS', width: '20%' },
                 { datafield: 'psc_cat', text: 'PSC', width: '20%' },
                 { datafield: 'vendorname', text: 'Vendor State', width: '20%' },
@@ -177,7 +209,18 @@
                 { datafield: 'fiscal_year', text: 'Contract Fiscal Year', width: '20%' }
               ]
             });
+
+            $("#csvExport").jqxButton();
+            $("#pdfExport").jqxButton();
+            $("#csvExport").click(function () {
+                $("#jqxgrid").jqxGrid('exportdata', 'csv', 'jqxGrid');
+            });
+            $("#pdfExport").click(function () {
+                $("#jqxgrid").jqxGrid('exportdata', 'pdf', 'jqxGrid');
+            });
+         
         };
+
 
         $scope.createTable();
 

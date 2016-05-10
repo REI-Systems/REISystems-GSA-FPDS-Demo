@@ -1,9 +1,197 @@
+
+
 <div class="ui accordion">
   <div class="title">
     <i class="dropdown blue icon"></i> Advanced Search
   </div>
   <div class="active content field">
+    <form name="searchFilterForm" class="ui form transition hidden">
+    
+      <div class="field" style="width: 50%">
+          <label>Agency</label>
+          <remote-dropdown column="agencyid" name="agencyid" ng-model="search.agencyid"></remote-dropdown>
+      </div>
+      <div class="field" style="width: 50%">
+          <label>Award Id</label>
+          <remote-dropdown column="awardid" name="awardid" ng-model="search.awardid"></remote-dropdown>
+      </div>
+      <div class="field" style="width: 50%">
+          <label>Contracting Agency</label>
+          <remote-dropdown column="contractingofficeagencyid" name="contractingofficeagencyid" ng-model="search.contractingofficeagencyid"></remote-dropdown>
+      </div>
+        <div class="field" style="width: 50%">
+          <label>Vendor Name</label>
+          <remote-dropdown column="vendorname" name="vendorname" ng-model="search.vendorname"></remote-dropdown>
+      </div>
+      <div class="field" style="width: 50%">
+          <label>Date Signed</label>
+          <div class="fields">
+            <input type="hidden" name="signeddate" ng-model="search.signeddate">
+            <div class="eight wide inline field">
+              <label for="from">From</label>
+              <input type="text" id="from" name="from">
+            </div>
+            <div class="eight wide inline field">
+              <label for="to">To</label>
+              <input type="text" id="to" name="to">
+          </div>
+      </div>
+      <div class="field">
+          <label>Action Obligation</label>
+          <div class="fields">
+            <div class="six wide field">
+              <input id="dollarsobligated" name="dollarsobligated" ng-model="search.dollarsobligated" readonly="">
+            </div>
+            <div class="ten wide field">
+              <div id="slider-range" style="margin-top: 10px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field" id="div1" style="width: 50%; display: none">
+          <label>Contract Type</label>
+          <remote-dropdown column="contractactiontype" name="contractactiontype" ng-model="search.contractactiontype"></remote-dropdown>
+      </div>
+      <div class="field" id="div2" style="width: 50%; display: none">
+          <label>Local Area</label>
+          <remote-dropdown column="localareasetaside" name="localareasetaside" ng-model="search.localareasetaside"></remote-dropdown>
+      </div>
+      <div class="field" id="div3" style="width: 50%; display: none">
+          <label>Department Full Name</label>
+          <remote-dropdown column="maj_agency_cat" name="maj_agency_cat" ng-model="search.maj_agency_cat"></remote-dropdown>
+      </div>
+      <div class="field" id="div4" style="width: 50%; display: none">
+          <label>PSC</label>
+          <remote-dropdown column="psc_cat" name="psc_cat" ng-model="search.psc_cat"></remote-dropdown>
+      </div>
+     
+      <div style="width: 50%">
+      <button type="button" class="ui button" ng-click="searchDataset()">Search</button>
+      
+      <div class="title" onclick="toggle_visibility("div5")" style="float: right; margin-right: 100px; visibility:none;" >
+        <i class="icon dropdown"></i>Add Filter
+      </div>
+      <div class="content field" id='div5'>
+                    <div class="field">
+                       <input type="checkbox" name="contractactiontype" onclick="showMe('div1', this)"> Contract Type
+                       <input type="checkbox" name="localareasetaside" onclick="showMe('div2', this)"> Local Area
+                     <input type="checkbox" name="maj_agency_cat" onclick="showMe('div3', this)"> Department Full Name
+                     <input type="checkbox" name="psc_cat" onclick="showMe('div4', this)"> PSC
+                </div>
+                </div>
+                </div>
 
+            
+
+</form>
+
+
+
+
+<!-- 
+    <form name="searchFilterForm" class="ui form transition hidden">
+
+      <div class="two fields">
+        <div class="field">
+          <label>Agency</label>
+          <remote-dropdown column="agencyid" name="agencyid" ng-model="search.agencyid"></remote-dropdown>
+        </div>
+
+        <div class="field">
+          <label>Contract Type</label>
+          <remote-dropdown column="contractactiontype" name="contractactiontype" ng-model="search.contractactiontype"></remote-dropdown>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Contracting Agency</label>
+          <remote-dropdown column="contractingofficeagencyid" name="contractingofficeagencyid" ng-model="search.contractingofficeagencyid"></remote-dropdown>
+        </div>
+
+        <div class="field">
+          <label>Local Area</label>
+          <remote-dropdown column="localareasetaside" name="localareasetaside" ng-model="search.localareasetaside"></remote-dropdown>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Department Full Name</label>
+          <remote-dropdown column="maj_agency_cat" name="maj_agency_cat" ng-model="search.maj_agency_cat"></remote-dropdown>
+        </div>
+
+        <div class="field">
+          <label>PoP State Name</label>
+          <remote-dropdown column="pop_state_code" name="pop_state_code" ng-model="search.pop_state_code"></remote-dropdown>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>PSC</label>
+          <remote-dropdown column="psc_cat" name="psc_cat" ng-model="search.psc_cat"></remote-dropdown>
+        </div>
+
+        <div class="field">
+          <label>Vendor Name</label>
+          <remote-dropdown column="vendorname" name="vendorname" ng-model="search.vendorname"></remote-dropdown>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Date Signed</label>
+          <div class="fields">
+            <input type="hidden" name="signeddate" ng-model="search.signeddate">
+            <div class="eight wide inline field">
+              <label for="from">From</label>
+              <input type="text" id="from" name="from">
+            </div>
+            <div class="eight wide inline field">
+              <label for="to">To</label>
+              <input type="text" id="to" name="to">
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Action Obligation</label>
+          <div class="fields">
+            <div class="six wide field">
+              <input id="dollarsobligated" name="dollarsobligated" ng-model="search.dollarsobligated" readonly="">
+            </div>
+            <div class="ten wide field">
+              <div id="slider-range" style="margin-top: 10px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="three fields">
+        <div class="field">
+          <label>NAICS</label>
+          <remote-dropdown column="principalnaicscode" name="principalnaicscode" ng-model="search.principalnaicscode"></remote-dropdown>
+        </div>
+
+        <div class="field">
+          <label>Fiscal Year</label>
+          <remote-dropdown column="fiscal_year" name="fiscal_year" ng-model="search.fiscal_year"></remote-dropdown>
+        </div>
+
+        <div class="field">
+          <label>Zip Code</label>
+          <remote-dropdown column="zipcode" name="zipcode" ng-model="search.zipcode"></remote-dropdown>
+        </div>
+      </div>
+
+      <button type="button" class="ui button" ng-click="searchDataset()">Search</button>
+
+      <button type="button" class="ui button" ng-click="">Add Filter</button>
+
+    </form> -->
+
+<!--
     <form name="searchFilterForm" class="ui form transition hidden">
 
       <div class="two fields">
@@ -108,6 +296,7 @@
 
 
     <!--Filters-->
+    <!--
     <div class="ui secondary segment">
 
       <div class="ui multiple dropdown">
@@ -176,7 +365,7 @@
       </div>
 
     </form>
-
-
+-->
+<!--
   </div>
-</div>
+</div>-->

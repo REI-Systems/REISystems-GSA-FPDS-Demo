@@ -10,7 +10,6 @@
 
   <!-- inject:css -->
   <!-- endinject -->
-
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
   <style type="text/css">
@@ -131,7 +130,7 @@
   <div class="ui large top fixed hidden menu" ng-controller="Navigation as vm">
     <div class="ui container">
       <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
-      <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Search</a>
+      <a ui-sref-active="active" ui-sref="search" class="item" >Search</a>
       <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
       <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Feedback</a>
       <div class="right menu">
@@ -155,7 +154,7 @@
   <!-- Sidebar -->
   <div class="ui vertical inverted sidebar menu left" ng-controller="Navigation as vm">
     <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
-    <a ui-sref-active="active" ui-sref="search" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Search</a>
+    <a ui-sref-active="active" ui-sref="search" class="item" >Search</a>
     <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
     <a ui-sref-active="active" ui-sref="feedback" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">Feedback</a>
     <a ng-show="!vm.isUserAuth" ui-sref-active="active" ui-sref="login" class="item">Login</a>
@@ -177,10 +176,10 @@
           </a>
 
           <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
-          <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="search" class="item">Search</a>
+          <a ng-show="vm.isUserAuth || !vm.isUserAuth" ui-sref-active="active" ui-sref="search" class="item">Search</a>
           <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="api" class="item">API</a>
           <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="feedback" class="item">Feedback</a>
-          <a ng-hide="vm.isUserAuth" class="item">Search</a>
+          <a ng-hide="vm.isUserAuth || !vm.isUserAuth" class="item">Search</a>
           <a ng-hide="vm.isUserAuth" class="item">API</a>
           <a ng-hide="vm.isUserAuth" class="item">Feedback</a>
 
@@ -239,6 +238,25 @@
   <!-- endinject -->
 
   <script src="http://www.appelsiini.net/projects/jeditable/jquery.jeditable.js"></script>
+  <!--<script src="app/search/export.js"></script>
+  <script src="app/search/aggregate.js"></script>-->
+  <script type="text/javascript">
+<!--
+function showMe (it, box) {
+  var vis = (box.checked) ? "block" : "none";
+  document.getElementById(it).style.display = vis;
+}
+//-->
+   function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+   }
+
+
+</script>
 
 </body>
 
