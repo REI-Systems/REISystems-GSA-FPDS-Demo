@@ -134,7 +134,7 @@
               function(data) {
                 console.log(data)
                 if(data.hasOwnProperty('rows') && data.rows.length > 0) {
-                  $scope.totalDollarsObligated = data.rows[0];
+                  $scope.totalDollarsObligated = data.rows[0].toString();
                 }
               },
               function(error) {
@@ -181,16 +181,12 @@
               width: '100%',
               source: dataAdapter,
               selectionmode: 'multiplerowsextended',
-              showstatusbar: true,
-                statusbarheight: 25,
               sortable: true,
               altrows: true,
               pageable: true,
               autoheight: true,
               columnsresize: true,
               columnsreorder: true,
-              editable: true,
-              showaggregates: true,
               filterable: true,
      columns: [
                 { datafield: 'contractactiontype', text: 'Contract Type', width: '20%' },
@@ -198,7 +194,7 @@
                 { datafield: 'signeddate', text: 'Date Signed', width: '20%' },
                 { datafield: 'contractingofficeagencyid', text: 'Contracting Agency ID', width: '20%' },
                 { datafield: 'maj_agency_cat', text: 'Department Full Name', width: '20%' },
-                { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%', cellsformat: 'c2', aggregates: ['sum', 'avg'] }, 
+                { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%' }, 
                 { datafield: 'principalnaicscode', text: 'NAICS', width: '20%' },
                 { datafield: 'psc_cat', text: 'PSC', width: '20%' },
                 { datafield: 'vendorname', text: 'Vendor State', width: '20%' },
