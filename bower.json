@@ -20,7 +20,8 @@
     "angular-ui-router": "~0.2.18",
     "jquery": "~2.2.1",
     "jqwidgets": "~4.0.0",
-    "jquery-ui": "~1.11.4"
+    "jquery-ui": "~1.11.4",
+    "angular-chart.js": "^0.10.2"
   },
   "overrides": {
     "jqwidgets": {
@@ -43,7 +44,7 @@
         "jqwidgets/jqxgrid.columnsresize.js",
         "jqwidgets/jqxgrid.columnsreorder.js",
         "jqwidgets/jqxgrid.selection.js",
-        "jqwidgets/jqxgrid.aggregates.js", 
+        "jqwidgets/jqxgrid.aggregates.js",
         "jqwidgets/jqxpanel.js",
         "jqwidgets/jqxcheckbox.js",
         "jqwidgets/jqxtabs.js",
