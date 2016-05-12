@@ -18,7 +18,10 @@
 <advanced-search ></advanced-search>
 </div>
 <div class="twelve wide column">
-   <h4 class="ui horizontal divider header">Total Value: {{ totalDollarsObligated | currency}}</h4>
+   <h4 class="ui horizontal divider header">Total Value: {{ totalDollarsObligated | currency }} </h4>
+
+    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
+    </canvas>
 
     <h4 class="ui horizontal divider header"><i class="table icon"></i>{{ vm.numresults }} Results found </h4>
 
@@ -132,6 +135,12 @@
                     <div class="ui child checkbox">
                       <input type="checkbox" name="fiscal_year">
                       <label>Contract Fiscal Year</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui child checkbox">
+                      <input type="checkbox" name="idvpiid">
+                      <label>Reference Id</label>
                     </div>
                   </div>
                 </div>

@@ -125,7 +125,7 @@
               "method": "GET",
               "oData": {},
               "oParams": {
-                "sql": "SELECT SUM(dollarsobligated) FROM contract " + sqlClause
+                "sql": "SELECT SUM(dollarsobligated) FROM contract " + sqlClause 
               }
             };
 
