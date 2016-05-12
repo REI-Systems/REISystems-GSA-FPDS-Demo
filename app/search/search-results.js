@@ -129,6 +129,7 @@
               }
             };
 
+
             //call SUM Api 
             apiService.call(oAPI.name, oAPI.suffix, oAPI.oParams, oAPI.oData, oAPI.method).then(
               function(data) {
@@ -141,6 +142,43 @@
                 console.log(error);
                 
               }
+            );
+
+            var oAPIChart = {
+                "name": "search",
+                "suffix": "",
+                "method": "GET",
+                "oData": {},
+                "oParams": {
+                    "sql": "SELECT agencyid, SUM(dollarsobligated) FROM contract " + sqlClause + " GROUP BY agencyid"
+                }
+            };
+
+            //call SUM group by agencyid Api
+            apiService.call(oAPIChart.name, oAPIChart.suffix, oAPIChart.oParams, oAPIChart.oData, oAPIChart.method).then(
+                function(data) {
+                    console.log(data)
+                    if(data.hasOwnProperty('rows') && data.rows.length > 0) {
+                        console.log(data);
+                        $scope.oChartData = {
+                            xAxis: [],
+                            yAxis: []
+                        };
+
+                        for(var i=0; i<data.rows.length; i++){
+                            $scope.oChartData.xAxis.push(data.rows[i][0]); //agency
+                            $scope.oChartData.yAxis.push(data.rows[i][1]); //amount
+                        }
+
+                        $scope.labels = $scope.oChartData.xAxis;
+                        $scope.series = ['Series A'];
+                        $scope.data = [$scope.oChartData.yAxis];
+                    }
+                },
+                function(error) {
+                    console.log(error);
+
+                }
             );
         });
 

@@ -7,6 +7,7 @@
     'app.data',
     'app.widgets',
     'chart.js',
+
     /*
      * Features
      */
