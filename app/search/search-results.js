@@ -109,15 +109,17 @@
         });
       },
       controller: function($scope) {
-
         $scope.$on('updateTable', function(element, sqlClause) {
-          $('#jqxgrid').jqxGrid('showloadelement');
+
+            $('#jqxgrid').jqxGrid('showloadelement');
 
 
-          $scope.source.url = '/api/search/query?sql=SELECT ' + ColumnsValue + ' FROM contract ' + sqlClause;
-          $("#jqxgrid").jqxGrid({ source: $scope.source });
+            $scope.source.url = '/api/search/query?sql=SELECT ' + ColumnsValue + ' FROM contract ' + sqlClause;
 
-          console.log('/api/search/query?sql=SELECT ' + ColumnsValue + ' FROM contract ' + sqlClause)
+            $("#jqxgrid").jqxGrid({ source: $scope.source });
+
+
+            console.log('/api/search/query?sql=SELECT ' + ColumnsValue + ' FROM contract ' + sqlClause)
 
             var oAPI = {
               "name": "search",
@@ -180,6 +182,7 @@
 
                 }
             );
+
         });
 
         $("#jqxgrid").on('bindingcomplete', function() {
@@ -188,6 +191,7 @@
           $timeout(function() {
             $scope.vm.numresults = rowscount;
           });
+            $(".prompt").removeAttr('disabled');
         });
 
         $scope.$on('loadTableState', function(element, preferences) {
@@ -262,8 +266,6 @@
 
         //save jqxGrid state in user preferences
         $scope.saveGridState = function(state) {
-          //console.log($scope);
-          //console.log($scope.vm.user.preferences);
           if ( typeof $scope.vm.user !== "undefined" ) {
             $scope.vm.user.preferences.jqxGridState = state;
           }

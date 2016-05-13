@@ -16,8 +16,9 @@
                 },
                 type: 'category',
                 onSelect: function(result, response) {
-                  var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.title + "'";
-                  scope.vm.updateTableResults(sqlClause);
+                    $(".prompt").attr('disabled', true);
+                       var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.title + "'";
+                       scope.vm.updateTableResults(sqlClause);
                 }
               });
           });

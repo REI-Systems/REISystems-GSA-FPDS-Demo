@@ -9,10 +9,9 @@
 
   function Search($scope, userAuthorization, userSession, searchService, $state) {
     var vm = this;
-
+    vm.searchLoading = false;
     vm.numresults = '0';
     vm.updateTableResults = UpdateTableResults;
-
     userAuthorization.isUserAuthenticated(function() {
       vm.user = userSession.getSession().user;
       if (vm.user.preferences.jqxGridState) {

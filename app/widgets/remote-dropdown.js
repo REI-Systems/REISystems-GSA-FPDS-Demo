@@ -18,7 +18,7 @@
           $('[column=' + columnName + ']').dropdown();
 
           setTimeout(function(){
-
+            
             $('[column=' + columnName + ']').parent()
                 .dropdown({
                   apiSettings: {
@@ -35,7 +35,7 @@
                     url: '/api/search/query?sql=SELECT+' + columnName + '+FROM+contract+WHERE+' + columnName + '+like+' + '\'{query}%25\'+GROUP+BY+' + columnName
                   }
                 });
-
+            
           }, 1000);
 
 
