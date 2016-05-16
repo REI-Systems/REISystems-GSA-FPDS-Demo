@@ -15,7 +15,7 @@ var paths = {
   tempVendorImages: 'temp/vendor/images',
   tempIndex: 'temp/index.html',
 
-  jqxImages: ['bower_components/jqwidgets/jqwidgets/styles/images/icon-up.png', 'bower_components/jqwidgets/jqwidgets/styles/images/icon-down.png', 'bower_components/jqwidgets/jqwidgets/styles/images/icon-left.png', 'bower_components/jqwidgets/jqwidgets/styles/images/icon-right.png', 'bower_components/jqwidgets/jqwidgets/styles/images/loader.gif', 'bower_components/jqwidgets/jqwidgets/styles/images/sortasc.png', 'bower_components/jqwidgets/jqwidgets/styles/images/sortdesc.png', 'bower_components/jqwidgets/jqwidgets/styles/images/sortremove.png', 'bower_components/jqwidgets/jqwidgets/styles/images/drag.png'],
+  jqxImages: ['bower_components/jqwidgets/jqwidgets/styles/images/icon-up.png', 'bower_components/jqwidgets/jqwidgets/styles/images/icon-down.png', 'bower_components/jqwidgets/jqwidgets/styles/images/icon-left.png', 'bower_components/jqwidgets/jqwidgets/styles/images/icon-right.png', 'bower_components/jqwidgets/jqwidgets/styles/images/loader.gif', 'bower_components/jqwidgets/jqwidgets/styles/images/sortasc.png', 'bower_components/jqwidgets/jqwidgets/styles/images/sortdesc.png', 'bower_components/jqwidgets/jqwidgets/styles/images/sortremove.png', 'bower_components/jqwidgets/jqwidgets/styles/images/drag.png', 'bower_components/jqwidgets/jqwidgets/styles/images/*.png'],
 
   index: 'app/index.html',
   appSrc: ['app/**/*', '!app/index.html', '!app/**/*.js'],

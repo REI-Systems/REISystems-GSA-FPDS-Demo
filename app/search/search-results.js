@@ -11,7 +11,7 @@
     return {
       restrict: 'E',
       replace: true,
-      template: '<div id="jqxWidget"><div style="float: right;">Export: <input style="margin-right: 5px;" type="button" id="csvExport" value="CSV"><input type="button" id="pdfExport" value="PDF"></div><div id="jqxgrid"></div></div>',
+      template: '<div id="jqxWidget"><div style="float: right;">Export: <input style="margin-right: 5px;" type="button" id="csvExport" value="CSV"><input type="button" id="pdfExport" value="PDF"></div><div class="ui accordion field"><div class="title"><i class="icon dropdown"></i> Show/Hide Columns</div><div class="content"><div style="float: left;" id="jqxlistbox"></div></div></div><div id="jqxgrid"></div></div>',
       link: function(scope, element, attrs, controller) {
         angular.element(document).ready(function() {
 
@@ -256,6 +256,33 @@
             });
             $("#pdfExport").click(function () {
                 $("#jqxgrid").jqxGrid('exportdata', 'pdf', 'jqxGrid');
+            });
+
+            var listSource = [{ label: 'Contract Type', value: 'contractactiontype', checked: true }, 
+                              { label: 'Agency Code', value: 'agencyid', checked: true }, 
+                              { label: 'Date Signed', value: 'signeddate', checked: true },
+                              { label: 'Contracting Agency ID', value: 'contractingofficeagencyid', checked: true}, 
+                              { label: 'Reference ID', value: 'idvpiid', checked: true }, 
+                              { label: 'Department Full Name', value: 'maj_agency_cat', checked: true},
+                              { label: 'Action Obligation ($)', value: 'dollarsobligated', checked: true },
+                              { label: 'NAICS', value: 'principalnaicscode', checked: true },
+                              { label: 'PSC', value: 'psc_cat', checked: true },
+                              { label: 'Vendor State', value: 'vendorname', checked: true },
+                              { label: 'Vendor ZIP Code', value: 'zipcode', checked: true },
+                              { label: 'PoP Country Name', value: 'placeofperformancecountrycode', checked: true },
+                              { label: 'Pop State Name', value: 'pop_state_code', checked: true},
+                              { label: 'Local Area Set Aside', value: 'localareasetaside', checked: true },
+                              { label: 'Contract Fiscal Year', value: 'fiscal_year', checked: true }];
+            $("#jqxlistbox").jqxListBox({ source: listSource, width: 200, height: 200,  checkboxes: true });
+            $("#jqxlistbox").on('checkChange', function (event) {
+                $("#jqxgrid").jqxGrid('beginupdate');
+                if (event.args.checked) {
+                    $("#jqxgrid").jqxGrid('showcolumn', event.args.value);
+                }
+                else {
+                    $("#jqxgrid").jqxGrid('hidecolumn', event.args.value);
+                }
+                $("#jqxgrid").jqxGrid('endupdate');
             });
          
         };
