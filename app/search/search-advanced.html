@@ -3,15 +3,15 @@
  <div class="title" style="font-size: 120%; text-align: center; border-radius: 5px; background-color: #112e51; color: white;">
     <i class="filter white icon"></i><strong>Advanced Search</strong> 
   </div>
-    <form name="searchFilterForm" class="ui form">
+    <form name="searchFilterForm" class="ui form" ng-submit="searchDataset()">
     
       <div class="field">
           <label>Agency</label>
           <remote-dropdown column="agencyid" name="agencyid" ng-model="search.agencyid"></remote-dropdown>
       </div>
       <div class="field">
-          <label>Award Id</label>
-          <remote-dropdown column="awardid" name="awardid" ng-model="search.awardid"></remote-dropdown>
+          <label>Reference Id</label>
+          <remote-dropdown column="idvpiid" name="idvpiid" ng-model="search.idvpiid"></remote-dropdown>
       </div>
       <div class="field">
           <label>Contracting Agency</label>
