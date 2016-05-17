@@ -18,13 +18,14 @@
 <advanced-search ></advanced-search>
 </div>
 <div class="twelve wide column">
-   <h4 class="ui horizontal divider header">Total Value: {{ totalDollarsObligated | currency }} </h4>
+  <h4 class="ui center aligned header" >Total Award Value: </h4>
+   <h1 class="ui horizontal divider olive header" id="totalvalue">{{ totalDollarsObligated | currency }} </h1>
 
     <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
     </canvas>-->
   <canvas id="line" class="chart chart-line" chart-data="data"
           chart-labels="labels" chart-legend="true" chart-series="series"
-          chart-click="onClick" >
+          chart-click="onClick">
   </canvas>
 
       <h4 class="ui horizontal divider header"><i class="table icon"></i>{{ vm.numresults }} Results found </h4>
@@ -355,3 +356,10 @@
    </div>
     </div>
   </div>
+  <style>
+
+    .line-legend-text{
+      font-weight: bold;
+      font-size: 150%;
+    }
+  </style>
