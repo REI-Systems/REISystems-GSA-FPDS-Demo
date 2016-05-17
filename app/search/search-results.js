@@ -152,7 +152,8 @@
                 "method": "GET",
                 "oData": {},
                 "oParams": {
-                    "sql": "SELECT agencyid, SUM(dollarsobligated) FROM contract " + sqlClause + " GROUP BY agencyid"
+                    //"sql": "SELECT agencyid, SUM(dollarsobligated) FROM contract " + sqlClause + " GROUP BY agencyid"
+                    "sql": "SELECT fiscal_year, SUM(dollarsobligated) FROM contract " + sqlClause + " GROUP BY fiscal_year ORDER BY fiscal_year"
                 }
             };
 
@@ -168,12 +169,12 @@
                         };
 
                         for(var i=0; i<data.rows.length; i++){
-                            $scope.oChartData.xAxis.push(data.rows[i][0]); //agency
+                            $scope.oChartData.xAxis.push(data.rows[i][0]); //year
                             $scope.oChartData.yAxis.push(data.rows[i][1]); //amount
                         }
 
                         $scope.labels = $scope.oChartData.xAxis;
-                        $scope.series = ['Series A'];
+                        $scope.series = ['Value of Contracts by Fiscal Year'];
                         $scope.data = [$scope.oChartData.yAxis];
                     }
                 },

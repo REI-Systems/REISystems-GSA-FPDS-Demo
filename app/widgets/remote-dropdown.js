@@ -30,9 +30,13 @@
                         response.results.push({ "name": item, "value": item });
                       });
                       console.log('Response' + response);
+                     // console.log(this.url);
+                     // console.log(transform);
+
                       return response;
+
                     },
-                    url: '/api/search/query?sql=SELECT+' + columnName + '+FROM+contract+WHERE+' + columnName + '+like+' + '\'{query}%25\'+GROUP+BY+' + columnName
+                    url: '/api/search/query?sql=SELECT+' + columnName + '+FROM+contract+WHERE+' + columnName + '+like+' + '\'{query}%25\'GROUP+BY+' + columnName
                   }
                 });
             
