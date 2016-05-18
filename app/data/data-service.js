@@ -55,8 +55,8 @@
     };
 
     this.sqlSearchAdvanced = function(columns, filter) {
-      return apiService.call('search', '', { 'sql': 'SELECT ' + columns + ' FROM contract ' + filter }, {}, 'GET');
-    };
+            return apiService.call('search', '', { 'sql': 'SELECT ' + columns + ' FROM contract ' + filter }, {}, 'GET');
+          };
   }
 
 })();
