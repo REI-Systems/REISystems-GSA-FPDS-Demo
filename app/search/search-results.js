@@ -108,7 +108,7 @@
 
         });
       },
-      controller: function($scope) {
+      controller: function($scope, $filter) {
         $scope.$on('updateTable', function(element, sqlClause) {
 
             $('#jqxgrid').jqxGrid('showloadelement');
@@ -172,6 +172,16 @@
                             $scope.oChartData.xAxis.push(data.rows[i][0]); //year
                             $scope.oChartData.yAxis.push(data.rows[i][1]); //amount
                         }
+
+                        $scope.options = {
+                            scaleLabel: function scaleLabel(label) {
+                                return $filter('currency')(label.value);
+                            },
+                            tooltipTemplate: function tooltipTemplate(data) {
+                                return data.label + ': ' + $filter('currency')(data.value);
+                            }
+                        };
+
 
                         $scope.labels = $scope.oChartData.xAxis;
                         $scope.series = ['Value of Contracts by Fiscal Year'];
