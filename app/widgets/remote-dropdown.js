@@ -22,6 +22,9 @@
             $('[column=' + columnName + ']').parent()
                 .dropdown({
                   apiSettings: {
+                    beforeSend: function(settings){
+                      settings.urlData.query = settings.urlData.query.toUpperCase();
+                    },
                     onResponse: function(apiResponse) {
                       var response = {
                         results: []
