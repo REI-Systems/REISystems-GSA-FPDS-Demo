@@ -138,6 +138,7 @@
                 console.log(data)
                 if(data.hasOwnProperty('rows') && data.rows.length > 0) {
                   $scope.totalDollarsObligated = data.rows[0].toString();
+                  document.getElementById("h06").style.display="none";
                 }
               },
               function(error) {
