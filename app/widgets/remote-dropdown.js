@@ -28,7 +28,7 @@ var aQuery = aQuery || {
           $('[column=' + columnName + ']').dropdown();
 
           setTimeout(function(){
-            
+
             $('[column=' + columnName + ']').parent()
                 .dropdown({
                   onChange: function(aValue, text){
@@ -43,21 +43,30 @@ var aQuery = aQuery || {
                         if(aQuery.agencyid.length > 0){
                         for (var i = 0; i<aQuery.agencyid.length-1; i++){
                             clause += "agencyid="+aQuery.agencyid[i]+"OR"
-                            settings.urlData.query = "agencyid:"
                         }
                         clause += "agencyid="+aQuery.agencyid[aQuery.agencyid.length-1]
                         clause+="+AND+"
                         }
-
-//                        if(aQuery.agencyid.length > 0){
-//                            settings.urlData.query = "agencyid:"
-//                        }
-//                        if(aQuery.agencyid.length > 0){
-//                            settings.urlData.query = "agencyid:"
-//                        }
-//                        if(aQuery.agencyid.length > 0){
-//                            settings.urlData.query = "agencyid:"
-//                        }
+                        if(aQuery.idvpiid.length > 0){
+                            for (var i = 0; i<aQuery.idvpiid.length-1; i++){
+                              clause += "idvpiid="+aQuery.idvpiid[i]+"OR"
+                              }
+                              clause += "idvpiid="+aQuery.agencyid[aQuery.idvpiid.length-1]
+                              clause+="+AND+"
+                              }
+                        if(aQuery.contractingofficeagencyid.length > 0){
+                            for (var i = 0; i<aQuery.contractingofficeagencyid.length-1; i++){
+                              clause += "idvpiid="+aQuery.contractingofficeagencyid[i]+"OR"
+                              }
+                              clause += "idvpiid="+aQuery.contractingofficeagencyid[aQuery.contractingofficeagencyid.length-1]
+                              clause+="+AND+"
+                              }
+                        if(aQuery.vendorname.length > 0){
+                            for (var i = 0; i<aQuery.idvpiid.length-1; i++){
+                               clause += "idvpiid="+aQuery.idvpiid[i]+"OR"
+                               }
+                               clause += "idvpiid="+aQuery.agencyid[aQuery.idvpiid.length-1]
+                               }
                       return settings;
                     },
 
