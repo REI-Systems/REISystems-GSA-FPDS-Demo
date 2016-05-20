@@ -40,33 +40,47 @@ var aQuery = aQuery || {
                     beforeSend: function(settings){
                       settings.urlData.query = settings.urlData.query.toUpperCase();
 
+//                        if(aQuery.agencyid.length == 0 && aQuery.idvpiid.length == 0){
+//                        clause +=   columnName + '+like+' + '\'{query}%25\'+'
+//                        }
                         if(aQuery.agencyid.length > 0){
-                        for (var i = 0; i<aQuery.agencyid.length-1; i++){
-                            clause += "agencyid="+aQuery.agencyid[i]+"OR"
+                            if(columnName == 'agencyid'){
+                            clause +=  ''
+                            }
+                            else {
+                        clause += "+AND+agencyid+in+"+aQuery.agencyid.join(', ')
                         }
-                        clause += "agencyid="+aQuery.agencyid[aQuery.agencyid.length-1]
-                        clause+="+AND+"
+//                        for (var i = 0; i<aQuery.agencyid.length-1; i++){
+//                            clause += "agencyid="+aQuery.agencyid[i]+"OR"
+//                        }
+//                        clause += "agencyid="+aQuery.agencyid[aQuery.agencyid.length-1]
                         }
                         if(aQuery.idvpiid.length > 0){
-                            for (var i = 0; i<aQuery.idvpiid.length-1; i++){
-                              clause += "idvpiid="+aQuery.idvpiid[i]+"OR"
+                            if(columnName == 'idvpiid'){
+                            clause +=  ''
+                            }
+                            else {
+                        clause += "+AND+idvpiid+in+"+aQuery.idvpiid.join(', ')
+                        }
+//                            for (var i = 0; i<aQuery.idvpiid.length-1; i++){
+//                              clause += "idvpiid="+aQuery.idvpiid[i]+"OR"
+//                              }
+//                              clause += "idvpiid="+aQuery.idvpiid[aQuery.idvpiid.length-1]
                               }
-                              clause += "idvpiid="+aQuery.agencyid[aQuery.idvpiid.length-1]
-                              clause+="+AND+"
-                              }
-                        if(aQuery.contractingofficeagencyid.length > 0){
-                            for (var i = 0; i<aQuery.contractingofficeagencyid.length-1; i++){
-                              clause += "idvpiid="+aQuery.contractingofficeagencyid[i]+"OR"
-                              }
-                              clause += "idvpiid="+aQuery.contractingofficeagencyid[aQuery.contractingofficeagencyid.length-1]
-                              clause+="+AND+"
-                              }
-                        if(aQuery.vendorname.length > 0){
-                            for (var i = 0; i<aQuery.idvpiid.length-1; i++){
-                               clause += "idvpiid="+aQuery.idvpiid[i]+"OR"
-                               }
-                               clause += "idvpiid="+aQuery.agencyid[aQuery.idvpiid.length-1]
-                               }
+//                        if(aQuery.contractingofficeagencyid.length > 0){
+//                            for (var i = 0; i<aQuery.contractingofficeagencyid.length-1; i++){
+//                              clause += "idvpiid="+aQuery.contractingofficeagencyid[i]+"OR"
+//                              }
+//                              clause += "idvpiid="+aQuery.contractingofficeagencyid[aQuery.contractingofficeagencyid.length-1]
+//                              clause+="+AND+"
+//                              }
+//                        if(aQuery.vendorname.length > 0){
+//                            for (var i = 0; i<aQuery.idvpiid.length-1; i++){
+//                               clause += "idvpiid="+aQuery.idvpiid[i]+"OR"
+//                               }
+//                               clause += "idvpiid="+aQuery.agencyid[aQuery.idvpiid.length-1]
+//                               }
+                        settings.urlData.query += clause;
                       return settings;
                     },
 
@@ -84,7 +98,8 @@ var aQuery = aQuery || {
                       return response;
 
                     },
-                    url: '/api/search/query?sql=SELECT+' + columnName + '+FROM+contract+WHERE+'+ columnName + '+like+' + '\'{query}%25\''+clause+'GROUP+BY+' + columnName
+                    url: '/api/search/query?sql=SELECT+' + columnName + '+FROM+contract+WHERE+'+ columnName + '+like+' + '\'{query}%25\'GROUP+BY+' + columnName
+//                      url: '/api/search/query?sql=SELECT+' + columnName + '+FROM+contract+WHERE+' + '\'{query}\'GROUP+BY+' + columnName
                   }
                 });
 
