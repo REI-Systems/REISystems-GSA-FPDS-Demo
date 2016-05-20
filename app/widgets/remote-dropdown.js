@@ -43,8 +43,7 @@ var aQuery = aQuery || {
 
                       console.log(settings.url);
 
-
-                        if(aQuery.agencyid.length == 0 && aQuery.idvpiid.length ==0){
+                        if(aQuery.agencyid.length == 0 && aQuery.idvpiid.length ==0 && aQuery.contractingofficeagencyid.length ==0 && aQuery.vendorname.length ==0) {
                         clause += '';
                         }
                         if(aQuery.agencyid.length > 0){
@@ -54,12 +53,11 @@ var aQuery = aQuery || {
                             else {
                         clause += "+AND+"
                         for (var i = 0; i<aQuery.agencyid.length-1; i++){
-                            clause += "agencyid+="+aQuery.agencyid[i]+"+OR+"
+                            clause += "agencyid+='"+aQuery.agencyid[i]+"'+OR+"
                         }
-                        clause += "agencyid+="+aQuery.agencyid[aQuery.agencyid.length-1]
+                        clause += "agencyid+='"+aQuery.agencyid[aQuery.agencyid.length-1]+"'"
                         }
                         }
-
                         if(aQuery.idvpiid.length > 0){
                             if(columnName == 'idvpiid'){
                             clause +=  ''
@@ -67,25 +65,14 @@ var aQuery = aQuery || {
                             else {
                         clause += "+AND+"
                             for (var i = 0; i<aQuery.idvpiid.length-1; i++){
-                              clause += "idvpiid+="+aQuery.idvpiid[i]+"+OR+"
+                              clause += "idvpiid+='"+aQuery.idvpiid[i]+"'+OR+"
                               }
-                              clause += "idvpiid+="+aQuery.idvpiid[aQuery.idvpiid.length-1]
+                              clause += "idvpiid+='"+aQuery.idvpiid[aQuery.idvpiid.length-1]+"'"
                               }
                               }
-//                        if(aQuery.contractingofficeagencyid.length > 0){
-//                            for (var i = 0; i<aQuery.contractingofficeagencyid.length-1; i++){
-//                              clause += "idvpiid="+aQuery.contractingofficeagencyid[i]+"OR"
-//                              }
-//                              clause += "idvpiid="+aQuery.contractingofficeagencyid[aQuery.contractingofficeagencyid.length-1]
-//                              clause+="+AND+"
-//                              }
-//                        if(aQuery.vendorname.length > 0){
-//                            for (var i = 0; i<aQuery.idvpiid.length-1; i++){
-//                               clause += "idvpiid="+aQuery.idvpiid[i]+"OR"
-//                               }
-//                               clause += "idvpiid="+aQuery.agencyid[aQuery.idvpiid.length-1]
-//                               }
-                settings.url = settings.url + clause + 'GROUP+BY+' + columnName
+   
+                settings.url = settings.url + clause + '+GROUP+BY+' + columnName
+                clause = '';
                       return settings;
                     },
 
