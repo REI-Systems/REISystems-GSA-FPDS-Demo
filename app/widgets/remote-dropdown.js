@@ -2,7 +2,11 @@ var aQuery = aQuery || {
             agencyid:'',
             idvpiid: '',
             contractingofficeagencyid: '',
-            vendorname: ''
+            vendorname: '',
+            contractactiontype: '',
+            localareasetaside: '',
+            maj_agency_cat: '',
+            psc_cat: ''
         };
 
 (function() {
@@ -70,7 +74,79 @@ var aQuery = aQuery || {
                               clause += "idvpiid+='"+aQuery.idvpiid[aQuery.idvpiid.length-1]+"'"
                               }
                               }
-   
+                        if(aQuery.contractingofficeagencyid.length > 0){
+                            if(columnName == 'contractingofficeagencyid'){
+                            clause +=  ''
+                            }
+                            else {
+                            clause += "+AND+"
+                            for (var i = 0; i<aQuery.contractingofficeagencyid.length-1; i++){
+                            clause += "contractingofficeagencyid+='"+aQuery.contractingofficeagencyid[i]+"'+OR+"
+                            }
+                            clause += "contractingofficeagencyid+='"+aQuery.contractingofficeagencyid[aQuery.contractingofficeagencyid.length-1]+"'"
+                            }
+                            }
+                        if(aQuery.vendorname.length > 0){
+                            if(columnName == 'vendorname'){
+                            clause +=  ''
+                            }
+                            else {
+                            clause += "+AND+"
+                            for (var i = 0; i<aQuery.vendorname.length-1; i++){
+                            clause += "vendorname+='"+aQuery.vendorname[i]+"'+OR+"
+                            }
+                            clause += "vendorname+='"+aQuery.vendorname[aQuery.vendorname.length-1]+"'"
+                            }
+                            }
+                        if(aQuery.contractactiontype.length > 0){
+                            if(columnName == 'contractactiontype'){
+                            clause +=  ''
+                            }
+                            else {
+                        clause += "+AND+"
+                        for (var i = 0; i<aQuery.contractactiontype.length-1; i++){
+                            clause += "contractactiontype+='"+aQuery.contractactiontype[i]+"'+OR+"
+                        }
+                        clause += "contractactiontype+='"+aQuery.contractactiontype[aQuery.contractactiontype.length-1]+"'"
+                        }
+                        }
+                        if(aQuery.localareasetaside.length > 0){
+                            if(columnName == 'localareasetaside'){
+                            clause +=  ''
+                            }
+                            else {
+                        clause += "+AND+"
+                            for (var i = 0; i<aQuery.localareasetaside.length-1; i++){
+                              clause += "localareasetaside+='"+aQuery.localareasetaside[i]+"'+OR+"
+                              }
+                              clause += "localareasetaside+='"+aQuery.localareasetaside[aQuery.localareasetaside.length-1]+"'"
+                              }
+                              }
+                        if(aQuery.maj_agency_cat.length > 0){
+                            if(columnName == 'maj_agency_cat'){
+                            clause +=  ''
+                            }
+                            else {
+                            clause += "+AND+"
+                            for (var i = 0; i<aQuery.maj_agency_cat.length-1; i++){
+                            clause += "maj_agency_cat+='"+aQuery.maj_agency_cat[i]+"'+OR+"
+                            }
+                            clause += "maj_agency_cat+='"+aQuery.maj_agency_cat[aQuery.maj_agency_cat.length-1]+"'"
+                            }
+                            }
+                        if(aQuery.psc_cat.length > 0){
+                            if(columnName == 'psc_cat'){
+                            clause +=  ''
+                            }
+                            else {
+                            clause += "+AND+"
+                            for (var i = 0; i<aQuery.psc_cat.length-1; i++){
+                            clause += "psc_cat+='"+aQuery.psc_cat[i]+"'+OR+"
+                            }
+                            clause += "psc_cat+='"+aQuery.psc_cat[aQuery.psc_cat.length-1]+"'"
+                            }
+                            }
+
                 settings.url = settings.url + clause + '+GROUP+BY+' + columnName
                 clause = '';
                       return settings;
