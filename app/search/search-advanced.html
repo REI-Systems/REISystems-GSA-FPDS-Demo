@@ -1,10 +1,10 @@
 
-<div style="border: 2px solid #112e51; border-radius: 5px; padding: 2px; margin-bottom: 2px;">
- <div class="title" style="font-size: 120%; text-align: center; border-radius: 5px; background-color: #112e51; color: white;">
-    <i class="filter white icon"></i><strong>Advanced Search</strong> 
+<div style="border: 1px solid #D3D3D3; border-radius: 5px; padding: 10px; margin-bottom: 2px;">
+ <div class="title" style="font-size: 125%; text-align: center; background-color: #D3D3D3; color: white; margin: -10px -10px 0px -10px; padding: 5px;">
+    <i class="filter"></i><strong style="color: black;">Advanced Search</strong>
   </div>
-    <form name="searchFilterForm" class="ui form" ng-submit="searchDataset()">
-    
+    <form name="searchFilterForm" class="ui form">
+
       <div class="field">
           <label>Agency</label>
           <remote-dropdown column="agencyid" name="agencyid" ng-model="search.agencyid"></remote-dropdown>
@@ -39,11 +39,11 @@
         <div class="field">
           <label>Action Obligation</label>
           <div class="fields">
-            <div class="six wide field">
-              <input id="dollarsobligated" name="dollarsobligated" ng-model="search.dollarsobligated" readonly="">
-            </div>
             <div class="eight wide field">
-              <div id="slider-range" style="margin-top: 10px;"></div>
+              <input id="dollarsobligated" name="dollarsobligated" ng-model="search.dollarsobligated" readonly="" style="display:block">
+            </div>
+            <div class="seven wide field">
+              <div id="slider-range" style="margin-top: 10px; display:block"></div>
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@
       </div>
      
      <div style="margin-bottom: 5px;">
-      <button type="button" class="ui button" ng-click="searchDataset()" style="margin-left: 20px;">Search</button>
+     <button type="button" class="ui button" ng-click="searchDataset()" style="margin-left: 20px;">Search</button>
       
       <div class="ui accordion">
       <div class="title">
@@ -73,10 +73,10 @@
       </div>
       <div class="content field">
                     <div class="field">
-                       <input type="checkbox" name="contractactiontype" ng-model="filter1"> Contract Type<br>
-                       <input type="checkbox" name="localareasetaside" ng-model="filter2"> Local Area<br>
-                     <input type="checkbox" name="maj_agency_cat" ng-model="filter3"> Department Full Name<br>
-                     <input type="checkbox" name="psc_cat" ng-model="filter4"> PSC
+                       <input type="checkbox" ng-model="filter1"> Contract Type<br>
+                       <input type="checkbox" ng-model="filter2"> Local Area<br>
+                     <input type="checkbox" ng-model="filter3"> Department Full Name<br>
+                     <input type="checkbox" ng-model="filter4"> PSC
                 </div>
                 </div>
                 </div>

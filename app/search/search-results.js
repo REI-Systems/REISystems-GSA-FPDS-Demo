@@ -108,7 +108,7 @@
 
         });
       },
-      controller: function($scope) {
+      controller: function($scope, $filter) {
         $scope.$on('updateTable', function(element, sqlClause) {
 
             $('#jqxgrid').jqxGrid('showloadelement');
@@ -138,6 +138,7 @@
                 console.log(data)
                 if(data.hasOwnProperty('rows') && data.rows.length > 0) {
                   $scope.totalDollarsObligated = data.rows[0].toString();
+                  document.getElementById("h06").style.display="none";
                 }
               },
               function(error) {
@@ -152,7 +153,8 @@
                 "method": "GET",
                 "oData": {},
                 "oParams": {
-                    "sql": "SELECT agencyid, SUM(dollarsobligated) FROM contract " + sqlClause + " GROUP BY agencyid"
+                    //"sql": "SELECT agencyid, SUM(dollarsobligated) FROM contract " + sqlClause + " GROUP BY agencyid"
+                    "sql": "SELECT fiscal_year, SUM(dollarsobligated) FROM contract " + sqlClause + " GROUP BY fiscal_year ORDER BY fiscal_year"
                 }
             };
 
@@ -168,12 +170,22 @@
                         };
 
                         for(var i=0; i<data.rows.length; i++){
-                            $scope.oChartData.xAxis.push(data.rows[i][0]); //agency
+                            $scope.oChartData.xAxis.push(data.rows[i][0]); //year
                             $scope.oChartData.yAxis.push(data.rows[i][1]); //amount
                         }
 
+                        $scope.options = {
+                            scaleLabel: function scaleLabel(label) {
+                                return $filter('currency')(label.value);
+                            },
+                            tooltipTemplate: function tooltipTemplate(data) {
+                                return data.label + ': ' + $filter('currency')(data.value);
+                            }
+                        };
+
+
                         $scope.labels = $scope.oChartData.xAxis;
-                        $scope.series = ['Series A'];
+                        $scope.series = ['Value of Contracts by Fiscal Year'];
                         $scope.data = [$scope.oChartData.yAxis];
                     }
                 },

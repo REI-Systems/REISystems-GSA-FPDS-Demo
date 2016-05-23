@@ -11,17 +11,21 @@
 
   <div class="ui grid container">
   <div class="sixteen wide column">
+    <!--<h2 style="size:20pt;display:inline-block;">Federal Procurement Data System &#8212; Next Generation</h2>-->
   <search-bar></search-bar>
   </div>
-  <div class="four wide column">
-   
-<advanced-search ></advanced-search>
-</div>
-<div class="twelve wide column">
-   <h4 class="ui horizontal divider header">Total Value: {{ totalDollarsObligated | currency }} </h4>
 
-    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
-    </canvas>
+<div class="twelve wide column">
+  <h4 class="ui center aligned header" >Total Award Value: </h4>
+  <span><h4 class="ui center aligned header" id="h06" style="color: #D3D3D3;">Enter Agency Id for award information</h4></span>
+   <h1 class="ui horizontal divider olive header" id="totalvalue">{{ totalDollarsObligated | currency }} </h1>
+
+    <!--<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"> chart-series="series"
+    </canvas>-->
+  <canvas id="line" class="chart chart-line" chart-data="data"
+          chart-labels="labels" chart-legend="true" chart-series="series"
+          chart-click="onClick" options="options">
+  </canvas>
 
       <h4 class="ui horizontal divider header"><i class="table icon"></i>{{ vm.numresults }} Results found </h4>
 
@@ -157,7 +161,7 @@
 
 
 
-      <h4 class="ui horizontal divider header"><i class="file outline icon"></i> Contract information</h4>
+      <h4 class="ui horizontal divider header"><i class="file outline icon"></i> Contract Information</h4>
 
       <!--Info message-->
       <div ng-hide="row">
@@ -348,6 +352,17 @@
   </div>
       <br>
       <br>
+    <div class="four wide column">
+      <advanced-search ></advanced-search>
+    </div>
+
    </div>
     </div>
   </div>
+  <style>
+
+    .line-legend-text{
+      font-weight: bold;
+      font-size: 150%;
+    }
+  </style>
