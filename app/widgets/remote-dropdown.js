@@ -3,6 +3,7 @@ var aQuery = aQuery || {
             idvpiid: '',
             contractingofficeagencyid: '',
             vendorname: '',
+            fiscal_year: '',
             contractactiontype: '',
             localareasetaside: '',
             maj_agency_cat: '',
@@ -27,8 +28,7 @@ var aQuery = aQuery || {
         var clause = "";
         angular.element(document).ready(function() {
 
-
-          $('[column=' + columnName + ']').dropdown();
+            $('[column=' + columnName + ']').dropdown();
 
           setTimeout(function(){
 
@@ -38,8 +38,12 @@ var aQuery = aQuery || {
                     var $this = $($(this)[0]);
                     aQuery[$this.find('select').attr('name')] = aValue;
                     console.log(aQuery)
-                      //$('form[name=searchFilterForm]').attr('disabled', true);
                   },
+                  // onRemove: function(aValue, text){
+                  //     var $this = $($(this)[0]);
+                  //     aQuery[$this.find('select').attr('name')].splice(aValue, 1);
+                  //     console.log(aQuery)
+                  // },
                   apiSettings: {
                     beforeSend: function(settings){
 
@@ -98,6 +102,18 @@ var aQuery = aQuery || {
                             clause += "vendorname+='"+aQuery.vendorname[aQuery.vendorname.length-1]+"'"
                             }
                             }
+                        if(aQuery.fiscal_year.length > 0){
+                            if(columnName == 'fiscal_year'){
+                                clause +=  ''
+                            }
+                            else {
+                                clause += "+AND+"
+                                for (var i = 0; i<aQuery.fiscal_year.length-1; i++){
+                                    clause += "fiscal_year+='"+aQuery.fiscal_year[i]+"'+OR+"
+                                }
+                                clause += "fiscal_year+='"+aQuery.fiscal_year[aQuery.fiscal_year.length-1]+"'"
+                            }
+                        }
                         if(aQuery.contractactiontype.length > 0){
                             if(columnName == 'contractactiontype'){
                             clause +=  ''
