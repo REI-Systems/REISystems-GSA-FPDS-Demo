@@ -204,6 +204,7 @@
             $scope.vm.numresults = rowscount;
           });
             $(".prompt").removeAttr('disabled');
+            $('.dropdown').removeClass('disabled');
         });
 
         $scope.$on('loadTableState', function(element, preferences) {

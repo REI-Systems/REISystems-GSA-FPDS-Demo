@@ -20,8 +20,7 @@ var aQuery = aQuery || {
     return {
       restrict: 'E',
       replace: true,
-      scope: {
-      },
+      scope: {},
       template: '<select multiple="" class="ui fluid remote search dropdown" ></select>',
       link: function(scope, element, attrs, controller) {
         var columnName = attrs.column;
@@ -39,6 +38,7 @@ var aQuery = aQuery || {
                     var $this = $($(this)[0]);
                     aQuery[$this.find('select').attr('name')] = aValue;
                     console.log(aQuery)
+                      //$('form[name=searchFilterForm]').attr('disabled', true);
                   },
                   apiSettings: {
                     beforeSend: function(settings){
