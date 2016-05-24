@@ -49,6 +49,7 @@
         "jqwidgets/jqxcheckbox.js",
         "jqwidgets/jqxtabs.js",
         "jqwidgets/jqxlistbox.js",
+        "jqwidgets/jqxdropdownlist.js",
         "jqwidgets/jqxangular.js",
         "jqwidgets/styles/jqx.base.css",
         "jqwidgets/styles/jqx.ui-sunny.css"
