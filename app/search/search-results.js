@@ -11,7 +11,7 @@
     return {
       restrict: 'E',
       replace: true,
-      template: '<div id="jqxWidget"><div style="float: right;">Export: <input style="margin-right: 5px;" type="button" id="csvExport" value="CSV"><input type="button" id="pdfExport" value="PDF"></div><div class="ui accordion field"><div class="title"><i class="icon dropdown"></i> Show/Hide Columns</div><div class="content"><div style="float: left;" id="jqxlistbox"></div></div></div><div id="jqxgrid"></div></div>',
+      template: '<div id="jqxWidget"><div style="float: right;">Export: <input style="margin-right: 5px;" type="button" id="csvExport" value="CSV"><input type="button" id="pdfExport" value="PDF"></div><div class="ui accordion field"><div class="title"><i class="icon dropdown"></i> Show/Hide Columns</div><div class="content"><div style="float: left;" id="jqxlistbox"></div></div></div><div id="jqxgrid"></div><div style="margin-top: 30px;" id="eventlog"></div></div>',
       link: function(scope, element, attrs, controller) {
         angular.element(document).ready(function() {
 
@@ -19,10 +19,10 @@
           $('.pointing.secondary.menu .item').tab();
 
           // Save State
-          $("#jqxgrid").on('columnreordered', function(event) {
-            var state = $("#jqxgrid").jqxGrid('savestate');
-            scope.saveGridState(state);
-          });
+          // $("#jqxgrid").on('columnreordered', function(event) {
+          //   var state = $("#jqxgrid").jqxGrid('savestate');
+          //   scope.saveGridState(state);
+          // });
 
           $('.message .close')
             .on('click', function() {
@@ -176,7 +176,7 @@
 
                         $scope.options = {
                             scaleLabel: function scaleLabel(label) {
-                                return $filter('currency')(label.value);
+                                return $filter('currency')(label.value, '$', 0);
                             },
                             tooltipTemplate: function tooltipTemplate(data) {
                                 return data.label + ': ' + $filter('currency')(data.value);
@@ -225,6 +225,7 @@
                 { name: 'effectivedate', map: '15' }, { name: 'unique_transaction_id', map: '16' }, { name: 'solicitationid', map: '17' },
                 { name: 'dunsnumber', map: '18' }, { name: 'descriptionofcontractrequirement', map: '19' }
               ],
+                id: 'id',
               datatype: "json",
               root: "rows"
             };
@@ -248,7 +249,7 @@
                 { datafield: 'agencyid', text: 'Agency Code', width: '20%' },
                 { datafield: 'signeddate', text: 'Date Signed', width: '20%' },
                 { datafield: 'contractingofficeagencyid', text: 'Contracting Agency ID', width: '20%' },
-                { datafield: 'idvpiid', text: 'Reference Id', width: '20%' },
+                { datafield: 'idvpiid', text: 'IDV', width: '20%' },
                 { datafield: 'maj_agency_cat', text: 'Department Full Name', width: '20%' },
                 { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%' }, 
                 { datafield: 'principalnaicscode', text: 'NAICS', width: '20%' },
@@ -270,12 +271,13 @@
             $("#pdfExport").click(function () {
                 $("#jqxgrid").jqxGrid('exportdata', 'pdf', 'jqxGrid');
             });
+            
 
             var listSource = [{ label: 'Contract Type', value: 'contractactiontype', checked: true }, 
                               { label: 'Agency Code', value: 'agencyid', checked: true }, 
                               { label: 'Date Signed', value: 'signeddate', checked: true },
                               { label: 'Contracting Agency ID', value: 'contractingofficeagencyid', checked: true}, 
-                              { label: 'Reference ID', value: 'idvpiid', checked: true }, 
+                              { label: 'IDV', value: 'idvpiid', checked: true },
                               { label: 'Department Full Name', value: 'maj_agency_cat', checked: true},
                               { label: 'Action Obligation ($)', value: 'dollarsobligated', checked: true },
                               { label: 'NAICS', value: 'principalnaicscode', checked: true },
