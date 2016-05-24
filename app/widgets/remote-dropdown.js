@@ -113,7 +113,7 @@ var aQuery = aQuery || {
                                 }
                                 clause += "fiscal_year+='"+aQuery.fiscal_year[aQuery.fiscal_year.length-1]+"'"
                             }
-                        }
+                            }
                         if(aQuery.contractactiontype.length > 0){
                             if(columnName == 'contractactiontype'){
                             clause +=  ''
@@ -163,7 +163,7 @@ var aQuery = aQuery || {
                             }
                             }
 
-                settings.url = settings.url + clause + '+GROUP+BY+' + columnName
+                settings.url = settings.url + clause + '+GROUP+BY+' + columnName + '+ORDER+BY+' +columnName
                 clause = '';
                       return settings;
                     },
