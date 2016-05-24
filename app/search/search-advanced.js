@@ -15,6 +15,7 @@
       link: function(scope, element, attrs, controller) {
 
         scope.searchDataset = function() {
+          $('.dropdown').addClass('disabled');
 
           $('.ui.accordion').accordion('close', 0);
 

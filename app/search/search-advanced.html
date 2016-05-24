@@ -3,25 +3,30 @@
  <div class="title" style="font-size: 125%; text-align: center; background-color: #D3D3D3; color: white; margin: -10px -10px 0px -10px; padding: 5px;">
     <i class="filter"></i><strong style="color: black;">Advanced Search</strong>
   </div>
-    <form name="searchFilterForm" class="ui form">
+    <form name="searchFilterForm" class="ui form" id="searchForm">
 
       <div class="field">
           <label>Agency</label>
-          <remote-dropdown column="agencyid" name="agencyid" ng-model="search.agencyid"></remote-dropdown>
+          <remote-dropdown column="agencyid" name="agencyid" ng-model="search.agencyid" ng-change="searchDataset()" id="searchSelect"></remote-dropdown>
       </div>
       <div class="field">
           <label>Reference Id</label>
-          <remote-dropdown column="idvpiid" name="idvpiid" ng-model="search.idvpiid"></remote-dropdown>
+          <remote-dropdown column="idvpiid" name="idvpiid" ng-model="search.idvpiid" ng-change="searchDataset()"></remote-dropdown>
       </div>
       <div class="field">
           <label>Contracting Agency</label>
-          <remote-dropdown column="contractingofficeagencyid" name="contractingofficeagencyid" ng-model="search.contractingofficeagencyid"></remote-dropdown>
+          <remote-dropdown column="contractingofficeagencyid" name="contractingofficeagencyid" ng-model="search.contractingofficeagencyid" ng-change="searchDataset()"></remote-dropdown>
       </div>
         <div class="field">
           <label>Vendor Name</label>
-          <remote-dropdown column="vendorname" name="vendorname" ng-model="search.vendorname"></remote-dropdown>
+          <remote-dropdown column="vendorname" name="vendorname" ng-model="search.vendorname" ng-change="searchDataset()"></remote-dropdown>
       </div>
-      <div class="field">
+        <div class="field">
+            <label>Fiscal Year</label>
+            <remote-dropdown column="fiscal_year" name="fiscal_year" ng-model="search.fiscal_year" ng-change="searchDataset()"></remote-dropdown>
+        </div>
+
+     <!-- <div class="field">
           <label>Date Signed</label>
           <div class="fields">
             <input type="hidden" name="signeddate" ng-model="search.signeddate">
@@ -34,7 +39,7 @@
               <input type="text" id="to" name="to">
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="field">
           <label>Action Obligation</label>
@@ -49,23 +54,23 @@
         </div>
       <div class="field" ng-show="filter1">
           <label>Contract Type</label>
-          <remote-dropdown column="contractactiontype" name="contractactiontype" ng-model="search.contractactiontype"></remote-dropdown>
+          <remote-dropdown column="contractactiontype" name="contractactiontype" ng-model="search.contractactiontype" ng-change="searchDataset()"></remote-dropdown>
       </div>
       <div class="field" ng-show="filter2">
           <label>Local Area</label>
-          <remote-dropdown column="localareasetaside" name="localareasetaside" ng-model="search.localareasetaside"></remote-dropdown>
+          <remote-dropdown column="localareasetaside" name="localareasetaside" ng-model="search.localareasetaside" ng-change="searchDataset()"></remote-dropdown>
       </div>
       <div class="field" ng-show="filter3">
           <label>Department Full Name</label>
-          <remote-dropdown column="maj_agency_cat" name="maj_agency_cat" ng-model="search.maj_agency_cat"></remote-dropdown>
+          <remote-dropdown column="maj_agency_cat" name="maj_agency_cat" ng-model="search.maj_agency_cat" ng-change="searchDataset()"></remote-dropdown>
       </div>
       <div class="field" ng-show="filter4">
           <label>PSC</label>
-          <remote-dropdown column="psc_cat" name="psc_cat" ng-model="search.psc_cat"></remote-dropdown>
+          <remote-dropdown column="psc_cat" name="psc_cat" ng-model="search.psc_cat" ng-change="searchDataset()"></remote-dropdown>
       </div>
      
      <div style="margin-bottom: 5px;">
-     <button type="button" class="ui button" ng-click="searchDataset()" style="margin-left: 20px;">Search</button>
+     <!--<button type="button" class="ui button" id ="searchDataset" ng-click="searchDataset()" style="margin-left: 20px;">Search</button>-->
       
       <div class="ui accordion">
       <div class="title">
@@ -73,10 +78,10 @@
       </div>
       <div class="content field">
                     <div class="field">
-                       <input type="checkbox" ng-model="filter1"> Contract Type<br>
-                       <input type="checkbox" ng-model="filter2"> Local Area<br>
-                     <input type="checkbox" ng-model="filter3"> Department Full Name<br>
-                     <input type="checkbox" ng-model="filter4"> PSC
+                       <input type="checkbox" ng-model="filter1" > Contract Type<br>
+                       <input type="checkbox" ng-model="filter2" > Local Area<br>
+                     <input type="checkbox" ng-model="filter3" > Department Full Name<br>
+                     <input type="checkbox" ng-model="filter4" > PSC
                 </div>
                 </div>
                 </div>
