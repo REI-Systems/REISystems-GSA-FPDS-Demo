@@ -224,7 +224,7 @@
           };
 
           var sliderMin = 0;
-          var sliderMax = 100000;
+          var sliderMax = 10000000000000;
 
           $("#slider-range").slider({
             range: true,
