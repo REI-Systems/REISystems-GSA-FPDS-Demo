@@ -37,15 +37,46 @@ var aQuery = aQuery || {
                   onChange: function(aValue, text){
                     var $this = $($(this)[0]);
                     aQuery[$this.find('select').attr('name')] = aValue;
-                    console.log(aQuery)
+                    // console.log('onChange')
+                    // console.log(aQuery)
                   },
-                  // onRemove: function(aValue, text){
-                  //     var $this = $($(this)[0]);
-                  //     aQuery[$this.find('select').attr('name')].splice(aValue, 1);
-                  //     console.log(aQuery)
-                  // },
+                    debug:true,
+                  onRemove: function(value, text, $removedChoice){
+                      var $this = $($(this)[0]);
+                      console.log($this)
+                      console.log(value)
+                      console.log(this)
+                      // console.log($this.find('select').attr('name'))
+                      // console.log('OnRemove')
+                      // console.log('Before: ', aQuery[$this.find('select').attr('name')])
+                      aQuery[$this.find('select').attr('name')].splice(aQuery[$this.find('select').attr('name')].indexOf(text), 1);
+                      // console.log('After: ', aQuery[$this.find('select').attr('name')])
+
+                      // $this.find('select').dropdown('remove selected', value);
+                      // $this.dropdown('set selected', aQuery[$this.find('select').attr('name')]);
+                      // $this.dropdown('refresh');
+                      var options = '';
+                      angular.forEach(aQuery[$this.find('select').attr('name')], function(item){
+                        options += "<option value='"+item+"' class='additions'>"+item+"</option>";
+                      });
+                      $this.find('select').html(options);
+
+                      $this.find('select').dropdown('refresh');
+
+                      setTimeout(function(){
+                          $this.find('select').dropdown('set selected', aQuery[$this.find('select').attr('name')])
+                      }, 1);
+
+                      //trigger table update
+                      // var scope = angular.element($('.ui.grid.container')).scope();
+                      // scope.$apply(function(){
+                      //     scope.searchDataset();
+                      // });
+                  },
                   apiSettings: {
                     beforeSend: function(settings){
+
+                        console.log('Before Send')
 
                       settings.urlData.query = settings.urlData.query.toUpperCase();
 
