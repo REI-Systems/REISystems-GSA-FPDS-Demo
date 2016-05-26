@@ -190,7 +190,7 @@ var aQuery = aQuery || {
                             for (var i = 0; i<aQuery.psc_cat.length-1; i++){
                             clause += "psc_cat+='"+aQuery.psc_cat[i]+"'+OR+"
                             }
-                            clause += "psc_cat+='"+aQuery.psc_cat[aQuery.psc_cat.length-1]+"'+)"
+                            clause += "psc_cat+='"+aQuery.psc_cat[aQuery.psc_cat.length-1]+"'+) "
                             }
                             }
                         if(columnName == 'fiscal_year'){
