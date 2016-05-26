@@ -7,7 +7,7 @@
         restrict: 'E',
         replace: true,
         templateUrl: 'widgets/search-bar.html',
-        link: function(scope, element, attrs, controller) {
+        link: function(scope, element, attrs, controller, $location ) {
           angular.element(document).ready(function() {
             $('.ui.search')
               .search({
@@ -17,6 +17,7 @@
                 type: 'category',
                 onSelect: function(result, response) {
                     $(".prompt").attr('disabled', true);
+                    window.location= '/#/search'
                        var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.title + "'";
                        scope.vm.updateTableResults(sqlClause);
                 }

@@ -27,6 +27,7 @@
 
             if (field.$name === "dollarsobligated") {
               field.$setViewValue($("#slider-range").slider("values"));
+              console.log("Print-1");
             }
 
             if (field.$name === "signeddate") {
@@ -50,12 +51,14 @@
                 field.$modelValue.forEach(function(value, index, array) {
 
                   if (field.$name === "dollarsobligated") {
+                    console.log("Print0");
                     if (str === '') {
                       str += key + '>=' + value + " AND ";
                     } else {
                       str += key + '<=' + value;
                     }
                   } else if (field.$name === "signeddate") {
+                    console.log("Other0");
                     if (str === '' && value !== 0 && index === 0) {
                       str += key + '>=' + value;
                     } else if (str !== '' && value !== 0) {
@@ -234,11 +237,12 @@
             values: [sliderMin, sliderMax],
             slide: function(event, ui) {
               $("#dollarsobligated").val("$" + (ui.values[0]).formatMoney(0, '.', ',') + " to $" + (ui.values[1]).formatMoney(0, '.', ','));
+              console.log("Print1");
             }
           });
 
           $("#dollarsobligated").val("$" + $("#slider-range").slider("values", 0) + " to $" + $("#slider-range").slider("values", 1));
-
+          console.log("Print2");
           apiService.call('search', '', { 'sql': 'SELECT contractactiontype,agencyid,signeddate,contractingofficeagencyid,idvpiid,maj_agency_cat,dollarsobligated,principalnaicscode,psc_cat,vendorname,zipcode,placeofperformancecountrycode,pop_state_code,localareasetaside,fiscal_year,effectivedate,unique_transaction_id,solicitationid,dunsnumber,descriptionofcontractrequirement FROM contract ORDER BY dollarsobligated DESC LIMIT 1' }, {}, 'GET').then(function(data) {
             // if (data.rows[0][5] !== 'undefined') {
             //   sliderMax = Math.round(data.rows[0][5]);
@@ -248,7 +252,7 @@
             // }
 
             $("#dollarsobligated").val("$" + ($("#slider-range").slider("values", 0)).formatMoney(0, '.', ',') + " to $" + ($("#slider-range").slider("values", 1)).formatMoney(0, '.', ','));
-
+            console.log("Print3");
           });
 
         });
