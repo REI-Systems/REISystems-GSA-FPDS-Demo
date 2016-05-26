@@ -90,11 +90,11 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                        clause += "+AND+"
+                        clause += "+AND+(+"
                         for (var i = 0; i<aQuery.agencyid.length-1; i++){
                             clause += "agencyid+='"+aQuery.agencyid[i]+"'+OR+"
                         }
-                        clause += "agencyid+='"+aQuery.agencyid[aQuery.agencyid.length-1]+"'"
+                        clause += "agencyid+='"+aQuery.agencyid[aQuery.agencyid.length-1]+"'+)"
                         }
                         }
                         if(aQuery.idvpiid.length > 0){
@@ -102,11 +102,11 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                        clause += "+AND+"
+                        clause += "+AND+(+"
                             for (var i = 0; i<aQuery.idvpiid.length-1; i++){
                               clause += "idvpiid+='"+aQuery.idvpiid[i]+"'+OR+"
                               }
-                              clause += "idvpiid+='"+aQuery.idvpiid[aQuery.idvpiid.length-1]+"'"
+                              clause += "idvpiid+='"+aQuery.idvpiid[aQuery.idvpiid.length-1]+"'+)"
                               }
                               }
                         if(aQuery.contractingofficeagencyid.length > 0){
@@ -114,11 +114,11 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                            clause += "+AND+"
+                            clause += "+AND+("
                             for (var i = 0; i<aQuery.contractingofficeagencyid.length-1; i++){
                             clause += "contractingofficeagencyid+='"+aQuery.contractingofficeagencyid[i]+"'+OR+"
                             }
-                            clause += "contractingofficeagencyid+='"+aQuery.contractingofficeagencyid[aQuery.contractingofficeagencyid.length-1]+"'"
+                            clause += "contractingofficeagencyid+='"+aQuery.contractingofficeagencyid[aQuery.contractingofficeagencyid.length-1]+"'+)"
                             }
                             }
                         if(aQuery.vendorname.length > 0){
@@ -126,11 +126,11 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                            clause += "+AND+"
+                            clause += "+AND+(+"
                             for (var i = 0; i<aQuery.vendorname.length-1; i++){
                             clause += "vendorname+='"+aQuery.vendorname[i]+"'+OR+"
                             }
-                            clause += "vendorname+='"+aQuery.vendorname[aQuery.vendorname.length-1]+"'"
+                            clause += "vendorname+='"+aQuery.vendorname[aQuery.vendorname.length-1]+"'+)"
                             }
                             }
                         if(aQuery.fiscal_year.length > 0){
@@ -138,11 +138,11 @@ var aQuery = aQuery || {
                                 clause +=  ''
                             }
                             else {
-                                clause += "+AND+"
+                                clause += "+AND+(+"
                                 for (var i = 0; i<aQuery.fiscal_year.length-1; i++){
                                     clause += "fiscal_year+='"+aQuery.fiscal_year[i]+"'+OR+"
                                 }
-                                clause += "fiscal_year+='"+aQuery.fiscal_year[aQuery.fiscal_year.length-1]+"'"
+                                clause += "fiscal_year+='"+aQuery.fiscal_year[aQuery.fiscal_year.length-1]+"'+)"
                             }
                             }
                         if(aQuery.contractactiontype.length > 0){
@@ -150,11 +150,11 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                        clause += "+AND+"
+                        clause += "+AND+(+"
                         for (var i = 0; i<aQuery.contractactiontype.length-1; i++){
                             clause += "contractactiontype+='"+aQuery.contractactiontype[i]+"'+OR+"
                         }
-                        clause += "contractactiontype+='"+aQuery.contractactiontype[aQuery.contractactiontype.length-1]+"'"
+                        clause += "contractactiontype+='"+aQuery.contractactiontype[aQuery.contractactiontype.length-1]+"'+)"
                         }
                         }
                         if(aQuery.localareasetaside.length > 0){
@@ -162,11 +162,11 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                        clause += "+AND+"
+                        clause += "+AND+(+"
                             for (var i = 0; i<aQuery.localareasetaside.length-1; i++){
                               clause += "localareasetaside+='"+aQuery.localareasetaside[i]+"'+OR+"
                               }
-                              clause += "localareasetaside+='"+aQuery.localareasetaside[aQuery.localareasetaside.length-1]+"'"
+                              clause += "localareasetaside+='"+aQuery.localareasetaside[aQuery.localareasetaside.length-1]+"'+)"
                               }
                               }
                         if(aQuery.maj_agency_cat.length > 0){
@@ -174,11 +174,11 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                            clause += "+AND+"
+                            clause += "+AND+(+"
                             for (var i = 0; i<aQuery.maj_agency_cat.length-1; i++){
                             clause += "maj_agency_cat+='"+aQuery.maj_agency_cat[i]+"'+OR+"
                             }
-                            clause += "maj_agency_cat+='"+aQuery.maj_agency_cat[aQuery.maj_agency_cat.length-1]+"'"
+                            clause += "maj_agency_cat+='"+aQuery.maj_agency_cat[aQuery.maj_agency_cat.length-1]+"'+)"
                             }
                             }
                         if(aQuery.psc_cat.length > 0){
@@ -186,15 +186,18 @@ var aQuery = aQuery || {
                             clause +=  ''
                             }
                             else {
-                            clause += "+AND+"
+                            clause += "+AND+(+"
                             for (var i = 0; i<aQuery.psc_cat.length-1; i++){
                             clause += "psc_cat+='"+aQuery.psc_cat[i]+"'+OR+"
                             }
-                            clause += "psc_cat+='"+aQuery.psc_cat[aQuery.psc_cat.length-1]+"'"
+                            clause += "psc_cat+='"+aQuery.psc_cat[aQuery.psc_cat.length-1]+"'+)"
                             }
                             }
-
-                settings.url = settings.url + clause + '+GROUP+BY+' + columnName + '+ORDER+BY+' +columnName
+                        if(columnName == 'fiscal_year'){
+                            settings.url = settings.url + clause + '+GROUP+BY+' + columnName + '+ORDER+BY+' + columnName
+                        }else {
+                            settings.url = settings.url + clause + '+GROUP+BY+' + columnName
+                        }
                 clause = '';
                       return settings;
                     },
