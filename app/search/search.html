@@ -1,4 +1,20 @@
-  <div class="ui grid container">
+<style>
+  .ui.category.search .results {
+    width: 100%;
+  }
+  .category .result .content .title {margin: 0 15px !important;display: inline}
+  .category .result .content .description{display: inline}
+  .ui.search > .results .result .price{display: inline;float: left;width: 200px;}
+  .ui.category.search > .results .category > .name {
+    width: 150px;
+  }
+  .ui.category.search > .results .category .result {
+
+    margin-left: 150px;
+
+  }
+</style>
+<div class="ui grid container">
     <div class="sixteen wide column">
 
       <!--Messages-->
@@ -177,11 +193,11 @@
       <div ng-show="row">
 
         <div class="ui pointing secondary menu">
-          <a class="active item" data-tab="first">Tab 1</a>
-          <a class="item" data-tab="second">Tab 2</a>
-          <a class="item" data-tab="third">Tab 3</a>
-          <a class="item" data-tab="fourth">Tab 4</a>
-          <a class="item" data-tab="fifth">Tab 5</a>
+          <a class="active item" data-tab="first">Purchaser Information</a>
+          <a class="item" data-tab="second">Product of Service Information</a>
+          <a class="item" data-tab="third">Contractor Information</a>
+          <a class="item" data-tab="fourth">Dates</a>
+          <a class="item" data-tab="fifth">Document Information</a>
         </div>
 
         <div class="ui active tab segment" data-tab="first">
@@ -280,11 +296,25 @@
                 <div class="description">{{ row.pop_state_code }}</div>
               </div>
             </div>
+            <div class="item">
+              <i class="right triangle icon"></i>
+              <div class="content">
+                <div class="header">DUNS No</div>
+                <div class="description">{{ row.dunsnumber }}</div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="ui tab segment" data-tab="fourth">
           <div class="ui relaxed list">
+            <div class="item">
+              <i class="right triangle icon"></i>
+              <div class="content">
+                <div class="header">Date Signed</div>
+                <div class="description">{{ row.signeddate }}</div>
+              </div>
+            </div>
             <div class="item">
               <i class="right triangle icon"></i>
               <div class="content">
@@ -306,13 +336,13 @@
                 <div class="description">{{ row.effectivedate }}</div>
               </div>
             </div>
-            <div class="item">
+            <!--<div class="item">
               <i class="right triangle icon"></i>
               <div class="content">
                 <div class="header">PSC</div>
                 <div class="description">{{ row.psc_cat }}</div>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -332,13 +362,13 @@
                 <div class="description">{{ row.solicitationid }}</div>
               </div>
             </div>
-            <div class="item">
+            <!--<div class="item">
               <i class="right triangle icon"></i>
               <div class="content">
                 <div class="header">DUNS No</div>
                 <div class="description">{{ row.dunsnumber }}</div>
               </div>
-            </div>
+            </div>-->
             <div class="item">
               <i class="right triangle icon"></i>
               <div class="content">

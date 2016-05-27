@@ -11,7 +11,7 @@
     return {
       restrict: 'E',
       replace: true,
-      template: '<div id="jqxWidget"><div style="float: right;">Export: <input style="margin-right: 5px;" type="button" id="csvExport" value="CSV"><input type="button" id="pdfExport" value="PDF"></div><div class="ui accordion field"><div class="title"><i class="icon dropdown"></i> Show/Hide Columns</div><div class="content"><div style="float: left;" id="jqxlistbox"></div></div></div><div id="jqxgrid"></div></div>',
+      template: '<div id="jqxWidget"><div style="float: right;">Export: <input style="margin-right: 5px;" type="button" id="csvExport" value="CSV"><input type="button" id="pdfExport" value="PDF"></div><div class="ui accordion field"><div class="title"><i class="icon dropdown"></i> Show/Hide Columns</div><div class="content"><div style="float: left;" id="jqxlistbox"></div></div></div><div id="jqxgrid"></div><div style="margin-top: 30px;" id="eventlog"></div></div>',
       link: function(scope, element, attrs, controller) {
         angular.element(document).ready(function() {
 
@@ -19,10 +19,10 @@
           $('.pointing.secondary.menu .item').tab();
 
           // Save State
-          $("#jqxgrid").on('columnreordered', function(event) {
-            var state = $("#jqxgrid").jqxGrid('savestate');
-            scope.saveGridState(state);
-          });
+          // $("#jqxgrid").on('columnreordered', function(event) {
+          //   var state = $("#jqxgrid").jqxGrid('savestate');
+          //   scope.saveGridState(state);
+          // });
 
           $('.message .close')
             .on('click', function() {
@@ -176,7 +176,7 @@
 
                         $scope.options = {
                             scaleLabel: function scaleLabel(label) {
-                                return $filter('currency')(label.value);
+                                return $filter('currency')(label.value, '$', 0);
                             },
                             tooltipTemplate: function tooltipTemplate(data) {
                                 return data.label + ': ' + $filter('currency')(data.value);
@@ -217,14 +217,15 @@
           $scope.source =
             {
               url: '',
-              datafields: [{ name: 'contractactiontype', map: '0' }, { name: 'agencyid', map: '1' },
-                { name: 'signeddate', map: '2' }, { name: 'contractingofficeagencyid', map: '3' }, { name: 'idvpiid', map: '4' }, { name: 'maj_agency_cat', map: '5' },
-                { name: 'dollarsobligated', map: '6' }, { name: 'principalnaicscode', map: '7' }, { name: 'psc_cat', map: '8' },
-                { name: 'vendorname', map: '9' }, { name: 'zipcode', map: '10' }, { name: 'placeofperformancecountrycode', map: '11' },
-                { name: 'pop_state_code', map: '12' }, { name: 'localareasetaside', map: '13' }, { name: 'fiscal_year', map: '14' },
-                { name: 'effectivedate', map: '15' }, { name: 'unique_transaction_id', map: '16' }, { name: 'solicitationid', map: '17' },
-                { name: 'dunsnumber', map: '18' }, { name: 'descriptionofcontractrequirement', map: '19' }
+              datafields: [{ name: 'agencyid', map: '0' }, { name: 'piid', map: '1' }, { name: 'modnumber', map: '2' }, { name: 'idvpiid', map: '3' }, { name: 'contractingofficeagencyid', map: '4' },
+                { name: 'dollarsobligated', map: '5' }, { name: 'fiscal_year', map: '6' }, { name: 'maj_agency_cat', map: '7' },
+                { name: 'contractactiontype', map: '6' }, { name: 'principalnaicscode', map: '7' }, { name: 'psc_cat', map: '8' },
+                { name: 'vendorname', map: '8' }, { name: 'zipcode', map: '9' }, { name: 'placeofperformancecountrycode', map: '10' },
+                { name: 'pop_state_code', map: '11' }, { name: 'localareasetaside', map: '12' }, { name: 'signeddate', map: '13' },
+                { name: 'effectivedate', map: '14' }, { name: 'unique_transaction_id', map: '15' }, { name: 'solicitationid', map: '16' },
+                { name: 'dunsnumber', map: '17' }, { name: 'descriptionofcontractrequirement', map: '18' }
               ],
+                id: 'id',
               datatype: "json",
               root: "rows"
             };
@@ -244,13 +245,15 @@
               columnsreorder: true,
               filterable: true,
      columns: [
-                { datafield: 'contractactiontype', text: 'Contract Type', width: '20%' },
                 { datafield: 'agencyid', text: 'Agency Code', width: '20%' },
-                { datafield: 'signeddate', text: 'Date Signed', width: '20%' },
+                { datafield: 'piid', text: 'piid', width: '20%' },
+                { datafield: 'modnumber', text: 'modnumber', width: '20%' },
+                { datafield: 'idvpiid', text: 'IDV', width: '20%' },
                 { datafield: 'contractingofficeagencyid', text: 'Contracting Agency ID', width: '20%' },
-                { datafield: 'idvpiid', text: 'Reference Id', width: '20%' },
+                { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%' },
+                { datafield: 'fiscal_year', text: 'Contract Fiscal Year', width: '20%' },
                 { datafield: 'maj_agency_cat', text: 'Department Full Name', width: '20%' },
-                { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%' }, 
+                { datafield: 'contractactiontype', text: 'Contract Type', width: '20%' },
                 { datafield: 'principalnaicscode', text: 'NAICS', width: '20%' },
                 { datafield: 'psc_cat', text: 'PSC', width: '20%' },
                 { datafield: 'vendorname', text: 'Vendor State', width: '20%' },
@@ -258,7 +261,7 @@
                 { datafield: 'placeofperformancecountrycode', text: 'PoP Country Name', width: '20%' },
                 { datafield: 'pop_state_code', text: 'PoP State Name', width: '20%' },
                 { datafield: 'localareasetaside', text: 'Local Area Set Aside', width: '20%' },
-                { datafield: 'fiscal_year', text: 'Contract Fiscal Year', width: '20%' }
+                { datafield: 'signeddate', text: 'Date Signed', width: '20%' }
               ]
             });
 
@@ -271,13 +274,14 @@
                 $("#jqxgrid").jqxGrid('exportdata', 'pdf', 'jqxGrid');
             });
 
-            var listSource = [{ label: 'Contract Type', value: 'contractactiontype', checked: true }, 
-                              { label: 'Agency Code', value: 'agencyid', checked: true }, 
-                              { label: 'Date Signed', value: 'signeddate', checked: true },
-                              { label: 'Contracting Agency ID', value: 'contractingofficeagencyid', checked: true}, 
-                              { label: 'Reference ID', value: 'idvpiid', checked: true }, 
-                              { label: 'Department Full Name', value: 'maj_agency_cat', checked: true},
+
+            var listSource = [{ label: 'Agency Code', value: 'agencyid', checked: true },
+                              { label: 'Contracting Agency ID', value: 'contractingofficeagencyid', checked: true},
+                              { label: 'IDV', value: 'idvpiid', checked: true },
                               { label: 'Action Obligation ($)', value: 'dollarsobligated', checked: true },
+                              { label: 'Contract Fiscal Year', value: 'fiscal_year', checked: true },
+                              { label: 'Department Full Name', value: 'maj_agency_cat', checked: true},
+                              { label: 'Contract Type', value: 'contractactiontype', checked: true },
                               { label: 'NAICS', value: 'principalnaicscode', checked: true },
                               { label: 'PSC', value: 'psc_cat', checked: true },
                               { label: 'Vendor State', value: 'vendorname', checked: true },
@@ -285,7 +289,7 @@
                               { label: 'PoP Country Name', value: 'placeofperformancecountrycode', checked: true },
                               { label: 'Pop State Name', value: 'pop_state_code', checked: true},
                               { label: 'Local Area Set Aside', value: 'localareasetaside', checked: true },
-                              { label: 'Contract Fiscal Year', value: 'fiscal_year', checked: true }];
+                              { label: 'Date Signed', value: 'signeddate', checked: true }];
             $("#jqxlistbox").jqxListBox({ source: listSource, width: 200, height: 200,  checkboxes: true });
             $("#jqxlistbox").on('checkChange', function (event) {
                 $("#jqxgrid").jqxGrid('beginupdate');
