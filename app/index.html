@@ -111,6 +111,24 @@
       background: #eee none repeat scroll 0 0;
     }
 
+    @-moz-document url-prefix() { 
+      .ui.grid > .row > .column[class*="twelve wide"], .ui.grid > .column.row > .column[class*="twelve wide"],
+     .ui.grid > .column[class*="twelve wide"], .ui.column.grid > .column[class*="twelve wide"] {
+      width: 72% !important;
+    } 
+    }
+
+    input.jqx-input[type="text"], input.jqx-input[type="password"] {
+      color: black;
+      }
+
+    .jqx-widget-header {
+      background: #112e51 none repeat scroll 0 0;
+      border-color: #c5c5c5;
+      box-sizing: content-box;
+      color: #fff;
+    }
+
 
 
   </style>
@@ -145,6 +163,22 @@
       padding: 10px !important;
       margin: 0 10px !important;
     }
+
+    .jqx-grid-cell-alt {
+      background: #dce4ef none repeat scroll 0 0;
+    }
+
+    .jqx-fill-state-hover {
+      background: #112e51 none repeat scroll 0 0;
+      color: #fff;
+    }
+
+    .jqx-fill-state-pressed {
+      background: #112e51 none repeat scroll 0 0;
+      color: #fff;
+    }
+
+
   </style>
 
 </head>
