@@ -25,10 +25,11 @@ var aQuery = aQuery || {
       template: '<select multiple="" class="ui fluid remote search dropdown" ></select>',
       link: function(scope, element, attrs, controller) {
         var columnName = attrs.column;
+        var holder = attrs.holder;
         var clause = "";
         angular.element(document).ready(function() {
 
-            $('[column=' + columnName + ']').dropdown();
+            $('[column=' + columnName + ']').dropdown({placeholder:'Enter '+ holder});
 
           setTimeout(function(){
 

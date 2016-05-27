@@ -7,7 +7,7 @@
                 restrict: 'E',
                 replace: true,
                 templateUrl: 'widgets/search-bar.html',
-                link: function(scope, element, attrs, controller, $location ) {
+                link: function(scope, element, attrs, controller) {
                     angular.element(document).ready(function() {
                         $('.ui.search')
                             .search({
