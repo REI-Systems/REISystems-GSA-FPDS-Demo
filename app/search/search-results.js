@@ -217,13 +217,13 @@
           $scope.source =
             {
               url: '',
-              datafields: [{ name: 'agencyid', map: '0' }, { name: 'contractingofficeagencyid', map: '1' },
-                { name: 'idvpiid', map: '2' }, { name: 'dollarsobligated', map: '3' }, { name: 'fiscal_year', map: '4' }, { name: 'maj_agency_cat', map: '5' },
+              datafields: [{ name: 'agencyid', map: '0' }, { name: 'piid', map: '1' }, { name: 'modnumber', map: '2' }, { name: 'idvpiid', map: '3' }, { name: 'contractingofficeagencyid', map: '4' },
+                { name: 'dollarsobligated', map: '5' }, { name: 'fiscal_year', map: '6' }, { name: 'maj_agency_cat', map: '7' },
                 { name: 'contractactiontype', map: '6' }, { name: 'principalnaicscode', map: '7' }, { name: 'psc_cat', map: '8' },
-                { name: 'vendorname', map: '9' }, { name: 'zipcode', map: '10' }, { name: 'placeofperformancecountrycode', map: '11' },
-                { name: 'pop_state_code', map: '12' }, { name: 'localareasetaside', map: '13' }, { name: 'signeddate', map: '14' },
-                { name: 'effectivedate', map: '15' }, { name: 'unique_transaction_id', map: '16' }, { name: 'solicitationid', map: '17' },
-                { name: 'dunsnumber', map: '18' }, { name: 'descriptionofcontractrequirement', map: '19' }
+                { name: 'vendorname', map: '8' }, { name: 'zipcode', map: '9' }, { name: 'placeofperformancecountrycode', map: '10' },
+                { name: 'pop_state_code', map: '11' }, { name: 'localareasetaside', map: '12' }, { name: 'signeddate', map: '13' },
+                { name: 'effectivedate', map: '14' }, { name: 'unique_transaction_id', map: '15' }, { name: 'solicitationid', map: '16' },
+                { name: 'dunsnumber', map: '17' }, { name: 'descriptionofcontractrequirement', map: '18' }
               ],
                 id: 'id',
               datatype: "json",
@@ -246,8 +246,10 @@
               filterable: true,
      columns: [
                 { datafield: 'agencyid', text: 'Agency Code', width: '20%' },
-                { datafield: 'contractingofficeagencyid', text: 'Contracting Agency ID', width: '20%' },
+                { datafield: 'piid', text: 'piid', width: '20%' },
+                { datafield: 'modnumber', text: 'modnumber', width: '20%' },
                 { datafield: 'idvpiid', text: 'IDV', width: '20%' },
+                { datafield: 'contractingofficeagencyid', text: 'Contracting Agency ID', width: '20%' },
                 { datafield: 'dollarsobligated', text: 'Action Obligation ($)', width: '20%' },
                 { datafield: 'fiscal_year', text: 'Contract Fiscal Year', width: '20%' },
                 { datafield: 'maj_agency_cat', text: 'Department Full Name', width: '20%' },

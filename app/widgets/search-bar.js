@@ -16,21 +16,22 @@
                                 },
                                 fields: {
                                     results : 'results',
-                                    title   : 'title',
-                                    description: 'piid',
-                                    price: 'M'
+                                    title   : 'piid',
+                                    description: 'M',
+                                    price: 'title'
                                 },
                                 debug: true,
                                 type: 'category',
                                 onSelect: function(result, response) {
-                                    window.location= '/#/search'
-                                    var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.title + "'";
+                                    $('.prompt').attr('disabled', true);
+                                    scope.$apply(function(){$location.path("/search");});
+                                    var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.piid + "'";
                                     scope.vm.updateTableResults(sqlClause);
-                                }
+                                } 
                             });
                     });
                 }
-            };  
+            };
         });
 
 })();
