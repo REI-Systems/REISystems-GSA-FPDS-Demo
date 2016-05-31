@@ -24,7 +24,7 @@
                                 type: 'category',
                                 onSelect: function(result, response) {
                                     $('.prompt').attr('disabled', true);
-                                    var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.piid + "'";
+                                    var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.piid + "'" + 'AND ' + result.mod + "=" + "'" + result.M + "'";
                                     if (result.title !== '&nbsp;') {
                                         sqlClause = 'WHERE idvpiid = ' + "'" + result.title + "'";
                                     }

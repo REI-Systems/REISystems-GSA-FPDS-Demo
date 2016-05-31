@@ -188,7 +188,7 @@
   <!-- Top Navigation -->
   <div class="ui large top fixed hidden menu" ng-controller="Navigation as vm">
     <div class="ui container">
-      <img src="/images/fpds_logo.png" ui-sref-active="active" ui-sref="image" class="item">
+     <!-- <img src="/images/fpds_logo.png" ui-sref-active="active" ui-sref="image" class="item"> -->
       <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
       <a ui-sref-active="active" ui-sref="search" class="item" >Search</a>
       <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
@@ -213,7 +213,7 @@
 
   <!-- Sidebar -->
   <div class="ui vertical inverted sidebar menu left" ng-controller="Navigation as vm">
-    <img src="/images/fpds_logo.png" ui-sref-active="active" ui-sref="image" class="item">
+   <!-- <img src="/images/fpds_logo.png" ui-sref-active="active" ui-sref="image" class="item"> -->
     <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
     <a ui-sref-active="active" ui-sref="search" class="item" >Search</a>
     <a ui-sref-active="active" ui-sref="api" class="item" ng-class=" !vm.isUserAuth ? 'disabled' : ' ' ">API</a>
@@ -235,7 +235,7 @@
           <a class="toc item">
             <i class="sidebar icon"></i>
           </a>
-          <img src="/images/fpds_logo.png" ui-sref-active="active" ui-sref="image" class="item">
+         <!-- <img src="/images/fpds_logo.png" ui-sref-active="active" ui-sref="image" class="item"> -->
           <a ui-sref-active="active" ui-sref="home" class="item">Home</a>
           <a ng-show="vm.isUserAuth || !vm.isUserAuth" ui-sref-active="active" ui-sref="search" class="item">Search</a>
           <a ng-show="vm.isUserAuth" ui-sref-active="active" ui-sref="api" class="item">API</a>
