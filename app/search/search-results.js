@@ -219,11 +219,11 @@
               url: '',
               datafields: [{ name: 'agencyid', map: '0' }, { name: 'piid', map: '1' }, { name: 'modnumber', map: '2' }, { name: 'idvpiid', map: '3' }, { name: 'contractingofficeagencyid', map: '4' },
                 { name: 'dollarsobligated', map: '5' }, { name: 'fiscal_year', map: '6' }, { name: 'maj_agency_cat', map: '7' },
-                { name: 'contractactiontype', map: '6' }, { name: 'principalnaicscode', map: '7' }, { name: 'psc_cat', map: '8' },
-                { name: 'vendorname', map: '8' }, { name: 'zipcode', map: '9' }, { name: 'placeofperformancecountrycode', map: '10' },
-                { name: 'pop_state_code', map: '11' }, { name: 'localareasetaside', map: '12' }, { name: 'signeddate', map: '13' },
-                { name: 'effectivedate', map: '14' }, { name: 'unique_transaction_id', map: '15' }, { name: 'solicitationid', map: '16' },
-                { name: 'dunsnumber', map: '17' }, { name: 'descriptionofcontractrequirement', map: '18' }
+                { name: 'contractactiontype', map: '8' }, { name: 'principalnaicscode', map: '9' }, { name: 'psc_cat', map: '10' },
+                { name: 'vendorname', map: '11' }, { name: 'zipcode', map: '12' }, { name: 'placeofperformancecountrycode', map: '13' },
+                { name: 'pop_state_code', map: '14' }, { name: 'localareasetaside', map: '15' }, { name: 'signeddate', map: '16' },
+                { name: 'effectivedate', map: '17' }, { name: 'unique_transaction_id', map: '18' }, { name: 'solicitationid', map: '19' },
+                { name: 'dunsnumber', map: '20' }, { name: 'descriptionofcontractrequirement', map: '21' }
               ],
                 id: 'id',
               datatype: "json",
