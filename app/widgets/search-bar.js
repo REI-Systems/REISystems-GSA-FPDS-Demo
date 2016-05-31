@@ -24,8 +24,10 @@
                                 type: 'category',
                                 onSelect: function(result, response) {
                                     $('.prompt').attr('disabled', true);
-                                    scope.$apply(function(){$location.path("/search");});
                                     var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.piid + "'";
+                                    if (result.title !== '&nbsp;') {
+                                        sqlClause = 'WHERE idvpiid = ' + "'" + result.title + "'";
+                                    }
                                     scope.vm.updateTableResults(sqlClause);
                                 } 
                             });
