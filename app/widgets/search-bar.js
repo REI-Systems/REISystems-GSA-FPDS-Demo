@@ -28,8 +28,7 @@
                                         sqlClause = 'WHERE idvpiid = ' + "'" + result.title + "'";
                                     }
                                     scope.vm.updateTableResults(sqlClause);
-                                    return false;
-                                } 
+                                }
                             });
                     });
                 }
