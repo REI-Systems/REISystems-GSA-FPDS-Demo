@@ -87,7 +87,7 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest(paths.temp));
 });
 
-gulp.task('serve', function() {
+gulp.task('serve', ['watch'], function() {
   gulp.src(paths.temp)
     .pipe(webserver({
       livereload: true,
@@ -99,7 +99,7 @@ gulp.task('serve', function() {
         {
           source: '/api',
           target: 'http://localhost:1337/api'
-        },
+        }
       ]
     }));
 });
