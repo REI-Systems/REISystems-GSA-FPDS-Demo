@@ -15,7 +15,6 @@
                                     url: 'api/search/category?q={query}'
                                 },
                                 fields: {
-                                    results : 'results',
                                     title   : 'piid',
                                     description: 'M',
                                     price: 'title'
@@ -29,6 +28,7 @@
                                         sqlClause = 'WHERE idvpiid = ' + "'" + result.title + "'";
                                     }
                                     scope.vm.updateTableResults(sqlClause);
+                                    return false;
                                 } 
                             });
                     });
