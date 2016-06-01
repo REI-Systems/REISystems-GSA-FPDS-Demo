@@ -29,8 +29,6 @@
                                     if (result.title !== '&nbsp;') {
                                         sqlClause = 'WHERE idvpiid = ' + "'" + result.title + "'";
                                     }
-
-
                                     scope.$apply(function(){
                                         if(!$state.is('search')){
                                             $location.path('/search').search({ "result": encodeURIComponent(JSON.stringify(result)) });
@@ -40,7 +38,7 @@
                                     if(scope.vm.hasOwnProperty('updateTableResults')) {
                                         scope.vm.updateTableResults(sqlClause);
                                     }
-                                } 
+                                }
                             });
                     });
                 }
