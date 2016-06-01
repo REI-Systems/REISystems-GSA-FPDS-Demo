@@ -1,15 +1,16 @@
-(function() {
-  'use strict';
+(function () {
+    'use strict';
 
-  angular
-    .module('app.home')
-    .controller('Home', Home);
+    angular
+        .module('app.home')
+        .controller('Home', Home);
 
-  Home.$inject = ['$state'];
+    Home.$inject = ['$state'];
 
-  function Home($state) {
-    var vm = this;
-  }
+    function Home($state) {
+        var vm = this;
+    }
+
 
 })();
 

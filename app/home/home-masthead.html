@@ -1,32 +1,38 @@
 <style type="text/css">
-  .masthead.segment {
-
-    padding: 1em 0em;
-  }
-  .ui.primary.button {
-    background: #112e51;
-  }
-  @media only screen and (max-width: 700px) {
     .masthead.segment {
-      min-height: 350px;
+
+        padding: 1em 0em;
     }
-    .masthead h1.ui.header {
-      font-size: 2em;
-      margin-top: 1.5em;
+
+    .ui.primary.button {
+        background: #112e51;
     }
-    .masthead h2 {
-      margin-top: 0.5em;
-      font-size: 1.5em;
+
+    @media only screen and (max-width: 700px) {
+        .masthead.segment {
+            min-height: 350px;
+        }
+
+        .masthead h1.ui.header {
+            font-size: 2em;
+            margin-top: 1.5em;
+        }
+
+        .masthead h2 {
+            margin-top: 0.5em;
+            font-size: 1.5em;
+        }
     }
-  }
 </style>
 
 <div style="padding-bottom: 25px;">
-<div class="ui text container">
-  <h1 class="ui inverted header">SAM.GOV</h1>
-  <h2>Procurement Data Portal</h2>
-  <div class="ui huge primary button" ui-sref="search">Get Started <i class="right arrow icon"></i></div>
-</div>
-<br>
-<search-bar style="padding: 0px 50px 0px 50px;"></search-bar>
+    <div class="ui text container">
+        <h1 class="ui inverted header">SAM.GOV</h1>
+        <h2>Procurement Data Portal</h2>
+        <div class="ui huge primary button" ui-sref="search">Get Started <i class="right arrow icon"></i></div>
+    </div>
+    <br>
+
+    <search-bar style="padding: 0px 50px 0px 50px;"></search-bar>
+
 </div>

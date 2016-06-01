@@ -5,9 +5,11 @@
     .module('app.search')
     .controller('Search', Search);
 
-  Search.$inject = ['$scope', 'userAuthorization', 'userSession', 'searchService', '$state'];
+  Search.$inject = ['$scope', 'userAuthorization', 'userSession', 'searchService', '$state', '$stateParams', '$timeout'];
 
-  function Search($scope, userAuthorization, userSession, searchService, $state) {
+  function Search($scope, userAuthorization, userSession, searchService, $state, $stateParams, $timeout) {
+
+    console.log("ON THE SEARCH CONTROLLER");
     var vm = this;
     vm.searchLoading = false;
     vm.numresults = '0';
@@ -33,7 +35,18 @@
       $scope.$broadcast('updateTable', sqlClause);
     }
 
+    if($stateParams.hasOwnProperty('result') && typeof $stateParams.result !== 'undefined') {
+      var result = JSON.parse(decodeURIComponent($stateParams.result));
 
+      var sqlClause = 'WHERE ' + result.column + "=" + "'" + result.piid + "'" + 'AND ' + result.mod + "=" + "'" + result.M + "'";
+      if (result.title !== '&nbsp;') {
+        sqlClause = 'WHERE idvpiid = ' + "'" + result.title + "'";
+      }
+
+      $timeout(function(){
+        UpdateTableResults(sqlClause);
+      }, 2000);
+    }
   }
 
 

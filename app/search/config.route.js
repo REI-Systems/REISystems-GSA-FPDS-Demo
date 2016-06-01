@@ -16,7 +16,7 @@
       {
         name: 'search',
         config: {
-          url: '/search',
+          url: '/search?result',
           views: {
             'pagecontent@': {
               templateUrl: 'search/search.html',
